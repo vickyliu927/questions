@@ -11,6 +11,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  transpilePackages: ['next-sanity', '@sanity/ui', '@sanity/icons'],
+  experimental: {
+    taint: true,
+  },
 };
 
 export default nextConfig;
