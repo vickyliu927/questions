@@ -1,67 +1,117 @@
 "use client";
 
 import { useState } from "react";
+import { HeaderData } from "../../types/sanity";
+import { urlFor } from "../../lib/sanity";
 
-export default function Header() {
+interface HeaderProps {
+  headerData?: HeaderData;
+}
+
+export default function Header({ headerData }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Debug logging
+  console.log('Header received data:', headerData);
+  console.log('Logo data:', headerData?.logo);
+  console.log('Logo asset:', headerData?.logo?.asset);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  // Fallback data if no Sanity data is provided
+  const fallbackData = {
+    navigation: [
+      { label: "Subjects", href: "#" },
+      { label: "Past Papers", href: "#" },
+      { label: "Resources", href: "#" },
+      { label: "About", href: "#" },
+      { label: "Contact", href: "#" }
+    ],
+    ctaButton: {
+      text: "View all CIE IGCSE Study Notes on TutorChase",
+      href: "#"
+    }
+  };
+
+  const navigation = headerData?.navigation || fallbackData.navigation;
+  const ctaButton = headerData?.ctaButton || fallbackData.ctaButton;
+  
+  // Only show logo if it exists in Sanity - no hardcoded fallback
+  const getSanitizedLogoUrl = () => {
+    if (headerData?.logo?.asset) {
+      try {
+        // If we have the asset, try to use urlFor for optimization
+        if (headerData.logo.asset._ref || headerData.logo.asset._id) {
+          return urlFor(headerData.logo)
+            .width(440)  // 2x resolution for retina displays
+            .height(140) // 2x resolution for retina displays
+            .fit('max')
+            .auto('format')
+            .quality(90)  // Higher quality
+            .dpr(2)       // Device pixel ratio for retina
+            .url();
+        }
+        // Fallback to direct URL if available
+        if (headerData.logo.asset.url) {
+          return headerData.logo.asset.url;
+        }
+      } catch (error) {
+        console.warn('Error generating Sanity logo URL:', error);
+        // Try direct URL as fallback
+        if (headerData.logo.asset.url) {
+          return headerData.logo.asset.url;
+        }
+      }
+    }
+    return null;
+  };
+
+  const logoSrc = getSanitizedLogoUrl();
+  const logoAlt = headerData?.logo?.alt || "Logo";
+  const hasLogo = logoSrc !== null;
+
   return (
     <header className="bg-white shadow-soft border-b sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-6">
-          {/* Logo */}
-          <div className="flex items-center">
-            <img 
-              src="/logo.jpg" 
-              alt="Logo" 
-              className="w-auto"
-              style={{ height: '64px' }}
-            />
-          </div>
+        <div className="flex justify-between items-center py-2">
+          {/* Logo - Only display if uploaded via Sanity */}
+          {hasLogo && (
+            <div className="flex items-center">
+              <img 
+                src={logoSrc}
+                alt={logoAlt}
+                className="w-auto object-contain"
+                style={{ 
+                  height: '70px', 
+                  maxWidth: '220px',
+                  imageRendering: 'auto'
+                }}
+                loading="eager"
+                decoding="sync"
+              />
+            </div>
+          )}
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            <a 
-              href="#" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              Subjects
-            </a>
-            <a 
-              href="#" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              Past Papers
-            </a>
-            <a 
-              href="#" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              Resources
-            </a>
-            <a 
-              href="#" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              About
-            </a>
-            <a 
-              href="#" 
-              className="text-foreground hover:text-primary transition-colors font-medium"
-            >
-              Contact
-            </a>
+          <nav className={`hidden md:flex space-x-8 ${!hasLogo ? 'ml-0' : ''}`}>
+            {navigation.map((link, index) => (
+              <a 
+                key={index}
+                href={link.href}
+                className="text-foreground hover:text-primary transition-colors font-medium"
+              >
+                {link.label}
+              </a>
+            ))}
           </nav>
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className="btn btn-primary">
-              View all CIE IGCSE Study Notes on TutorChase
-            </button>
+            <a href={ctaButton.href} className="btn btn-primary">
+              {ctaButton.text}
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -89,42 +139,21 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="md:hidden pb-6 animate-slide-down">
             <nav className="flex flex-col space-y-4">
-              <a 
-                href="#" 
-                className="text-foreground hover:text-primary transition-colors font-medium py-2"
-              >
-                Subjects
-              </a>
-              <a 
-                href="#" 
-                className="text-foreground hover:text-primary transition-colors font-medium py-2"
-              >
-                Past Papers
-              </a>
-              <a 
-                href="#" 
-                className="text-foreground hover:text-primary transition-colors font-medium py-2"
-              >
-                Resources
-              </a>
-              <a 
-                href="#" 
-                className="text-foreground hover:text-primary transition-colors font-medium py-2"
-              >
-                About
-              </a>
-              <a 
-                href="#" 
-                className="text-foreground hover:text-primary transition-colors font-medium py-2"
-              >
-                Contact
-              </a>
+              {navigation.map((link, index) => (
+                <a 
+                  key={index}
+                  href={link.href}
+                  className="text-foreground hover:text-primary transition-colors font-medium py-2"
+                >
+                  {link.label}
+                </a>
+              ))}
               
               {/* Mobile CTA Buttons */}
               <div className="flex flex-col space-y-3 pt-4 border-t border-border">
-                <button className="btn btn-primary w-full">
-                  View all CIE IGCSE Study Notes on TutorChase
-                </button>
+                <a href={ctaButton.href} className="btn btn-primary w-full">
+                  {ctaButton.text}
+                </a>
               </div>
             </nav>
           </div>
