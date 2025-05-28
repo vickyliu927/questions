@@ -1,5 +1,5 @@
 import { SubjectGridData, SubjectGridSubject } from '../../types/sanity';
-import { urlFor, client, allSubjectPagesQuery } from '../../lib/sanity';
+import { urlFor } from '../../lib/sanity';
 import { SubjectPageData } from '../../types/sanity';
 
 interface SubjectGridProps {
