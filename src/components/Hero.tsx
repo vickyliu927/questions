@@ -114,7 +114,7 @@ export default function Hero({ heroData }: HeroProps) {
               </div>
 
               {/* Main heading - keeping highlighted text in original orange color */}
-              <h1 className="font-bold text-slate-800 leading-tight" style={{fontSize: '60px', fontFamily: '"Crimson Text", serif'}}>
+              <h1 className="font-bold text-slate-800 leading-none" style={{fontSize: '60px', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>
                 <span className="block">{data.sectionTitle}</span>
                 <span className="block">
                   <span style={{color: '#E67E50'}}>{data.sectionTitleHighlighted}</span>
@@ -135,7 +135,7 @@ export default function Hero({ heroData }: HeroProps) {
               <a 
                 href={data.ctaButtons.primaryButton.href}
                 className="text-white px-8 py-3 rounded-md font-medium font-sans inline-flex items-center justify-center group transition-colors hover:opacity-90" 
-                style={{backgroundColor: '#E67E50'}}
+                style={{backgroundColor: '#E67E50', fontSize: '14px'}}
               >
                 {data.ctaButtons.primaryButton.text}
                 <svg className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,6 +145,7 @@ export default function Hero({ heroData }: HeroProps) {
               <a 
                 href={data.ctaButtons.secondaryButton.href}
                 className="border border-slate-300 text-slate-700 hover:bg-slate-50 px-8 py-3 rounded-md font-medium font-sans transition-colors"
+                style={{fontSize: '14px'}}
               >
                 {data.ctaButtons.secondaryButton.text}
               </a>
@@ -153,15 +154,15 @@ export default function Hero({ heroData }: HeroProps) {
             {/* Statistics */}
             <div className="flex items-center gap-8 pt-4">
               <div className="text-center">
-                <div className="text-3xl font-serif font-bold text-slate-800">{data.statistics.studentsHelped.stats}</div>
+                <div className="text-3xl font-serif font-bold text-slate-800" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>{data.statistics.studentsHelped.stats}</div>
                 <div className="text-sm font-sans text-slate-600">{data.statistics.studentsHelped.text}</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-serif font-bold text-slate-800">{data.statistics.subjectsCovered.stats}</div>
+                <div className="text-3xl font-serif font-bold text-slate-800" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>{data.statistics.subjectsCovered.stats}</div>
                 <div className="text-sm font-sans text-slate-600">{data.statistics.subjectsCovered.text}</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-serif font-bold text-slate-800">{data.statistics.successRate.stats}</div>
+                <div className="text-3xl font-serif font-bold text-slate-800" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>{data.statistics.successRate.stats}</div>
                 <div className="text-sm font-sans text-slate-600">{data.statistics.successRate.text}</div>
               </div>
             </div>

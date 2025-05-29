@@ -23,22 +23,19 @@ export default defineType({
       name: 'sectionTitle',
       title: 'Section Title',
       type: 'string',
-      description: 'Main title text (e.g., "Master Your")',
-      validation: Rule => Rule.required()
+      description: 'Main title text (e.g., "Master Your")'
     }),
     defineField({
       name: 'sectionTitleHighlighted',
       title: 'Section Title (Highlighted Part)',
       type: 'string',
-      description: 'Highlighted part of the title (e.g., "IGCSE Journey")',
-      validation: Rule => Rule.required()
+      description: 'Highlighted part of the title (e.g., "IGCSE Journey")'
     }),
     defineField({
       name: 'sectionTitleNoHighlight',
       title: 'Section Title (No Highlights)',
       type: 'string',
-      description: 'Text displayed after the highlighted part (e.g., "with Confidence")',
-      validation: Rule => Rule.required()
+      description: 'Text displayed after the highlighted part (e.g., "with Confidence")'
     }),
     defineField({
       name: 'description',
