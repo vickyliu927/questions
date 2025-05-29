@@ -1,6 +1,9 @@
+"use client";
+
 import { SubjectGridData, SubjectGridSubject } from '../../types/sanity';
 import { urlFor } from '../../lib/sanity';
 import { SubjectPageData } from '../../types/sanity';
+import Image from "next/image";
 
 interface SubjectGridProps {
   subjectGridData?: SubjectGridData;
@@ -233,9 +236,11 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                 {/* Image Section */}
                 <div className="w-full h-48 bg-gray-200 relative overflow-hidden">
                   {imageUrl ? (
-                    <img 
+                    <Image 
                       src={imageUrl}
                       alt={subject.image.alt || subject.name}
+                      width={400}
+                      height={200}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   ) : (

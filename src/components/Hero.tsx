@@ -114,7 +114,7 @@ export default function Hero({ heroData }: HeroProps) {
               </div>
 
               {/* Main heading - keeping highlighted text in original orange color */}
-              <h1 className="text-5xl lg:text-6xl font-serif font-bold text-slate-800 leading-tight">
+              <h1 className="font-bold text-slate-800 leading-tight" style={{fontSize: '60px', fontFamily: '"Crimson Text", serif'}}>
                 <span className="block">{data.sectionTitle}</span>
                 <span className="block">
                   <span style={{color: '#E67E50'}}>{data.sectionTitleHighlighted}</span>

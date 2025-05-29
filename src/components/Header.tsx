@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { HeaderData } from "../../types/sanity";
 import { urlFor } from "../../lib/sanity";
 
@@ -79,20 +81,21 @@ export default function Header({ headerData }: HeaderProps) {
           {/* Logo - Only display if uploaded via Sanity */}
           {hasLogo && (
             <div className="flex items-center">
-              <a href="/" className="flex items-center">
-                <img 
+              <Link href="/" className="flex items-center">
+                <Image 
                   src={logoSrc}
                   alt={logoAlt}
+                  width={220}
+                  height={70}
                   className="w-auto object-contain"
                   style={{ 
                     height: '70px', 
                     maxWidth: '220px',
                     imageRendering: 'auto'
                   }}
-                  loading="eager"
-                  decoding="sync"
+                  priority
                 />
-              </a>
+              </Link>
             </div>
           )}
 
