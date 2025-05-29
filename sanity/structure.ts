@@ -56,50 +56,32 @@ export const structure = (S: StructureBuilder) =>
                     ])
                 ),
               
-              // Subject Pages
+              // Subject Pages (showing subject pages directly)
               S.listItem()
                 .title('Subject Pages')
                 .child(
-                  S.list()
+                  S.documentTypeList('subjectPage')
                     .title('Subject Pages')
-                    .items([
-                      // Maths Page (legacy)
-                      S.listItem()
-                        .title('Maths Page (Legacy)')
-                        .child(
-                          S.documentTypeList('mathsPage')
-                            .title('Maths Page')
-                            .filter('_type == "mathsPage"')
-                        ),
-                      
-                      // Dynamic Subject Pages
-                      S.listItem()
-                        .title('Dynamic Subject Pages')
-                        .child(
-                          S.documentTypeList('subjectPage')
-                            .title('Subject Pages')
-                            .filter('_type == "subjectPage"')
-                        ),
-                    ])
+                    .filter('_type == "subjectPage"')
+                ),
+              
+              // Header
+              S.listItem()
+                .title('Header')
+                .child(
+                  S.documentTypeList('header')
+                    .title('Header')
+                    .filter('_type == "header"')
+                ),
+              
+              // Footer
+              S.listItem()
+                .title('Footer')
+                .child(
+                  S.documentTypeList('footer')
+                    .title('Footer')
+                    .filter('_type == "footer"')
                 ),
             ])
-        ),
-      
-      // Header
-      S.listItem()
-        .title('Header')
-        .child(
-          S.documentTypeList('header')
-            .title('Header')
-            .filter('_type == "header"')
-        ),
-      
-      // Footer
-      S.listItem()
-        .title('Footer')
-        .child(
-          S.documentTypeList('footer')
-            .title('Footer')
-            .filter('_type == "footer"')
         ),
     ]) 

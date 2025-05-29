@@ -8,17 +8,16 @@ The Sanity Studio has been reorganized into a clean, hierarchical structure that
 
 ```
 Content
-├── CIE IGCSE
-│   ├── Homepage
-│   │   ├── Hero Section
-│   │   ├── Subject Grid Section
-│   │   ├── Why Choose Us Section
-│   │   └── FAQ Section
-│   └── Subject Pages
-│       ├── Maths Page (Legacy)
-│       └── Dynamic Subject Pages
-├── Header
-└── Footer
+└── CIE IGCSE
+    ├── Homepage
+    │   ├── Hero Section
+    │   ├── Subject Grid Section
+    │   ├── Why Choose Us Section
+    │   └── FAQ Section
+    ├── Subject Pages
+    │   └── Mathematics (and other subject pages)
+    ├── Header
+    └── Footer
 ```
 
 ## Structure Details
@@ -35,42 +34,46 @@ Contains all sections that appear on the main homepage:
 - **FAQ Section**: Frequently asked questions and contact support
 
 #### 📚 Subject Pages
-Contains all subject-related page configurations:
+Contains all subject-related page configurations. Subject pages are now displayed directly without subfolders for easier access:
 
-- **Maths Page (Legacy)**: The original mathematics page configuration
-- **Dynamic Subject Pages**: New flexible subject pages that can be created for any subject
+- **Mathematics**: The mathematics subject page with topics and content
+- **Future subjects**: New subject pages can be created here (Physics, Chemistry, Biology, etc.)
 
-### 🔝 Header
+#### 🔝 Header
 Website header configuration including logo, navigation, and CTA button.
 
-### 🔻 Footer
+#### 🔻 Footer
 Website footer configuration including links, social media, and layout settings.
 
 ## Benefits of New Structure
 
-### ✅ **Organized Content**
-- Logical grouping of related content
-- Clear separation between homepage and subject content
-- Easy to find specific sections
+### ✅ **Streamlined Organization**
+- All CIE IGCSE content is grouped under one main section
+- Header and Footer are included in the main content area for easier access
+- Subject pages are displayed directly without unnecessary nesting
 
 ### ✅ **Intuitive Navigation**
-- Hierarchical structure matches website organization
-- Reduced clutter in the main content list
-- Faster content discovery
+- Single-level navigation within CIE IGCSE section
+- Faster access to all content types
+- Logical grouping that matches website organization
 
 ### ✅ **Scalable Design**
 - Easy to add new homepage sections
 - Simple to create new subject pages
-- Flexible structure for future content types
+- Clean structure for future content types
 
 ### ✅ **Better User Experience**
 - Content editors can quickly find what they need
-- Reduced cognitive load when managing content
+- Reduced clicks to reach content
 - Clear content relationships
 
 ## How to Use
 
-### Accessing Homepage Content
+### Accessing All Content
+1. Navigate to **CIE IGCSE** (main content section)
+2. All content is organized within this single section
+
+### Managing Homepage Content
 1. Navigate to **CIE IGCSE** → **Homepage**
 2. Select the section you want to edit:
    - Hero Section
@@ -80,24 +83,26 @@ Website footer configuration including links, social media, and layout settings.
 
 ### Managing Subject Pages
 1. Navigate to **CIE IGCSE** → **Subject Pages**
-2. Choose between:
-   - **Maths Page (Legacy)**: For the existing mathematics page
-   - **Dynamic Subject Pages**: For creating new subject pages
+2. All subject pages are displayed directly:
+   - **Mathematics**: Existing mathematics subject page
+   - Create new subject pages as needed
 
 ### Editing Header/Footer
-1. Navigate directly to **Header** or **Footer**
-2. Edit the active configuration
+1. Navigate to **CIE IGCSE** → **Header** or **Footer**
+2. Edit the configuration directly
 
-## Migration Notes
+## Recent Changes
 
-### ✅ **Completed Changes**
-- Removed "Subjects Page" schema (no longer needed)
-- Reorganized all existing content types
-- Updated studio configuration
-- All existing content remains accessible
+### ✅ **Completed Updates**
+- **Moved Header and Footer** under CIE IGCSE section for consolidated access
+- **Removed legacy Maths Page** (mathsPage schema) - no longer needed
+- **Simplified Subject Pages** - Mathematics and other subjects now show directly
+- **Streamlined navigation** - fewer clicks to reach content
+- **Updated structure configuration** for optimal organization
 
 ### 📝 **No Action Required**
 - All existing content is preserved
+- Mathematics page is now accessible via the new structure
 - No data migration needed
 - All functionality remains the same
 - Build process works correctly
@@ -105,24 +110,23 @@ Website footer configuration including links, social media, and layout settings.
 ## Technical Implementation
 
 ### Files Modified
-- `sanity/structure.ts` - New custom structure configuration
-- `sanity.config.ts` - Updated to use custom structure
-- `sanity/schemas/index.ts` - Removed subjectsPage import
-- `sanity/schemas/subjectsPage.ts` - Deleted (no longer needed)
+- `sanity/structure.ts` - Updated structure configuration
+- `sanity.config.ts` - Uses custom structure
+- `sanity/schemas/index.ts` - Removed mathsPage import
+- `sanity/schemas/mathsPage.ts` - Deleted (legacy schema)
 
-### Structure Configuration
-The structure is defined in `sanity/structure.ts` using Sanity's Structure Builder API, which allows for:
-- Custom hierarchical organization
-- Filtered document lists
-- Nested navigation
-- Flexible content grouping
+### Structure Benefits
+- **Consolidated Access**: All content under one main section
+- **Direct Navigation**: Subject pages accessible without subfolders
+- **Logical Grouping**: Header/Footer included in main content area
+- **Scalable Organization**: Easy to add new content types
 
 ## Future Enhancements
 
 The new structure makes it easy to add:
 - New homepage sections
-- Additional subject pages
+- Additional subject pages (Physics, Chemistry, Biology, etc.)
 - Content type categories
 - Advanced filtering and organization
 
-This organized structure provides a solid foundation for scaling your content management as your CIE IGCSE Notes platform grows. 
+This streamlined structure provides an optimal foundation for managing your CIE IGCSE Notes platform efficiently and intuitively. 
