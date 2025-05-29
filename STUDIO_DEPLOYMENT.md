@@ -3,6 +3,8 @@
 ## Overview
 The Sanity Studio is now integrated into your Next.js application and will be deployed alongside your website at `/studio`.
 
+**Last Updated**: January 30, 2025 - Studio is fully operational!
+
 ## Access URLs
 
 ### Local Development
@@ -77,6 +79,7 @@ The studio provides access to all your schemas:
 1. **Studio not loading**: Check environment variables are set correctly
 2. **Authentication issues**: Verify your Sanity account has project access
 3. **Build failures**: Ensure all Sanity packages are up to date
+4. **Browser caching**: Try hard refresh (Ctrl+Shift+R) or incognito mode
 
 ### Support
 - Check Sanity documentation: https://www.sanity.io/docs

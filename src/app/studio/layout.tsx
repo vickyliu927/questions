@@ -1,4 +1,6 @@
-export { metadata } from 'next-sanity/studio'
+import { metadata } from 'next-sanity/studio'
+
+export { metadata }
 
 export default function StudioLayout({
   children,

@@ -1,5 +1,5 @@
 import { defineConfig } from 'sanity'
-import { deskTool } from 'sanity/desk'
+import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './sanity/schemas'
 
@@ -11,6 +11,9 @@ if (projectId === 'your_project_id_here') {
   console.warn('⚠️  Please set NEXT_PUBLIC_SANITY_PROJECT_ID in your .env.local file')
 }
 
+console.log('Sanity config - Project ID:', projectId)
+console.log('Sanity config - Dataset:', dataset)
+
 export default defineConfig({
   name: 'default',
   title: 'CIE IGCSE Notes',
@@ -18,9 +21,14 @@ export default defineConfig({
   projectId,
   dataset,
 
-  plugins: [deskTool(), visionTool()],
+  plugins: [
+    structureTool(),
+    visionTool()
+  ],
 
   schema: {
     types: schemaTypes,
   },
+
+  basePath: '/studio',
 }) 
