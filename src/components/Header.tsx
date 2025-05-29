@@ -79,28 +79,31 @@ export default function Header({ headerData }: HeaderProps) {
           {/* Logo - Only display if uploaded via Sanity */}
           {hasLogo && (
             <div className="flex items-center">
-              <img 
-                src={logoSrc}
-                alt={logoAlt}
-                className="w-auto object-contain"
-                style={{ 
-                  height: '70px', 
-                  maxWidth: '220px',
-                  imageRendering: 'auto'
-                }}
-                loading="eager"
-                decoding="sync"
-              />
+              <a href="/" className="flex items-center">
+                <img 
+                  src={logoSrc}
+                  alt={logoAlt}
+                  className="w-auto object-contain"
+                  style={{ 
+                    height: '70px', 
+                    maxWidth: '220px',
+                    imageRendering: 'auto'
+                  }}
+                  loading="eager"
+                  decoding="sync"
+                />
+              </a>
             </div>
           )}
 
           {/* Desktop Navigation */}
-          <nav className={`hidden md:flex space-x-8 ${!hasLogo ? 'ml-0' : ''}`}>
+          <nav className={`hidden md:flex space-x-12 ${!hasLogo ? 'ml-0' : ''}`}>
             {navigation.map((link, index) => (
               <a 
                 key={index}
                 href={link.href}
-                className="text-foreground hover:text-primary transition-colors font-medium"
+                className="transition-colors font-semibold py-2"
+                style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
               >
                 {link.label}
               </a>
@@ -109,7 +112,11 @@ export default function Header({ headerData }: HeaderProps) {
 
           {/* Desktop CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
-            <a href={ctaButton.href} className="btn btn-primary">
+            <a 
+              href={ctaButton.href} 
+              className="btn btn-primary font-semibold px-4 py-2"
+              style={{ backgroundColor: '#e67e50', borderColor: '#e67e50', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
+            >
               {ctaButton.text}
             </a>
           </div>
@@ -143,7 +150,8 @@ export default function Header({ headerData }: HeaderProps) {
                 <a 
                   key={index}
                   href={link.href}
-                  className="text-foreground hover:text-primary transition-colors font-medium py-2"
+                  className="transition-colors font-semibold py-2"
+                  style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
                 >
                   {link.label}
                 </a>
@@ -151,7 +159,11 @@ export default function Header({ headerData }: HeaderProps) {
               
               {/* Mobile CTA Buttons */}
               <div className="flex flex-col space-y-3 pt-4 border-t border-border">
-                <a href={ctaButton.href} className="btn btn-primary w-full">
+                <a 
+                  href={ctaButton.href} 
+                  className="btn btn-primary w-full font-semibold px-4 py-2"
+                  style={{ backgroundColor: '#e67e50', borderColor: '#e67e50', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
+                >
                   {ctaButton.text}
                 </a>
               </div>
