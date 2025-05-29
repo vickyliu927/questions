@@ -125,7 +125,7 @@ export default function Hero({ heroData }: HeroProps) {
               </h1>
 
               {/* Description */}
-              <p className="text-xl font-sans leading-relaxed" style={{color: '#64748b', fontWeight: '500'}}>
+              <p className="text-xl font-sans leading-relaxed" style={{color: '#486581', fontWeight: '500'}}>
                 {data.description}
               </p>
             </div>

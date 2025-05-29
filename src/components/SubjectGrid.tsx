@@ -212,18 +212,22 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
   };
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h3 className="text-3xl font-bold text-foreground mb-4">
+    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50/30 relative overflow-hidden">
+      {/* Floating decorative bubbles - mirroring hero section design */}
+      <div className="absolute top-32 left-8 w-6 h-6 rounded-full" style={{backgroundColor: '#E67E50', opacity: '0.06'}}></div>
+      <div className="absolute top-28 right-12 w-8 h-8 rounded-full" style={{backgroundColor: '#E67E50', opacity: '0.04'}}></div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="text-center mb-20">
+          <h3 className="leading-none mb-6" style={{fontSize: '42px', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#243b53', letterSpacing: '-0.01em', fontWeight: '600'}}>
             {data.sectionTitle}
           </h3>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="font-sans leading-relaxed max-w-3xl mx-auto" style={{fontSize: '20px', color: '#486581', fontWeight: '500'}}>
             {data.sectionDescription}
           </p>
         </div>
         
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {data.subjects.map((subject) => {
             const imageUrl = getImageUrl(subject.image);
             const subjectUrl = getSubjectUrl(subject);
@@ -231,58 +235,95 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
             return (
               <div 
                 key={subject.name} 
-                className="card p-0 hover:shadow-medium transition-all hover:-translate-y-1 group overflow-hidden"
+                className="group relative bg-white rounded-2xl overflow-hidden border border-gray-100/60 hover:border-gray-200/80 transition-all duration-500 hover:shadow-lg hover:shadow-gray-900/5 hover:-translate-y-1"
+                style={{
+                  boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 1px 2px 0 rgba(0, 0, 0, 0.03)'
+                }}
               >
                 {/* Image Section */}
-                <div className="w-full h-48 bg-gray-200 relative overflow-hidden">
+                <div className="relative w-full h-56 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                   {imageUrl ? (
-                    <Image 
-                      src={imageUrl}
-                      alt={subject.image.alt || subject.name}
-                      width={400}
-                      height={200}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
+                    <>
+                      <Image 
+                        src={imageUrl}
+                        alt={subject.image.alt || subject.name}
+                        width={400}
+                        height={224}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      />
+                      {/* Subtle overlay for better text contrast */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </>
                   ) : (
-                    <div className={`w-full h-full ${subject.color} flex items-center justify-center`}>
-                      <span className="text-white font-bold text-4xl">{subject.name[0]}</span>
+                    <div className={`w-full h-full ${subject.color} bg-gradient-to-br from-current to-current/80 flex items-center justify-center relative overflow-hidden`}>
+                      {/* Subtle pattern overlay */}
+                      <div className="absolute inset-0 opacity-10" style={{
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='2' cy='2' r='1'/%3E%3Ccircle cx='32' cy='32' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+                      }}></div>
+                      <span className="text-white font-bold relative z-10" style={{fontSize: '42px', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>{subject.name[0]}</span>
                     </div>
                   )}
                 </div>
                 
                 {/* Content Section */}
-                <div className="p-6">
-                  <h4 className="text-lg font-semibold text-foreground mb-2">{subject.name}</h4>
+                <div className="p-8 space-y-6">
+                  {/* Subject Name */}
+                  <h4 className="text-xl font-semibold leading-tight" style={{color: '#243b53', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>
+                    {subject.name}
+                  </h4>
                   
-                  <p className="text-sm text-muted-foreground mb-3">{subject.description}</p>
+                  {/* Description */}
+                  <p className="text-sm leading-relaxed font-sans" style={{color: '#64748b', lineHeight: '1.6'}}>
+                    {subject.description}
+                  </p>
                   
-                  <div className="flex items-center justify-end mb-4">
-                    <div className="flex items-center text-xs text-success">
-                      <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                      </svg>
-                      Updated {formatDate(subject.dateUpdated)}
+                  {/* Updated Date - Minimalist Design */}
+                  <div className="flex items-center justify-between pt-2 border-t border-gray-100/80">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
+                      <span className="text-xs font-medium font-sans tracking-wide" style={{color: '#64748b', letterSpacing: '0.025em'}}>
+                        Updated {formatDate(subject.dateUpdated)}
+                      </span>
                     </div>
                   </div>
                   
-                  <a 
-                    href={subjectUrl}
-                    className="btn btn-outline w-full group-hover:btn-primary group-hover:text-primary-foreground transition-all block text-center"
-                  >
-                    {subject.viewNotesButton.text}
-                  </a>
+                  {/* CTA Button - Premium Design */}
+                  <div className="pt-4">
+                    <a 
+                      href={subjectUrl}
+                      className="group/btn relative w-full inline-flex items-center justify-center px-6 py-3.5 text-sm font-medium font-sans tracking-wide rounded-xl border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 overflow-hidden"
+                      style={{letterSpacing: '0.025em'}}
+                    >
+                      {/* Button background effect */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-gray-50 to-gray-100 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+                      
+                      <span className="relative z-10 flex items-center">
+                        {subject.viewNotesButton.text}
+                        <svg className="ml-2 w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                        </svg>
+                      </span>
+                    </a>
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
         
-        <div className="text-center mt-12">
+        {/* View All Button - Premium Design */}
+        <div className="text-center mt-20">
           <a 
             href={data.viewAllButton.href}
-            className="btn btn-primary px-8 py-3"
+            className="group relative inline-flex items-center justify-center px-12 py-4 text-sm font-medium font-sans tracking-wide rounded-2xl bg-white border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md"
+            style={{letterSpacing: '0.05em', color: '#e67e50'}}
           >
-            {data.viewAllButton.text}
+            <span className="flex items-center">
+              {data.viewAllButton.text}
+              <svg className="ml-3 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </span>
           </a>
         </div>
       </div>
