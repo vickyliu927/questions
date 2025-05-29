@@ -5,16 +5,17 @@ const fallbackFooterData: FooterData = {
   _id: 'fallback',
   title: 'Fallback Footer',
   isActive: true,
-  websiteTitle: 'CIE IGCSE Study Notes',
-  websiteDescription: 'Empowering students to achieve excellence in their IGCSE examinations through comprehensive study materials and expert guidance.',
+  websiteTitle: 'CIE IGCSE',
+  websiteDescription: 'Expert IGCSE tutoring and comprehensive study materials to help students achieve their academic goals with confidence and success.',
   quickLinks: {
     sectionTitle: 'Quick Links',
     links: [
-      { label: 'All Subjects', href: '#' },
+      { label: 'All Subjects', href: '#subjects' },
+      { label: 'Sample Notes', href: '#' },
+      { label: 'Tutoring', href: '#' },
       { label: 'Past Papers', href: '#' },
-      { label: 'Revision Guides', href: '#' },
-      { label: 'Practice Tests', href: '#' },
-      { label: 'Study Tips', href: '#' }
+      { label: 'Exam Tips', href: '#' },
+      { label: 'Success Stories', href: '#' }
     ]
   },
   popularSubjects: {
@@ -27,6 +28,17 @@ const fallbackFooterData: FooterData = {
       { label: 'English', href: '#' }
     ]
   },
+  support: {
+    sectionTitle: 'Support',
+    links: [
+      { label: 'FAQs', href: '#faqs' },
+      { label: 'Contact Us', href: '#' },
+      { label: 'Help Center', href: '#' },
+      { label: 'Privacy Policy', href: '#' },
+      { label: 'Terms of Service', href: '#' },
+      { label: 'Refund Policy', href: '#' }
+    ]
+  },
   layoutSettings: {
     adaptiveSpacing: true,
     showCopyright: true,
@@ -34,31 +46,57 @@ const fallbackFooterData: FooterData = {
   }
 }
 
-// Social media icons components
-const SocialIcons = {
+// Lucide-style icons
+const Icons = {
+  BookOpen: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-8 w-8 text-coral-400">
+      <path d="M12 7v14"></path>
+      <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"></path>
+    </svg>
+  ),
   Facebook: () => (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
     </svg>
   ),
   Twitter: () => (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+      <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"></path>
     </svg>
   ),
   Instagram: () => (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.297-3.323C5.902 8.198 7.053 7.708 8.35 7.708s2.448.49 3.323 1.297c.897.875 1.387 2.026 1.387 3.323s-.49 2.448-1.297 3.323c-.875.897-2.026 1.387-3.323 1.387zm7.718 0c-1.297 0-2.448-.49-3.323-1.297-.897-.875-1.387-2.026-1.387-3.323s.49-2.448 1.297-3.323c.875-.897 2.026-1.387 3.323-1.387s2.448.49 3.323 1.297c.897.875 1.387 2.026 1.387 3.323s-.49 2.448-1.297 3.323c-.875.897-2.026 1.387-3.323 1.387z"/>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
     </svg>
   ),
-  LinkedIn: () => (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+  Youtube: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
+      <path d="m10 15 5-3-5-3z"></path>
     </svg>
   ),
-  YouTube: () => (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-      <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  Mail: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-coral-400 mt-1 flex-shrink-0">
+      <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+    </svg>
+  ),
+  Phone: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-coral-400 mt-1 flex-shrink-0">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  ),
+  MapPin: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5 text-coral-400 mt-1 flex-shrink-0">
+      <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path>
+      <circle cx="12" cy="10" r="3"></circle>
+    </svg>
+  ),
+  Heart: () => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 text-coral-400 fill-current">
+      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
     </svg>
   )
 }
@@ -80,178 +118,205 @@ export default function Footer({ footerData }: FooterProps) {
                            data.support.links.length > 0 && 
                            data.support.sectionTitle
 
-  // Determine if adaptive spacing should be used
-  const useAdaptiveSpacing = data.layoutSettings?.adaptiveSpacing && !shouldShowSupport
-
-  // Determine grid columns based on sections
-  const getGridClasses = () => {
-    if (useAdaptiveSpacing) {
-      return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" // 3 columns: company info + 2 sections
-    }
-    return "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8" // 4 columns: company info + 3 sections
-  }
-
   return (
-    <footer className="bg-muted/50 border-t">
-      {/* Main Footer Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className={getGridClasses()}>
-          {/* Company Info */}
-          <div className="lg:col-span-1">
-            <h4 className="text-lg font-semibold text-foreground mb-4">
-              {data.websiteTitle || 'CIE IGCSE Study Notes'}
-            </h4>
-            <p className="text-muted-foreground mb-4 leading-relaxed">
-              {data.websiteDescription || 'Empowering students to achieve excellence in their IGCSE examinations through comprehensive study materials and expert guidance.'}
+    <div className="py-16 bg-[#253B53]">
+      <div className="container mx-auto px-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Logo and Company Info */}
+          <div className="space-y-6 animate-fade-in-left">
+            <div className="flex items-center space-x-3">
+              <Icons.BookOpen />
+              <div>
+                <h3 className="text-2xl font-serif font-bold text-white">
+                  {data.websiteTitle || 'CIE IGCSE'}
+                </h3>
+                <p className="text-white/70 text-sm -mt-1">Study Notes</p>
+              </div>
+            </div>
+            <p className="text-white/80 leading-relaxed">
+              {data.websiteDescription || 'Expert IGCSE tutoring and comprehensive study materials to help students achieve their academic goals with confidence and success.'}
             </p>
             
             {/* Social Media Links */}
-            {data.socialMedia && (
-              <div className="flex space-x-4">
-                {data.socialMedia.facebook && (
-                  <a 
-                    href={data.socialMedia.facebook}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    aria-label="Facebook"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <SocialIcons.Facebook />
+            <div className="flex space-x-4">
+              {data.socialMedia?.facebook && (
+                <a 
+                  href={data.socialMedia.facebook}
+                  className="text-white/70 hover:text-coral-400 transition-colors"
+                  aria-label="Facebook"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icons.Facebook />
+                </a>
+              )}
+              {data.socialMedia?.twitter && (
+                <a 
+                  href={data.socialMedia.twitter}
+                  className="text-white/70 hover:text-coral-400 transition-colors"
+                  aria-label="Twitter"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icons.Twitter />
+                </a>
+              )}
+              {data.socialMedia?.instagram && (
+                <a 
+                  href={data.socialMedia.instagram}
+                  className="text-white/70 hover:text-coral-400 transition-colors"
+                  aria-label="Instagram"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icons.Instagram />
+                </a>
+              )}
+              {data.socialMedia?.youtube && (
+                <a 
+                  href={data.socialMedia.youtube}
+                  className="text-white/70 hover:text-coral-400 transition-colors"
+                  aria-label="YouTube"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icons.Youtube />
+                </a>
+              )}
+              {/* Default social icons if no data provided */}
+              {!data.socialMedia && (
+                <>
+                  <a href="#" className="text-white/70 hover:text-coral-400 transition-colors">
+                    <Icons.Facebook />
                   </a>
-                )}
-                {data.socialMedia.twitter && (
-                  <a 
-                    href={data.socialMedia.twitter}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    aria-label="Twitter"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <SocialIcons.Twitter />
+                  <a href="#" className="text-white/70 hover:text-coral-400 transition-colors">
+                    <Icons.Twitter />
                   </a>
-                )}
-                {data.socialMedia.instagram && (
-                  <a 
-                    href={data.socialMedia.instagram}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    aria-label="Instagram"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <SocialIcons.Instagram />
+                  <a href="#" className="text-white/70 hover:text-coral-400 transition-colors">
+                    <Icons.Instagram />
                   </a>
-                )}
-                {data.socialMedia.linkedin && (
-                  <a 
-                    href={data.socialMedia.linkedin}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    aria-label="LinkedIn"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <SocialIcons.LinkedIn />
+                  <a href="#" className="text-white/70 hover:text-coral-400 transition-colors">
+                    <Icons.Youtube />
                   </a>
-                )}
-                {data.socialMedia.youtube && (
-                  <a 
-                    href={data.socialMedia.youtube}
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                    aria-label="YouTube"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <SocialIcons.YouTube />
-                  </a>
-                )}
-              </div>
-            )}
+                </>
+              )}
+            </div>
           </div>
 
           {/* Quick Links */}
-          <div>
-            <h5 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
+          <div className="animate-fade-in-delay-1">
+            <h4 className="text-lg font-serif font-semibold mb-6 text-white">
               {data.quickLinks?.sectionTitle || 'Quick Links'}
-            </h5>
+            </h4>
             <ul className="space-y-3">
-              {data.quickLinks?.links?.map((link, index) => (
+              {(data.quickLinks?.links || []).map((link, index) => (
                 <li key={index}>
                   <a 
                     href={link.href} 
-                    className="text-muted-foreground hover:text-primary transition-colors"
+                    className="text-white/80 hover:text-coral-400 transition-colors"
                   >
                     {link.label}
                   </a>
                 </li>
-              )) || []}
+              ))}
             </ul>
           </div>
 
-          {/* Popular Subjects */}
-          <div>
-            <h5 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-              {data.popularSubjects?.sectionTitle || 'Popular Subjects'}
-            </h5>
-            <ul className="space-y-3">
-              {data.popularSubjects?.links?.map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.href} 
-                    className="text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              )) || []}
-            </ul>
-          </div>
-
-          {/* Support - Only render if it has content */}
-          {shouldShowSupport && (
-            <div>
-              <h5 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
+          {/* Support or Popular Subjects */}
+          {shouldShowSupport ? (
+            <div className="animate-fade-in-delay-2">
+              <h4 className="text-lg font-serif font-semibold mb-6 text-white">
                 {data.support!.sectionTitle}
-              </h5>
+              </h4>
               <ul className="space-y-3">
-                {data.support!.links?.map((link, index) => (
+                {(data.support!.links || []).map((link, index) => (
                   <li key={index}>
                     <a 
                       href={link.href} 
-                      className="text-muted-foreground hover:text-primary transition-colors"
+                      className="text-white/80 hover:text-coral-400 transition-colors"
                     >
                       {link.label}
                     </a>
                   </li>
-                )) || []}
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div className="animate-fade-in-delay-2">
+              <h4 className="text-lg font-serif font-semibold mb-6 text-white">
+                {data.popularSubjects?.sectionTitle || 'Popular Subjects'}
+              </h4>
+              <ul className="space-y-3">
+                {(data.popularSubjects?.links || []).map((link, index) => (
+                  <li key={index}>
+                    <a 
+                      href={link.href} 
+                      className="text-white/80 hover:text-coral-400 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
               </ul>
             </div>
           )}
-        </div>
-      </div>
 
-      {/* Bottom Footer */}
-      {data.layoutSettings?.showCopyright && (
-        <div className="border-t border-border">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-              <div className="text-sm text-muted-foreground">
-                {data.layoutSettings?.copyrightText || 
-                 `© ${currentYear} ${data.websiteTitle || 'CIE IGCSE Study Notes'}. All rights reserved.`}
+          {/* Get in Touch */}
+          <div className="animate-fade-in-delay-3">
+            <h4 className="text-lg font-serif font-semibold mb-6 text-white">Get in Touch</h4>
+            <div className="space-y-4">
+              <div className="flex items-start space-x-3">
+                <Icons.Mail />
+                <div>
+                  <p className="text-white/80">hello@igcsestudynotes.com</p>
+                  <p className="text-white/60 text-sm">24/7 support</p>
+                </div>
               </div>
-              <div className="flex space-x-6 text-sm">
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Privacy Policy
-                </a>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Terms of Service
-                </a>
-                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
-                  Cookie Policy
-                </a>
+              <div className="flex items-start space-x-3">
+                <Icons.Phone />
+                <div>
+                  <p className="text-white/80">+44 20 1234 5678</p>
+                  <p className="text-white/60 text-sm">Mon-Fri 9AM-6PM GMT</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3">
+                <Icons.MapPin />
+                <div>
+                  <p className="text-white/80">London, United Kingdom</p>
+                  <p className="text-white/60 text-sm">Online tutoring worldwide</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      )}
-    </footer>
+
+        {/* Bottom Footer */}
+        {data.layoutSettings?.showCopyright && (
+          <div className="border-t border-white/20 pt-8 animate-fade-in-up">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <div className="flex items-center gap-2 text-white/70">
+                <span>© {currentYear} {data.websiteTitle || 'CIE IGCSE Study Notes'}. Made with</span>
+                <Icons.Heart />
+                <span>for students worldwide.</span>
+              </div>
+              <div className="flex flex-wrap gap-6 text-sm">
+                <a href="#" className="text-white/70 hover:text-coral-400 transition-colors">
+                  Privacy
+                </a>
+                <a href="#" className="text-white/70 hover:text-coral-400 transition-colors">
+                  Terms
+                </a>
+                <a href="#" className="text-white/70 hover:text-coral-400 transition-colors">
+                  Cookies
+                </a>
+                <a href="#" className="text-white/70 hover:text-coral-400 transition-colors">
+                  Accessibility
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
   )
 } 

@@ -108,6 +108,32 @@ export default {
           800: '#991b1b',
           900: '#7f1d1d',
         },
+        // Navy color palette for footer
+        navy: {
+          50: '#f8fafc',
+          100: '#f1f5f9',
+          200: '#e2e8f0',
+          300: '#94a3b8',
+          400: '#64748b',
+          500: '#475569',
+          600: '#334155',
+          700: '#1e293b',
+          800: '#0f172a',
+          900: '#020617',
+        },
+        // Coral color palette for footer
+        coral: {
+          50: '#fef7ee',
+          100: '#fdedd3',
+          200: '#fad7a5',
+          300: '#f6bb6d',
+          400: '#f19432',
+          500: '#ec7808',
+          600: '#dd5d00',
+          700: '#b84502',
+          800: '#953508',
+          900: '#7a2e0a',
+        },
       },
       fontFamily: {
         sans: ['var(--font-inter)', 'Inter', 'system-ui', 'sans-serif'],
@@ -145,6 +171,11 @@ export default {
         'fade-in': 'fadeIn 0.5s ease-in-out',
         'slide-up': 'slideUp 0.3s ease-out',
         'slide-down': 'slideDown 0.3s ease-out',
+        'fade-in-left': 'fadeInLeft 0.6s ease-out',
+        'fade-in-delay-1': 'fadeInUp 0.6s ease-out 0.1s both',
+        'fade-in-delay-2': 'fadeInUp 0.6s ease-out 0.2s both',
+        'fade-in-delay-3': 'fadeInUp 0.6s ease-out 0.3s both',
+        'fade-in-up': 'fadeInUp 0.6s ease-out 0.4s both',
       },
       keyframes: {
         fadeIn: {
@@ -158,6 +189,14 @@ export default {
         slideDown: {
           '0%': { transform: 'translateY(-10px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        fadeInLeft: {
+          '0%': { opacity: '0', transform: 'translateX(-20px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        fadeInUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
     },
