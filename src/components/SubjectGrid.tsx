@@ -219,7 +219,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-20">
-          <h3 className="leading-none mb-6" style={{fontSize: '42px', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#243b53', letterSpacing: '-0.01em', fontWeight: '600'}}>
+          <h3 className="leading-none mb-6" style={{fontSize: '42px', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#e67e50', letterSpacing: '-0.01em', fontWeight: '600'}}>
             {data.sectionTitle}
           </h3>
           <p className="font-sans leading-relaxed max-w-3xl mx-auto" style={{fontSize: '20px', color: '#486581', fontWeight: '500'}}>
