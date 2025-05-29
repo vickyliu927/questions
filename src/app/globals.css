@@ -107,8 +107,8 @@ body {
 .notebook-paper {
   background-color: #fefefe;
   background-image: 
-    linear-gradient(90deg, #e0e7ff 1px, transparent 1px),
-    linear-gradient(180deg, #e0e7ff 1px, transparent 1px);
+    linear-gradient(90deg, rgba(229, 231, 235, 0.35) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(229, 231, 235, 0.35) 1px, transparent 1px);
   background-size: 24px 24px;
   position: relative;
 }
@@ -120,8 +120,8 @@ body {
   left: 60px;
   width: 2px;
   height: 100%;
-  background-color: #fca5a5;
-  opacity: 0.6;
+  background-color: rgba(252, 165, 165, 0.4);
+  opacity: 0.5;
 }
 
 /* Custom component classes */
@@ -156,4 +156,23 @@ body {
   outline: 2px solid transparent;
   outline-offset: 2px;
   box-shadow: 0 0 0 2px hsl(var(--ring));
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-float-delayed {
+  animation: float 4s ease-in-out infinite;
+  animation-delay: 2s;
 }

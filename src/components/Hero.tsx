@@ -91,14 +91,14 @@ export default function Hero({ heroData }: HeroProps) {
 
   return (
     <section className="relative py-20 overflow-hidden notebook-paper">
-      {/* Background with increased transparency and gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-orange-50/30 via-white/20 to-red-50/30"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-orange-100/20 via-transparent to-red-100/20"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-orange-50/20"></div>
+      {/* Background with reduced orange tones and gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-50/25 via-white/20 to-orange-50/20"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-100/15 via-transparent to-orange-100/15"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-gray-50/15"></div>
 
-      {/* Floating decorative elements with reduced opacity */}
-      <div className="absolute top-20 left-10 w-32 h-32 rounded-full animate-pulse" style={{backgroundColor: '#E67E50', opacity: '0.2'}}></div>
-      <div className="absolute bottom-20 right-10 w-24 h-24 bg-red-200 rounded-full opacity-10 animate-pulse" style={{animationDelay: '1s'}}></div>
+      {/* Floating decorative elements with gentle up and down movement */}
+      <div className="absolute top-20 left-10 w-32 h-32 rounded-full animate-float" style={{backgroundColor: '#E67E50', opacity: '0.08'}}></div>
+      <div className="absolute bottom-20 right-10 w-24 h-24 rounded-full animate-float-delayed" style={{backgroundColor: '#E67E50', opacity: '0.06'}}></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -106,7 +106,7 @@ export default function Hero({ heroData }: HeroProps) {
           <div className="space-y-8">
             <div className="space-y-6">
               {/* Premium badge - updated color to #B14F29 */}
-              <div className="inline-flex items-center px-4 py-2 bg-orange-100 rounded-full text-orange-700 text-sm font-medium" style={{backgroundColor: '#FEF3E2', color: '#B14F29'}}>
+              <div className="inline-flex items-center px-4 py-2 bg-orange-100 rounded-full text-orange-700 text-sm font-semibold" style={{backgroundColor: '#fdeee6', color: '#B14F29'}}>
                 <svg className="h-4 w-4 mr-2 fill-current" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
                 </svg>
@@ -114,7 +114,7 @@ export default function Hero({ heroData }: HeroProps) {
               </div>
 
               {/* Main heading - keeping highlighted text in original orange color */}
-              <h1 className="font-bold text-slate-800 leading-none" style={{fontSize: '60px', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>
+              <h1 className="font-semibold leading-none" style={{fontSize: '55px', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#243b53', letterSpacing: '-0.01em', fontWeight: '600'}}>
                 <span className="block">{data.sectionTitle}</span>
                 <span className="block">
                   <span style={{color: '#E67E50'}}>{data.sectionTitleHighlighted}</span>
@@ -125,7 +125,7 @@ export default function Hero({ heroData }: HeroProps) {
               </h1>
 
               {/* Description */}
-              <p className="text-xl font-sans text-slate-600 leading-relaxed">
+              <p className="text-xl font-sans leading-relaxed" style={{color: '#64748b', fontWeight: '500'}}>
                 {data.description}
               </p>
             </div>
@@ -144,8 +144,8 @@ export default function Hero({ heroData }: HeroProps) {
               </a>
               <a 
                 href={data.ctaButtons.secondaryButton.href}
-                className="border border-slate-300 text-slate-700 hover:bg-slate-50 px-8 py-3 rounded-md font-medium font-sans transition-colors"
-                style={{fontSize: '14px'}}
+                className="border border-slate-300 hover:bg-slate-50 px-8 py-3 rounded-md font-medium font-sans transition-colors"
+                style={{fontSize: '14px', color: '#475569'}}
               >
                 {data.ctaButtons.secondaryButton.text}
               </a>
@@ -154,48 +154,48 @@ export default function Hero({ heroData }: HeroProps) {
             {/* Statistics */}
             <div className="flex items-center gap-8 pt-4">
               <div className="text-center">
-                <div className="text-3xl font-serif font-bold text-slate-800" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>{data.statistics.studentsHelped.stats}</div>
-                <div className="text-sm font-sans text-slate-600">{data.statistics.studentsHelped.text}</div>
+                <div className="text-3xl font-serif font-bold" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#243b53'}}>{data.statistics.studentsHelped.stats}</div>
+                <div className="text-sm font-sans" style={{color: '#64748b'}}>{data.statistics.studentsHelped.text}</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-serif font-bold text-slate-800" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>{data.statistics.subjectsCovered.stats}</div>
-                <div className="text-sm font-sans text-slate-600">{data.statistics.subjectsCovered.text}</div>
+                <div className="text-3xl font-serif font-bold" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#243b53'}}>{data.statistics.subjectsCovered.stats}</div>
+                <div className="text-sm font-sans" style={{color: '#64748b'}}>{data.statistics.subjectsCovered.text}</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-serif font-bold text-slate-800" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>{data.statistics.successRate.stats}</div>
-                <div className="text-sm font-sans text-slate-600">{data.statistics.successRate.text}</div>
+                <div className="text-3xl font-serif font-bold" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#243b53'}}>{data.statistics.successRate.stats}</div>
+                <div className="text-sm font-sans" style={{color: '#64748b'}}>{data.statistics.successRate.text}</div>
               </div>
             </div>
           </div>
 
           {/* Right side - Floating cards with gradient effects */}
           <div className="relative lg:h-96">
-            {/* First card (Physics/top-right) with gradient overlay */}
+            {/* First card (Physics/top-right) with muted gradient overlay */}
             {data.floatingCards[0] && (
               <div className="absolute top-0 right-8 bg-white rounded-2xl p-6 shadow-lg border border-slate-200 rotate-3 transform hover:rotate-0 transition-transform duration-300 overflow-hidden">
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-transparent to-slate-100/30 pointer-events-none"></div>
+                {/* Muted gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-50/40 via-transparent to-slate-100/30 pointer-events-none"></div>
                 <div className="relative z-10">
-                  <div className="w-full h-32 bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="h-8 w-8 text-slate-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="w-full h-32 bg-gradient-to-br from-white via-slate-100 to-slate-300 rounded-lg flex items-center justify-center mb-4">
+                    <svg className="h-8 w-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <circle cx="12" cy="12" r="10"/>
                       <circle cx="12" cy="12" r="6"/>
                       <circle cx="12" cy="12" r="2"/>
                     </svg>
                   </div>
-                  <h3 className="font-serif font-semibold text-slate-800 mb-2">{data.floatingCards[0].title}</h3>
-                  <p className="text-sm font-sans text-slate-600 whitespace-pre-line">{wrapText(data.floatingCards[0].description, data.floatingCards[0].maxCharactersPerLine)}</p>
+                  <h3 className="font-serif font-bold mb-2" style={{color: '#243b53'}}>{data.floatingCards[0].title}</h3>
+                  <p className="text-sm font-sans whitespace-pre-line" style={{color: '#64748b'}}>{wrapText(data.floatingCards[0].description, data.floatingCards[0].maxCharactersPerLine)}</p>
                 </div>
               </div>
             )}
 
-            {/* Second card (Mathematics/left) with gradient overlay */}
+            {/* Second card (Mathematics/left) with muted gradient overlay */}
             {data.floatingCards[1] && (
               <div className="absolute top-8 left-4 bg-white rounded-2xl p-6 shadow-lg border border-slate-200 -rotate-2 transform hover:rotate-0 transition-transform duration-300 overflow-hidden">
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-50/60 via-transparent to-orange-50/40 pointer-events-none"></div>
+                {/* Muted gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-yellow-50/40 via-transparent to-yellow-100/30 pointer-events-none"></div>
                 <div className="relative z-10">
-                  <div className="w-full h-24 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+                  <div className="w-full h-24 bg-gradient-to-br from-white via-yellow-100 to-yellow-200 rounded-lg flex items-center justify-center mb-4">
                     <svg className="h-6 w-6 text-yellow-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
                       <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
@@ -205,25 +205,25 @@ export default function Hero({ heroData }: HeroProps) {
                       <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
                     </svg>
                   </div>
-                  <h3 className="font-serif font-semibold text-slate-800 mb-2">{data.floatingCards[1].title}</h3>
-                  <p className="text-sm font-sans text-slate-600 whitespace-pre-line">{wrapText(data.floatingCards[1].description, data.floatingCards[1].maxCharactersPerLine)}</p>
+                  <h3 className="font-serif font-bold mb-2" style={{color: '#243b53'}}>{data.floatingCards[1].title}</h3>
+                  <p className="text-sm font-sans whitespace-pre-line" style={{color: '#64748b'}}>{wrapText(data.floatingCards[1].description, data.floatingCards[1].maxCharactersPerLine)}</p>
                 </div>
               </div>
             )}
 
-            {/* Third card (Chemistry/bottom-right) with gradient overlay */}
+            {/* Third card (Chemistry/bottom-right) with muted gradient overlay */}
             {data.floatingCards[2] && (
               <div className="absolute bottom-[-2rem] right-16 bg-white rounded-2xl p-4 shadow-lg border border-slate-200 rotate-1 transform hover:rotate-0 transition-transform duration-300 overflow-hidden">
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-red-50/50 via-transparent to-pink-50/30 pointer-events-none"></div>
+                {/* Muted gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-red-50/30 via-transparent to-red-100/25 pointer-events-none"></div>
                 <div className="relative z-10">
-                  <div className="w-full h-20 bg-gradient-to-br from-red-100 to-red-200 rounded-lg flex items-center justify-center mb-3">
+                  <div className="w-full h-20 bg-gradient-to-br from-white via-red-100 to-red-200 rounded-lg flex items-center justify-center mb-3">
                     <svg className="h-5 w-5 text-red-700 fill-current" viewBox="0 0 24 24" fill="currentColor">
-                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
+                      <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.770-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a .53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
                     </svg>
                   </div>
-                  <h3 className="font-serif font-semibold text-slate-800 text-sm mb-1">{data.floatingCards[2].title}</h3>
-                  <p className="text-xs font-sans text-slate-600 whitespace-pre-line">{wrapText(data.floatingCards[2].description, data.floatingCards[2].maxCharactersPerLine)}</p>
+                  <h3 className="font-serif font-bold text-sm mb-1" style={{color: '#243b53'}}>{data.floatingCards[2].title}</h3>
+                  <p className="text-xs font-sans whitespace-pre-line" style={{color: '#64748b'}}>{wrapText(data.floatingCards[2].description, data.floatingCards[2].maxCharactersPerLine)}</p>
                 </div>
               </div>
             )}

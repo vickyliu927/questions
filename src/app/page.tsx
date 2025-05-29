@@ -1,4 +1,9 @@
-import { Header, Hero, SubjectGrid, WhyChooseUs, FAQ, Footer } from '@/components';
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import SubjectGrid from '@/components/SubjectGrid';
+import WhyChooseUs from '@/components/WhyChooseUs';
+import FAQ from '@/components/FAQ';
+import Footer from '@/components/Footer';
 import { client, headerQuery, heroQuery, subjectGridQuery, whyChooseUsQuery, faqQuery, footerQuery, allSubjectPagesQuery } from '../../lib/sanity';
 import { HeaderData, HeroData, SubjectGridData, WhyChooseUsData, FAQData, FooterData, SubjectPageData } from '../../types/sanity';
 
