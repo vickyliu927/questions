@@ -219,7 +219,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
       
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="text-center mb-20">
-          <h3 className="leading-none mb-6" style={{fontSize: '42px', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#e67e50', letterSpacing: '-0.01em', fontWeight: '600'}}>
+          <h3 className="leading-none mb-6 font-serif" style={{fontSize: '42px', color: '#e67e50', letterSpacing: '-0.01em', fontWeight: '600'}}>
             {data.sectionTitle}
           </h3>
           <p className="font-sans leading-relaxed max-w-3xl mx-auto" style={{fontSize: '20px', color: '#486581', fontWeight: '500'}}>
@@ -260,7 +260,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                       <div className="absolute inset-0 opacity-10" style={{
                         backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='2' cy='2' r='1'/%3E%3Ccircle cx='32' cy='32' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
                       }}></div>
-                      <span className="text-white font-bold relative z-10" style={{fontSize: '42px', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>{subject.name[0]}</span>
+                      <span className="text-white font-bold relative z-10 font-serif" style={{fontSize: '42px'}}>{subject.name[0]}</span>
                     </div>
                   )}
                 </div>
@@ -268,7 +268,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                 {/* Content Section */}
                 <div className="p-8 space-y-6">
                   {/* Subject Name */}
-                  <h4 className="text-xl font-semibold leading-tight" style={{color: '#243b53', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif'}}>
+                  <h4 className="text-xl font-semibold leading-tight font-serif" style={{color: '#243b53'}}>
                     {subject.name}
                   </h4>
                   

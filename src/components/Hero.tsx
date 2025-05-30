@@ -114,7 +114,7 @@ export default function Hero({ heroData }: HeroProps) {
               </div>
 
               {/* Main heading - keeping highlighted text in original orange color */}
-              <h1 className="font-semibold leading-none" style={{fontSize: '55px', fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#243b53', letterSpacing: '-0.01em', fontWeight: '600'}}>
+              <h1 className="font-bold leading-none font-serif" style={{fontSize: '55px', color: '#243b53', letterSpacing: '-0.01em', fontWeight: '600'}}>
                 <span className="block">{data.sectionTitle}</span>
                 <span className="block">
                   <span style={{color: '#E67E50'}}>{data.sectionTitleHighlighted}</span>
@@ -154,15 +154,15 @@ export default function Hero({ heroData }: HeroProps) {
             {/* Statistics */}
             <div className="flex items-center gap-8 pt-4">
               <div className="text-center">
-                <div className="text-3xl font-serif font-bold" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#243b53'}}>{data.statistics.studentsHelped.stats}</div>
+                <div className="text-3xl font-serif font-bold" style={{color: '#243b53'}}>{data.statistics.studentsHelped.stats}</div>
                 <div className="text-sm font-sans" style={{color: '#64748b'}}>{data.statistics.studentsHelped.text}</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-serif font-bold" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#243b53'}}>{data.statistics.subjectsCovered.stats}</div>
+                <div className="text-3xl font-serif font-bold" style={{color: '#243b53'}}>{data.statistics.subjectsCovered.stats}</div>
                 <div className="text-sm font-sans" style={{color: '#64748b'}}>{data.statistics.subjectsCovered.text}</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-serif font-bold" style={{fontFamily: '"Iowan Old Style BT Pro Bold", "Iowan Old Style", Georgia, serif', color: '#243b53'}}>{data.statistics.successRate.stats}</div>
+                <div className="text-3xl font-serif font-bold" style={{color: '#243b53'}}>{data.statistics.successRate.stats}</div>
                 <div className="text-sm font-sans" style={{color: '#64748b'}}>{data.statistics.successRate.text}</div>
               </div>
             </div>
