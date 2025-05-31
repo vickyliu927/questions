@@ -1,5 +1,4 @@
 import { defineField, defineType } from 'sanity'
-import { seoFields } from './seo'
 
 export default defineType({
   name: 'subjectGrid',
@@ -27,7 +26,6 @@ export default defineType({
       description: 'Description text below the section title',
       validation: Rule => Rule.required()
     }),
-    ...seoFields,
     defineField({
       name: 'subjects',
       title: 'Subjects',

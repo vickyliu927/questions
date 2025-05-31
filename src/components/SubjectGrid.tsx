@@ -140,7 +140,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
     ],
     viewAllButton: {
       text: "View All Subjects",
-      href: "/subjects"
+      href: "/"
     }
   };
 

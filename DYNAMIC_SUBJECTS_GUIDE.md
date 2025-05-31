@@ -7,7 +7,6 @@ This guide explains how to use the new dynamic subject pages system that allows 
 The dynamic subject system allows you to:
 - Create subject pages through Sanity CMS with custom URLs
 - Automatically display them on the homepage subject grid
-- Include them in the `/subjects` page
 - Generate SEO-optimized pages with custom metadata
 - Use a hierarchical topic structure (Topic → Subtopic → Sub-Subtopic)
 
@@ -33,7 +32,6 @@ The system uses a new `subjectPage` schema in Sanity that includes:
 ### 3. Automatic Integration
 
 - Published subjects automatically appear in the homepage subject grid
-- They're included in the `/subjects` page listing
 - Links are automatically updated to use the dynamic URLs
 - Existing static subjects (like the legacy `/maths` page) continue to work
 
@@ -130,16 +128,6 @@ Physics
 - Automatically includes published subject pages
 - Updates links to use dynamic URLs
 - Maintains existing styling and functionality
-
-### Subjects Page
-- Merges published subjects with existing subject grid data
-- Respects sorting preferences (alphabetical, recent, custom)
-- Maintains all existing features
-
-### Legacy Support
-- Existing `/maths` page continues to work
-- Can gradually migrate to the new system
-- Both systems can coexist
 
 ## Technical Details
 

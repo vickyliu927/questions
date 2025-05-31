@@ -106,27 +106,6 @@ export interface AdditionalSubject {
   displayOrder: number
 }
 
-export interface SubjectsPageSEO {
-  metaTitle?: string
-  metaDescription?: string
-  noFollow?: boolean
-}
-
-export interface SubjectsPageData {
-  _id: string
-  title: string
-  pageTitle: string
-  pageDescription: string
-  subjectGridDisplayOrder: 'alphabetical' | 'reverse-alphabetical' | 'recent-first' | 'oldest-first' | 'custom'
-  showAdditionalSubjects: boolean
-  additionalSubjects?: AdditionalSubject[] | null
-  additionalSubjectRequestTitle: string
-  additionalSubjectRequestDescription: string
-  additionalSubjectRequestButton: CTAButton
-  seo?: SubjectsPageSEO
-  isActive: boolean
-}
-
 export interface WhyChooseUsHighlight {
   title: string
   description: string
