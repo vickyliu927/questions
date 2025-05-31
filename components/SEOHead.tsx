@@ -74,18 +74,4 @@ export function generateSEOMetadata({
   }
 
   return metadata
-}
-
-// Component for runtime SEO (if needed for dynamic content)
-export function SEOHead({
-  title,
-  description,
-  keywords,
-  canonicalUrl,
-  seoData,
-  fallbackImage = '/images/default-og-image.jpg'
-}: SEOHeadProps) {
-  // This component can be used for client-side SEO updates if needed
-  // Most SEO should be handled via generateMetadata in Next.js 13+
-  return null
 } 

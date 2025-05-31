@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Header, Footer, SubjectTopicGrid } from '@/components'
 import { client, headerQuery, footerQuery, getSubjectPageData, getGlobalSEOSettings, allSubjectSlugsQuery } from '../../../lib/sanity'
-import { HeaderData, FooterData, SubjectPageData } from '../../../types/sanity'
+import { HeaderData, FooterData } from '../../../types/sanity'
 import { generateSEOMetadata } from '../../../components/SEOHead'
 
 interface SubjectPageProps {

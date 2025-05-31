@@ -116,9 +116,17 @@ const sortSubjects = (subjects: (SubjectGridSubject | AdditionalSubject)[], orde
     case 'reverse-alphabetical':
       return [...subjects].sort((a, b) => b.name.localeCompare(a.name));
     case 'recent-first':
-      return [...subjects].sort((a, b) => new Date(b.dateUpdated).getTime() - new Date(a.dateUpdated).getTime());
+      return [...subjects].sort((a, b) => {
+        const dateA = a.dateUpdated ? new Date(a.dateUpdated).getTime() : 0;
+        const dateB = b.dateUpdated ? new Date(b.dateUpdated).getTime() : 0;
+        return dateB - dateA;
+      });
     case 'oldest-first':
-      return [...subjects].sort((a, b) => new Date(a.dateUpdated).getTime() - new Date(b.dateUpdated).getTime());
+      return [...subjects].sort((a, b) => {
+        const dateA = a.dateUpdated ? new Date(a.dateUpdated).getTime() : 0;
+        const dateB = b.dateUpdated ? new Date(b.dateUpdated).getTime() : 0;
+        return dateA - dateB;
+      });
     case 'custom':
     default:
       return subjects;
@@ -160,7 +168,8 @@ interface SubjectsPageGridProps {
 
 function SubjectsPageGrid({ subjects, pageData, publishedSubjects }: SubjectsPageGridProps) {
   // Helper function to format date
-  const formatDate = (dateString: string) => {
+  const formatDate = (dateString?: string) => {
+    if (!dateString) return 'Recently';
     try {
       const date = new Date(dateString);
       return date.toLocaleDateString('en-US', { 

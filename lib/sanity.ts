@@ -343,16 +343,6 @@ export const mathsPageQuery = `*[_type == "mathsPage"][0]{
   }
 }`
 
-// Helper function to construct image URLs
-const getImageUrl = (imageData: any) => {
-  if (!imageData?.asset?._ref) return null
-  
-  const baseUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/`
-  const assetId = imageData.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-jpeg', '.jpeg').replace('-webp', '.webp')
-  
-  return `${baseUrl}${assetId}`
-}
-
 // Homepage data query
 export async function getHomepageData() {
   const query = `
