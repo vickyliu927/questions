@@ -354,21 +354,6 @@ export async function getHomepageData() {
       "seo": seo {
         metaTitle,
         metaDescription,
-        metaKeywords,
-        ogTitle,
-        ogDescription,
-        ogImage {
-          ...,
-          "url": asset->url
-        },
-        twitterTitle,
-        twitterDescription,
-        twitterImage {
-          ...,
-          "url": asset->url
-        },
-        canonicalUrl,
-        noIndex,
         noFollow
       },
       sections
@@ -391,21 +376,6 @@ export async function getGlobalSEOSettings() {
       "seo": seo {
         metaTitle,
         metaDescription,
-        metaKeywords,
-        ogTitle,
-        ogDescription,
-        ogImage {
-          ...,
-          "url": asset->url
-        },
-        twitterTitle,
-        twitterDescription,
-        twitterImage {
-          ...,
-          "url": asset->url
-        },
-        canonicalUrl,
-        noIndex,
         noFollow
       }
     }
@@ -434,21 +404,6 @@ export async function getSubjectPageData(slug: string) {
       "seo": seo {
         metaTitle,
         metaDescription,
-        metaKeywords,
-        ogTitle,
-        ogDescription,
-        ogImage {
-          ...,
-          "url": asset->url
-        },
-        twitterTitle,
-        twitterDescription,
-        twitterImage {
-          ...,
-          "url": asset->url
-        },
-        canonicalUrl,
-        noIndex,
         noFollow
       },
       topics[] {

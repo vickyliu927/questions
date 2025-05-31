@@ -1,76 +1,59 @@
 # SEO Implementation Guide
 
-This guide explains the comprehensive SEO implementation for the CIE IGCSE Notes website, covering all pages including the homepage and subject pages.
+This guide explains the simplified SEO implementation for the CIE IGCSE Notes website, covering the homepage and all subject pages.
 
 ## Overview
 
 The SEO system provides:
 - ✅ Meta titles and descriptions
-- ✅ Open Graph tags for social media
-- ✅ Twitter Card tags
-- ✅ Canonical URLs
-- ✅ Keywords optimization
-- ✅ Robots meta tags (noindex/nofollow)
-- ✅ Custom images for social sharing
-- ✅ Global SEO fallbacks
-- ✅ Page-specific SEO overrides
+- ✅ No follow link control
+- ✅ Simple and easy-to-manage settings
 
 ## Schema Structure
 
-### 1. SEO Fields Schema (`sanity/schemas/seo.ts`)
+### SEO Fields Schema (`sanity/schemas/seo.ts`)
 
-The reusable SEO schema includes:
+The simplified SEO schema includes only three essential fields:
 - **Meta Title** (50-60 characters recommended)
-- **Meta Description** (150-160 characters recommended)
-- **Meta Keywords** (comma-separated)
-- **Open Graph Title/Description/Image**
-- **Twitter Title/Description/Image**
-- **Canonical URL**
-- **No Index/No Follow flags**
+- **Meta Description** (150-160 characters recommended)  
+- **No Follow Links** (toggle to prevent search engines from following links)
 
-### 2. Global SEO Settings (`seoSettings` document type)
+### Global SEO Settings (`seoSettings` document type)
 
 Create global SEO defaults that apply to all pages unless overridden:
 - Set `isGlobal: true` for default settings
 - Used as fallback when page-specific SEO is not configured
 
-### 3. Homepage SEO (`homepage` document type)
+### Homepage SEO (`homepage` document type)
 
 Homepage-specific SEO configuration:
 - Page title and description
-- Complete SEO meta tags
-- Section visibility controls
+- Dedicated SEO section with the three fields
 
-### 4. Subject Page SEO (`subjectPage` document type)
+### Subject Page SEO (`subjectPage` document type)
 
 Subject-specific SEO configuration:
 - Subject-specific meta tags
-- Custom social sharing images
-- Subject-focused keywords
+- Individual SEO control per subject
 
 ## Implementation Details
 
-### 1. SEO Component (`components/SEOHead.tsx`)
+### SEO Component (`components/SEOHead.tsx`)
 
 ```typescript
-// Generate metadata for Next.js 13+ app router
 export function generateSEOMetadata({
   title,
   description,
-  keywords,
-  canonicalUrl,
   seoData,
-  fallbackImage
 }: SEOHeadProps): Metadata
 ```
 
 Features:
+- Simple three-field configuration
 - Automatic fallbacks for missing data
-- Image URL handling for Sanity images
-- Proper Open Graph and Twitter Card generation
-- Robots meta tag configuration
+- Robots meta tag for no-follow control
 
-### 2. Homepage SEO (`src/app/page.tsx`)
+### Homepage SEO (`src/app/page.tsx`)
 
 ```typescript
 export async function generateMetadata(): Promise<Metadata> {
@@ -87,7 +70,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 ```
 
-### 3. Subject Page SEO (`src/app/[subject]/page.tsx`)
+### Subject Page SEO (`src/app/[subject]/page.tsx`)
 
 ```typescript
 export async function generateMetadata({ params }: SubjectPageProps): Promise<Metadata> {
@@ -99,7 +82,6 @@ export async function generateMetadata({ params }: SubjectPageProps): Promise<Me
   return generateSEOMetadata({
     title: `${subjectPageData.pageTitle} - CIE IGCSE Notes`,
     description: subjectPageData.pageDescription,
-    canonicalUrl: `${process.env.NEXT_PUBLIC_SITE_URL}/${subject}`,
     seoData,
   });
 }
@@ -109,135 +91,92 @@ export async function generateMetadata({ params }: SubjectPageProps): Promise<Me
 
 ### 1. Create Global SEO Settings
 
-1. Go to Sanity Studio → SEO Settings
+1. Go to Sanity Studio → Global SEO Settings
 2. Create a new document
-3. Set `isGlobal: true`
-4. Configure default meta tags, images, and settings
+3. Set `Use as Global Default: true`
+4. Configure:
+   - Meta Title (default site title)
+   - Meta Description (default site description)
+   - No Follow Links (usually false for global settings)
 
 ### 2. Configure Homepage SEO
 
 1. Go to Sanity Studio → Homepage
 2. Create/edit homepage configuration
 3. Fill in page title and description
-4. Configure SEO section with:
-   - Custom meta title/description
-   - Social sharing images
-   - Keywords
+4. Configure SEO Settings section:
+   - Meta Title (specific to homepage)
+   - Meta Description (homepage-specific description)
+   - No Follow Links (toggle as needed)
 
 ### 3. Configure Subject Page SEO
 
 1. Go to Sanity Studio → Subject Page
 2. For each subject, configure:
-   - Subject-specific meta tags
-   - Custom social sharing images
-   - Subject-focused keywords
-   - Canonical URLs
+   - Meta Title (subject-specific title)
+   - Meta Description (subject-specific description)
+   - No Follow Links (per subject control)
 
-## Environment Variables
+## SEO Fields Explained
 
-Add to your `.env.local`:
+### Meta Title
+- Appears in search results and browser tabs
+- Keep between 50-60 characters
+- Should be descriptive and include relevant keywords
+- Example: "Mathematics IGCSE Notes - CIE Study Materials"
 
-```bash
-# Site Configuration (for SEO)
-NEXT_PUBLIC_SITE_URL=https://your-domain.com
+### Meta Description
+- Appears in search results below the title
+- Keep between 150-160 characters
+- Should be compelling and describe the page content
+- Example: "Comprehensive mathematics notes covering algebra, geometry, and statistics for CIE IGCSE students."
 
-# Sanity Configuration
-NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
-NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_API_TOKEN=your_write_token
-```
-
-## SEO Best Practices Implemented
-
-### 1. Title Optimization
-- Homepage: "CIE IGCSE Notes - Comprehensive Study Resources"
-- Subject pages: "{Subject Name} - CIE IGCSE Notes"
-- Fallbacks for missing data
-
-### 2. Description Optimization
-- Descriptive, action-oriented descriptions
-- Include relevant keywords naturally
-- Stay within 150-160 character limit
-
-### 3. Keywords Strategy
-- Homepage: General IGCSE terms
-- Subject pages: Subject-specific terms
-- Include: "IGCSE", "CIE", "notes", "study materials", "exam preparation"
-
-### 4. Social Media Optimization
-- Open Graph tags for Facebook, LinkedIn
-- Twitter Card tags for Twitter
-- Custom images (1200x630px for OG, 1024x512px for Twitter)
-- Fallback images when custom images not set
-
-### 5. Technical SEO
-- Canonical URLs to prevent duplicate content
-- Robots meta tags for indexing control
-- Proper image alt text
-- Structured metadata
+### No Follow Links
+- When enabled, tells search engines not to follow links on this page
+- Useful for pages you don't want to pass link equity
+- Generally keep disabled (false) for most content pages
+- Consider enabling for contact forms or temporary pages
 
 ## Testing SEO Implementation
 
 ### 1. Meta Tags Testing
 - View page source to verify meta tags
 - Use browser dev tools to inspect `<head>` section
+- Check that titles and descriptions appear correctly
 
-### 2. Social Media Testing
-- Facebook Sharing Debugger: https://developers.facebook.com/tools/debug/
-- Twitter Card Validator: https://cards-dev.twitter.com/validator
-- LinkedIn Post Inspector: https://www.linkedin.com/post-inspector/
+### 2. Search Console
+- Submit your sitemap to Google Search Console
+- Monitor how your pages appear in search results
+- Check for any crawling issues
 
-### 3. SEO Tools
-- Google Search Console
-- SEMrush Site Audit
-- Ahrefs Site Explorer
-- Screaming Frog SEO Spider
+## Best Practices
 
-## Troubleshooting
+### Title Optimization
+- Homepage: "CIE IGCSE Notes - Comprehensive Study Resources"
+- Subject pages: "{Subject Name} - CIE IGCSE Notes"
+- Keep titles unique and descriptive
 
-### 1. Missing Meta Tags
-- Check if SEO data is properly fetched from Sanity
-- Verify environment variables are set
-- Check for JavaScript errors in browser console
+### Description Optimization
+- Write compelling, action-oriented descriptions
+- Include relevant keywords naturally
+- Stay within character limits
+- Make each description unique
 
-### 2. Images Not Loading
-- Verify Sanity image URLs are correct
-- Check image permissions in Sanity
-- Ensure fallback images exist in `/public/images/`
-
-### 3. Canonical URLs
-- Verify `NEXT_PUBLIC_SITE_URL` is set correctly
-- Check canonical URL format in generated HTML
-
-## Future Enhancements
-
-1. **JSON-LD Structured Data**
-   - Add schema.org markup for better search results
-   - Implement breadcrumb structured data
-
-2. **Advanced SEO Features**
-   - XML sitemap generation
-   - Robots.txt optimization
-   - Meta robots advanced directives
-
-3. **Performance SEO**
-   - Image optimization for social sharing
-   - Core Web Vitals optimization
-   - Page speed improvements
+### No Follow Usage
+- Generally keep disabled for content pages
+- Enable for non-content pages (contact, privacy policy)
+- Use sparingly to avoid reducing site authority
 
 ## Maintenance
 
-1. **Regular SEO Audits**
-   - Monthly review of meta tags
-   - Check for missing or duplicate content
-   - Monitor search console for issues
+1. **Regular Reviews**
+   - Check meta titles and descriptions monthly
+   - Update descriptions to improve click-through rates
+   - Ensure all new subjects have SEO configured
 
-2. **Content Updates**
-   - Update meta descriptions for better CTR
-   - Refresh keywords based on search trends
-   - Add new social sharing images
+2. **Performance Monitoring**
+   - Monitor search rankings for key terms
+   - Track click-through rates in Search Console
+   - Update content based on search performance
 
-3. **Technical Monitoring**
-   - Monitor canonical URL changes
-   - Check for broken social media previews
-   - Verify robots meta tag configurations 
+The simplified SEO system makes it easy to manage essential SEO settings without complexity, while ensuring all pages have proper search engine optimization. 

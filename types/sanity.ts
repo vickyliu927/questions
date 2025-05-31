@@ -109,7 +109,7 @@ export interface AdditionalSubject {
 export interface SubjectsPageSEO {
   metaTitle?: string
   metaDescription?: string
-  keywords?: string[]
+  noFollow?: boolean
 }
 
 export interface SubjectsPageData {
@@ -320,15 +320,6 @@ export interface MathsPageData {
 export interface SEOData {
   metaTitle?: string
   metaDescription?: string
-  metaKeywords?: string
-  ogTitle?: string
-  ogDescription?: string
-  ogImage?: SanityImage & { url?: string }
-  twitterTitle?: string
-  twitterDescription?: string
-  twitterImage?: SanityImage & { url?: string }
-  canonicalUrl?: string
-  noIndex?: boolean
   noFollow?: boolean
 }
 

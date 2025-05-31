@@ -25,8 +25,6 @@ export async function generateMetadata(): Promise<Metadata> {
     return generateSEOMetadata({
       title: homepageData?.pageTitle || 'CIE IGCSE Notes - Comprehensive Study Resources',
       description: homepageData?.pageDescription || 'Access comprehensive IGCSE study notes, past papers, and revision materials for all subjects. Boost your exam performance with our expert-curated content.',
-      keywords: 'IGCSE notes, CIE notes, IGCSE past papers, IGCSE revision, study materials, exam preparation',
-      canonicalUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://your-domain.com',
       seoData,
     });
   } catch (error) {
@@ -36,7 +34,6 @@ export async function generateMetadata(): Promise<Metadata> {
     return generateSEOMetadata({
       title: 'CIE IGCSE Notes - Comprehensive Study Resources',
       description: 'Access comprehensive IGCSE study notes, past papers, and revision materials for all subjects.',
-      keywords: 'IGCSE notes, CIE notes, IGCSE past papers, IGCSE revision, study materials',
     });
   }
 }

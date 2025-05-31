@@ -64,8 +64,6 @@ export async function generateMetadata({ params }: SubjectPageProps): Promise<Me
     return generateSEOMetadata({
       title: `${subjectPageData.pageTitle} - CIE IGCSE Notes`,
       description: subjectPageData.pageDescription,
-      keywords: `${subjectPageData.subjectName}, IGCSE, CIE, notes, study materials, exam preparation, revision`,
-      canonicalUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://your-domain.com'}/${subject}`,
       seoData,
     })
   } catch (error) {

@@ -308,7 +308,10 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: subjectsPageData.seo?.metaTitle || `${subjectsPageData.pageTitle} - CIE IGCSE Notes`,
     description: subjectsPageData.seo?.metaDescription || subjectsPageData.pageDescription,
-    keywords: subjectsPageData.seo?.keywords?.join(', ') || 'IGCSE, CIE, subjects, notes, study materials'
+    robots: {
+      index: true,
+      follow: !subjectsPageData.seo?.noFollow,
+    }
   };
 }
 

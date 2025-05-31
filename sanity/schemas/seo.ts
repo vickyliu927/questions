@@ -3,7 +3,7 @@ import { defineField, defineType } from 'sanity'
 export const seoFields = [
   defineField({
     name: 'seo',
-    title: 'SEO & Meta Tags',
+    title: 'SEO Settings',
     type: 'object',
     description: 'Search engine optimization settings',
     fields: [
@@ -22,85 +22,8 @@ export const seoFields = [
         validation: Rule => Rule.max(160).warning('Descriptions longer than 160 characters may be truncated in search results')
       },
       {
-        name: 'metaKeywords',
-        title: 'Meta Keywords',
-        type: 'string',
-        description: 'Comma-separated keywords relevant to this page (optional)'
-      },
-      {
-        name: 'ogTitle',
-        title: 'Open Graph Title',
-        type: 'string',
-        description: 'Title for social media sharing (falls back to Meta Title if not set)'
-      },
-      {
-        name: 'ogDescription',
-        title: 'Open Graph Description',
-        type: 'text',
-        description: 'Description for social media sharing (falls back to Meta Description if not set)'
-      },
-      {
-        name: 'ogImage',
-        title: 'Open Graph Image',
-        type: 'image',
-        description: 'Image for social media sharing (1200x630px recommended)',
-        options: {
-          hotspot: true
-        },
-        fields: [
-          {
-            name: 'alt',
-            title: 'Alt Text',
-            type: 'string',
-            description: 'Alternative text for the image'
-          }
-        ]
-      },
-      {
-        name: 'twitterTitle',
-        title: 'Twitter Title',
-        type: 'string',
-        description: 'Title for Twitter cards (falls back to OG Title if not set)'
-      },
-      {
-        name: 'twitterDescription',
-        title: 'Twitter Description',
-        type: 'text',
-        description: 'Description for Twitter cards (falls back to OG Description if not set)'
-      },
-      {
-        name: 'twitterImage',
-        title: 'Twitter Image',
-        type: 'image',
-        description: 'Image for Twitter cards (1024x512px recommended)',
-        options: {
-          hotspot: true
-        },
-        fields: [
-          {
-            name: 'alt',
-            title: 'Alt Text',
-            type: 'string',
-            description: 'Alternative text for the image'
-          }
-        ]
-      },
-      {
-        name: 'canonicalUrl',
-        title: 'Canonical URL',
-        type: 'url',
-        description: 'Canonical URL for this page (optional, auto-generated if not set)'
-      },
-      {
-        name: 'noIndex',
-        title: 'No Index',
-        type: 'boolean',
-        description: 'Prevent search engines from indexing this page',
-        initialValue: false
-      },
-      {
         name: 'noFollow',
-        title: 'No Follow',
+        title: 'No Follow Links',
         type: 'boolean',
         description: 'Prevent search engines from following links on this page',
         initialValue: false
@@ -115,7 +38,7 @@ export const seoFields = [
 
 export default defineType({
   name: 'seoSettings',
-  title: 'SEO Settings',
+  title: 'Global SEO Settings',
   type: 'document',
   fields: [
     defineField({
@@ -128,7 +51,7 @@ export default defineType({
     ...seoFields,
     defineField({
       name: 'isGlobal',
-      title: 'Global SEO Settings',
+      title: 'Use as Global Default',
       type: 'boolean',
       description: 'Use as default SEO settings for pages without specific SEO configuration',
       initialValue: false
@@ -144,7 +67,7 @@ export default defineType({
       const { title, metaTitle, isGlobal } = selection
       return {
         title: title,
-        subtitle: `${metaTitle || 'No meta title set'}${isGlobal ? ' (Global)' : ''}`,
+        subtitle: `${metaTitle || 'No meta title set'}${isGlobal ? ' (Global Default)' : ''}`,
         media: () => '🔍'
       }
     }
