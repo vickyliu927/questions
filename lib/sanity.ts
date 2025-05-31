@@ -351,11 +351,6 @@ export async function getHomepageData() {
       title,
       pageTitle,
       pageDescription,
-      "seo": seo {
-        metaTitle,
-        metaDescription,
-        noFollow
-      },
       sections
     }
   `
@@ -365,6 +360,27 @@ export async function getHomepageData() {
     return data
   } catch (error) {
     console.error('Error fetching homepage data:', error)
+    return null
+  }
+}
+
+// SEO Settings query
+export async function getSEOSettings() {
+  const query = `
+    *[_type == "seoSettings" && isActive == true][0] {
+      _id,
+      title,
+      metaTitle,
+      metaDescription,
+      noFollow
+    }
+  `
+  
+  try {
+    const data = await client.fetch(query)
+    return data
+  } catch (error) {
+    console.error('Error fetching SEO settings:', error)
     return null
   }
 }

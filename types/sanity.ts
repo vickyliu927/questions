@@ -302,12 +302,19 @@ export interface SEOData {
   noFollow?: boolean
 }
 
+export interface SEOSettings {
+  _id: string
+  title: string
+  metaTitle?: string
+  metaDescription?: string
+  noFollow?: boolean
+}
+
 export interface HomepageData {
   _id: string
   title: string
   pageTitle: string
   pageDescription?: string
-  seo?: SEOData
   sections?: {
     showHeader?: boolean
     showHero?: boolean

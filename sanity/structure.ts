@@ -53,6 +53,15 @@ export const structure = (S: StructureBuilder) =>
                             .title('FAQ Section')
                             .filter('_type == "faq"')
                         ),
+                      
+                      // SEO Settings
+                      S.listItem()
+                        .title('SEO Settings')
+                        .child(
+                          S.documentTypeList('seoSettings')
+                            .title('SEO Settings')
+                            .filter('_type == "seoSettings"')
+                        ),
                     ])
                 ),
               

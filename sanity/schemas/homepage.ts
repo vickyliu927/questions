@@ -1,5 +1,4 @@
 import { defineField, defineType } from 'sanity'
-import { seoFields } from './seo'
 
 export default defineType({
   name: 'homepage',
@@ -26,7 +25,6 @@ export default defineType({
       type: 'text',
       description: 'Brief description of the homepage content'
     }),
-    ...seoFields,
     defineField({
       name: 'sections',
       title: 'Page Sections',
