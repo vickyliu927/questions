@@ -58,9 +58,9 @@ export const structure = (S: StructureBuilder) =>
                       S.listItem()
                         .title('SEO Settings')
                         .child(
-                          S.documentTypeList('seoSettings')
+                          S.documentTypeList('homepageSEO')
                             .title('SEO Settings')
-                            .filter('_type == "seoSettings"')
+                            .filter('_type == "homepageSEO"')
                         ),
                     ])
                 ),

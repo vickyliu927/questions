@@ -367,7 +367,7 @@ export async function getHomepageData() {
 // SEO Settings query
 export async function getSEOSettings() {
   const query = `
-    *[_type == "seoSettings" && isActive == true][0] {
+    *[_type == "homepageSEO" && isActive == true][0] {
       _id,
       title,
       metaTitle,

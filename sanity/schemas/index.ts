@@ -7,7 +7,7 @@ import faq from './faq'
 import footer from './footer'
 import seo from './seo'
 import homepage from './homepage'
-import seoSettings from './seoSettings'
+import homepageSEO from './seoSettings'
 
 export const schemaTypes = [
   header, 
@@ -19,5 +19,5 @@ export const schemaTypes = [
   footer,
   seo,
   homepage,
-  seoSettings
+  homepageSEO
 ] 

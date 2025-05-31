@@ -1,7 +1,7 @@
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'seoSettings',
+  name: 'homepageSEO',
   title: 'SEO Settings',
   type: 'document',
   fields: [
