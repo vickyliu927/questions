@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { seoFields } from './seo'
 
 export default defineType({
   name: 'subjectGrid',
@@ -26,6 +27,7 @@ export default defineType({
       description: 'Description text below the section title',
       validation: Rule => Rule.required()
     }),
+    ...seoFields,
     defineField({
       name: 'subjects',
       title: 'Subjects',
@@ -66,8 +68,7 @@ export default defineType({
               name: 'description',
               title: 'Subject Description',
               type: 'text',
-              description: 'Brief description of what the subject covers',
-              validation: Rule => Rule.required()
+              description: 'Brief description of what the subject covers'
             },
             {
               name: 'color',
@@ -97,8 +98,7 @@ export default defineType({
               name: 'dateUpdated',
               title: 'Date Updated',
               type: 'date',
-              description: 'Date when this subject content was last updated',
-              validation: Rule => Rule.required()
+              description: 'Date when this subject content was last updated'
             },
             {
               name: 'viewNotesButton',

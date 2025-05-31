@@ -5,6 +5,9 @@ import { urlFor } from '../../../lib/sanity';
 import Image from 'next/image';
 import { Metadata } from 'next';
 
+// Revalidate on every request for immediate content updates
+export const revalidate = 0;
+
 async function getHeaderData(): Promise<HeaderData | undefined> {
   try {
     const headerData = await client.fetch(headerQuery);

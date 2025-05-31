@@ -7,6 +7,7 @@ export interface SanityImage {
     url?: string
   }
   alt?: string
+  url?: string
   hotspot?: {
     _type: 'sanity.imageHotspot'
     x: number
@@ -80,9 +81,9 @@ export interface HeroData {
 export interface SubjectGridSubject {
   name: string
   image: SanityImage
-  description: string
+  description?: string
   color: string
-  dateUpdated: string
+  dateUpdated?: string
   viewNotesButton: CTAButton
 }
 
@@ -314,4 +315,35 @@ export interface MathsPageData {
   pageDescription: string
   topics: MathsTopic[]
   seo?: MathsPageSEO
+}
+
+export interface SEOData {
+  metaTitle?: string
+  metaDescription?: string
+  metaKeywords?: string
+  ogTitle?: string
+  ogDescription?: string
+  ogImage?: SanityImage & { url?: string }
+  twitterTitle?: string
+  twitterDescription?: string
+  twitterImage?: SanityImage & { url?: string }
+  canonicalUrl?: string
+  noIndex?: boolean
+  noFollow?: boolean
+}
+
+export interface HomepageData {
+  _id: string
+  title: string
+  pageTitle: string
+  pageDescription?: string
+  seo?: SEOData
+  sections?: {
+    showHeader?: boolean
+    showHero?: boolean
+    showSubjectGrid?: boolean
+    showWhyChooseUs?: boolean
+    showFAQ?: boolean
+    showFooter?: boolean
+  }
 } 

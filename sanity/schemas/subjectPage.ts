@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity'
+import { seoFields } from './seo'
 
 export default defineType({
   name: 'subjectPage',
@@ -252,42 +253,7 @@ export default defineType({
       description: 'Whether this subject page is published and should appear on the website',
       initialValue: false
     }),
-    defineField({
-      name: 'seo',
-      title: 'SEO Settings',
-      type: 'object',
-      description: 'Search engine optimization settings',
-      fields: [
-        {
-          name: 'metaTitle',
-          title: 'Meta Title',
-          type: 'string',
-          description: 'Title that appears in search engine results and browser tabs',
-          validation: Rule => Rule.max(60)
-        },
-        {
-          name: 'metaDescription',
-          title: 'Meta Description',
-          type: 'text',
-          description: 'Description that appears in search engine results',
-          validation: Rule => Rule.max(160)
-        },
-        {
-          name: 'keywords',
-          title: 'Keywords',
-          type: 'array',
-          description: 'Keywords for search engine optimization',
-          of: [{ type: 'string' }],
-          options: {
-            layout: 'tags'
-          }
-        }
-      ],
-      options: {
-        collapsible: true,
-        collapsed: true
-      }
-    })
+    ...seoFields,
   ],
   preview: {
     select: {

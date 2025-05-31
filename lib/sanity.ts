@@ -2,8 +2,10 @@ import { createClient } from 'next-sanity'
 import imageUrlBuilder from '@sanity/image-url'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your_project_id_here'
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '8udeaunz'
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+const apiVersion = '2023-12-01'
+const token = process.env.SANITY_API_TOKEN
 
 if (projectId === 'your_project_id_here') {
   console.warn('⚠️  Please set NEXT_PUBLIC_SANITY_PROJECT_ID in your .env.local file')
@@ -12,8 +14,9 @@ if (projectId === 'your_project_id_here') {
 export const client = createClient({
   projectId,
   dataset,
-  apiVersion: '2023-12-01',
-  useCdn: process.env.NODE_ENV === 'production',
+  apiVersion,
+  token,
+  useCdn: false,
 })
 
 const builder = imageUrlBuilder(client)
@@ -338,4 +341,149 @@ export const mathsPageQuery = `*[_type == "mathsPage"][0]{
     metaDescription,
     keywords
   }
-}` 
+}`
+
+// Helper function to construct image URLs
+const getImageUrl = (imageData: any) => {
+  if (!imageData?.asset?._ref) return null
+  
+  const baseUrl = `https://cdn.sanity.io/images/${projectId}/${dataset}/`
+  const assetId = imageData.asset._ref.replace('image-', '').replace('-jpg', '.jpg').replace('-png', '.png').replace('-jpeg', '.jpeg').replace('-webp', '.webp')
+  
+  return `${baseUrl}${assetId}`
+}
+
+// Homepage data query
+export async function getHomepageData() {
+  const query = `
+    *[_type == "homepage" && isActive == true][0] {
+      _id,
+      title,
+      pageTitle,
+      pageDescription,
+      "seo": seo {
+        metaTitle,
+        metaDescription,
+        metaKeywords,
+        ogTitle,
+        ogDescription,
+        ogImage {
+          ...,
+          "url": asset->url
+        },
+        twitterTitle,
+        twitterDescription,
+        twitterImage {
+          ...,
+          "url": asset->url
+        },
+        canonicalUrl,
+        noIndex,
+        noFollow
+      },
+      sections
+    }
+  `
+  
+  try {
+    const data = await client.fetch(query)
+    return data
+  } catch (error) {
+    console.error('Error fetching homepage data:', error)
+    return null
+  }
+}
+
+// Global SEO settings query (fallback)
+export async function getGlobalSEOSettings() {
+  const query = `
+    *[_type == "seoSettings" && isGlobal == true][0] {
+      "seo": seo {
+        metaTitle,
+        metaDescription,
+        metaKeywords,
+        ogTitle,
+        ogDescription,
+        ogImage {
+          ...,
+          "url": asset->url
+        },
+        twitterTitle,
+        twitterDescription,
+        twitterImage {
+          ...,
+          "url": asset->url
+        },
+        canonicalUrl,
+        noIndex,
+        noFollow
+      }
+    }
+  `
+  
+  try {
+    const data = await client.fetch(query)
+    return data?.seo || null
+  } catch (error) {
+    console.error('Error fetching global SEO settings:', error)
+    return null
+  }
+}
+
+// Subject page data query (updated to include SEO)
+export async function getSubjectPageData(slug: string) {
+  const query = `
+    *[_type == "subjectPage" && subjectSlug.current == $slug][0] {
+      _id,
+      title,
+      subjectSlug,
+      subjectName,
+      pageTitle,
+      pageDescription,
+      heroBackgroundColor,
+      "seo": seo {
+        metaTitle,
+        metaDescription,
+        metaKeywords,
+        ogTitle,
+        ogDescription,
+        ogImage {
+          ...,
+          "url": asset->url
+        },
+        twitterTitle,
+        twitterDescription,
+        twitterImage {
+          ...,
+          "url": asset->url
+        },
+        canonicalUrl,
+        noIndex,
+        noFollow
+      },
+      topics[] {
+        topicName,
+        topicDescription,
+        color,
+        subtopics[] {
+          subtopicName,
+          subtopicUrl,
+          isComingSoon,
+          subSubtopics[] {
+            subSubtopicName,
+            subSubtopicUrl,
+            isComingSoon
+          }
+        }
+      }
+    }
+  `
+  
+  try {
+    const data = await client.fetch(query, { slug })
+    return data
+  } catch (error) {
+    console.error('Error fetching subject page data:', error)
+    return null
+  }
+} 

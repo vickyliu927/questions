@@ -5,5 +5,17 @@ import subjectPage from './subjectPage'
 import whyChooseUs from './whyChooseUs'
 import faq from './faq'
 import footer from './footer'
+import seo from './seo'
+import homepage from './homepage'
 
-export const schemaTypes = [header, hero, subjectGrid, subjectPage, whyChooseUs, faq, footer] 
+export const schemaTypes = [
+  header, 
+  hero, 
+  subjectGrid, 
+  subjectPage, 
+  whyChooseUs, 
+  faq, 
+  footer,
+  seo,
+  homepage
+] 

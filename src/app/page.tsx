@@ -1,11 +1,45 @@
+import { Metadata } from 'next'
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import SubjectGrid from '@/components/SubjectGrid';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
-import { client, headerQuery, heroQuery, subjectGridQuery, whyChooseUsQuery, faqQuery, footerQuery, allSubjectPagesQuery } from '../../lib/sanity';
-import { HeaderData, HeroData, SubjectGridData, WhyChooseUsData, FAQData, FooterData, SubjectPageData } from '../../types/sanity';
+import { client, headerQuery, heroQuery, subjectGridQuery, whyChooseUsQuery, faqQuery, footerQuery, allSubjectPagesQuery, getHomepageData, getGlobalSEOSettings } from '../../lib/sanity';
+import { HeaderData, HeroData, SubjectGridData, WhyChooseUsData, FAQData, FooterData, SubjectPageData, HomepageData } from '../../types/sanity';
+import { generateSEOMetadata } from '../../components/SEOHead';
+
+// Revalidate on every request for immediate content updates
+export const revalidate = 0;
+
+// Generate metadata for SEO
+export async function generateMetadata(): Promise<Metadata> {
+  try {
+    // Fetch homepage data for SEO
+    const homepageData: HomepageData | null = await getHomepageData();
+    const globalSEO = await getGlobalSEOSettings();
+    
+    // Use homepage SEO data if available, otherwise fall back to global SEO
+    const seoData = homepageData?.seo || globalSEO;
+    
+    return generateSEOMetadata({
+      title: homepageData?.pageTitle || 'CIE IGCSE Notes - Comprehensive Study Resources',
+      description: homepageData?.pageDescription || 'Access comprehensive IGCSE study notes, past papers, and revision materials for all subjects. Boost your exam performance with our expert-curated content.',
+      keywords: 'IGCSE notes, CIE notes, IGCSE past papers, IGCSE revision, study materials, exam preparation',
+      canonicalUrl: process.env.NEXT_PUBLIC_SITE_URL || 'https://your-domain.com',
+      seoData,
+    });
+  } catch (error) {
+    console.error('Error generating homepage metadata:', error);
+    
+    // Return default metadata if there's an error
+    return generateSEOMetadata({
+      title: 'CIE IGCSE Notes - Comprehensive Study Resources',
+      description: 'Access comprehensive IGCSE study notes, past papers, and revision materials for all subjects.',
+      keywords: 'IGCSE notes, CIE notes, IGCSE past papers, IGCSE revision, study materials',
+    });
+  }
+}
 
 async function getHeaderData(): Promise<HeaderData | undefined> {
   try {

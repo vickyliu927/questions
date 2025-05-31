@@ -227,7 +227,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
           </p>
         </div>
         
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {data.subjects.map((subject) => {
             const imageUrl = getImageUrl(subject.image);
             const subjectUrl = getSubjectUrl(subject);
@@ -273,19 +273,23 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                   </h4>
                   
                   {/* Description */}
-                  <p className="text-sm leading-relaxed font-sans" style={{color: '#64748b', lineHeight: '1.6'}}>
-                    {subject.description}
-                  </p>
+                  {subject.description && (
+                    <p className="text-sm leading-relaxed font-sans" style={{color: '#64748b', lineHeight: '1.6'}}>
+                      {subject.description}
+                    </p>
+                  )}
                   
                   {/* Updated Date - Minimalist Design */}
-                  <div className="flex items-center justify-between pt-2 border-t border-gray-100/80">
-                    <div className="flex items-center space-x-2">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
-                      <span className="text-xs font-medium font-sans tracking-wide" style={{color: '#64748b', letterSpacing: '0.025em'}}>
-                        Updated {formatDate(subject.dateUpdated)}
-                      </span>
+                  {subject.dateUpdated && (
+                    <div className="flex items-center justify-between pt-2 border-t border-gray-100/80">
+                      <div className="flex items-center space-x-2">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
+                        <span className="text-xs font-medium font-sans tracking-wide" style={{color: '#64748b', letterSpacing: '0.025em'}}>
+                          Updated {formatDate(subject.dateUpdated)}
+                        </span>
+                      </div>
                     </div>
-                  </div>
+                  )}
                   
                   {/* CTA Button - Premium Design */}
                   <div className="pt-4">

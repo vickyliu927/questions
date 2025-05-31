@@ -1,8 +1,9 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { Header, Footer, SubjectTopicGrid } from '@/components'
-import { client, headerQuery, footerQuery, subjectPageBySlugQuery, allSubjectSlugsQuery } from '../../../lib/sanity'
+import { client, headerQuery, footerQuery, getSubjectPageData, getGlobalSEOSettings, allSubjectSlugsQuery } from '../../../lib/sanity'
 import { HeaderData, FooterData, SubjectPageData } from '../../../types/sanity'
+import { generateSEOMetadata } from '../../../components/SEOHead'
 
 interface SubjectPageProps {
   params: Promise<{
@@ -30,16 +31,6 @@ async function getFooterData(): Promise<FooterData | undefined> {
   }
 }
 
-async function getSubjectPageData(slug: string): Promise<SubjectPageData | undefined> {
-  try {
-    const subjectPageData = await client.fetch(subjectPageBySlugQuery(slug))
-    return subjectPageData
-  } catch (error) {
-    console.error('Error fetching subject page data:', error)
-    return undefined
-  }
-}
-
 export async function generateStaticParams() {
   try {
     const slugs = await client.fetch(allSubjectSlugsQuery)
@@ -53,20 +44,38 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: SubjectPageProps): Promise<Metadata> {
-  const { subject } = await params
-  const subjectPageData = await getSubjectPageData(subject)
-  
-  if (!subjectPageData) {
-    return {
-      title: 'Subject Not Found - CIE IGCSE Notes',
-      description: 'The requested subject page could not be found.'
+  try {
+    const { subject } = await params
+    const subjectPageData = await getSubjectPageData(subject)
+    
+    if (!subjectPageData) {
+      return generateSEOMetadata({
+        title: 'Subject Not Found - CIE IGCSE Notes',
+        description: 'The requested subject page could not be found.'
+      })
     }
-  }
 
-  return {
-    title: subjectPageData.seo?.metaTitle || `${subjectPageData.pageTitle} - CIE IGCSE Notes`,
-    description: subjectPageData.seo?.metaDescription || subjectPageData.pageDescription,
-    keywords: subjectPageData.seo?.keywords?.join(', ') || `${subjectPageData.subjectName}, IGCSE, CIE, notes, study`
+    // Get global SEO settings as fallback
+    const globalSEO = await getGlobalSEOSettings()
+    
+    // Use subject page SEO data if available, otherwise fall back to global SEO
+    const seoData = subjectPageData.seo || globalSEO
+
+    return generateSEOMetadata({
+      title: `${subjectPageData.pageTitle} - CIE IGCSE Notes`,
+      description: subjectPageData.pageDescription,
+      keywords: `${subjectPageData.subjectName}, IGCSE, CIE, notes, study materials, exam preparation, revision`,
+      canonicalUrl: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://your-domain.com'}/${subject}`,
+      seoData,
+    })
+  } catch (error) {
+    console.error('Error generating subject page metadata:', error)
+    
+    // Return basic metadata if there's an error
+    return generateSEOMetadata({
+      title: 'IGCSE Notes - CIE Study Materials',
+      description: 'Access comprehensive IGCSE study notes and revision materials.',
+    })
   }
 }
 
