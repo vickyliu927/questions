@@ -1,6 +1,6 @@
 "use client";
 
-import { SubjectGridData, SubjectGridSubject, SubjectPageData, SanityImage } from '../../types/sanity';
+import { SubjectGridData, SubjectGridSubject, SubjectPageData } from '../../types/sanity';
 import { urlFor } from '../../lib/sanity';
 import Image from "next/image";
 
