@@ -30,7 +30,7 @@ export interface NavigationLink {
 }
 
 export interface CTAButton {
-  text: string
+  text?: string
   href?: string
   url?: string
 }
@@ -55,8 +55,8 @@ export interface HeroStatistics {
 }
 
 export interface HeroCTAButtons {
-  primaryButton: CTAButton
-  secondaryButton: CTAButton
+  primaryButton?: CTAButton
+  secondaryButton?: CTAButton
 }
 
 export interface FloatingCard {
@@ -73,7 +73,7 @@ export interface HeroData {
   sectionTitleHighlighted: string
   sectionTitleNoHighlight: string
   description: string
-  ctaButtons: HeroCTAButtons
+  ctaButtons?: HeroCTAButtons
   statistics: HeroStatistics
   floatingCards: FloatingCard[]
 }

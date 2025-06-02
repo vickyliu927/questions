@@ -89,6 +89,11 @@ export default function Hero({ heroData }: HeroProps) {
   // Use Sanity data if available, otherwise use fallback
   const data = heroData || fallbackData;
 
+  // Check if we have any CTA buttons to display
+  const hasPrimaryButton = data.ctaButtons?.primaryButton?.text && data.ctaButtons?.primaryButton?.href;
+  const hasSecondaryButton = data.ctaButtons?.secondaryButton?.text && data.ctaButtons?.secondaryButton?.href;
+  const hasAnyButtons = hasPrimaryButton || hasSecondaryButton;
+
   return (
     <section className="relative py-20 overflow-hidden notebook-paper">
       {/* Background with reduced orange tones and gradient overlay */}
@@ -130,29 +135,35 @@ export default function Hero({ heroData }: HeroProps) {
               </p>
             </div>
 
-            {/* CTA Buttons - updated start learning button to orange */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a 
-                href={data.ctaButtons.primaryButton.href}
-                className="text-white px-8 py-3 rounded-md font-medium font-sans inline-flex items-center justify-center group transition-colors hover:opacity-90" 
-                style={{backgroundColor: '#E67E50', fontSize: '14px'}}
-              >
-                {data.ctaButtons.primaryButton.text}
-                <svg className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-7-7l7 7-7 7" />
-                </svg>
-              </a>
-              <a 
-                href={data.ctaButtons.secondaryButton.href}
-                className="border border-slate-300 hover:bg-slate-50 px-8 py-3 rounded-md font-medium font-sans transition-colors"
-                style={{fontSize: '14px', color: '#475569'}}
-              >
-                {data.ctaButtons.secondaryButton.text}
-              </a>
-            </div>
+            {/* CTA Buttons - only show if buttons exist, adjust spacing if no buttons */}
+            {hasAnyButtons && (
+              <div className="flex flex-col sm:flex-row gap-4">
+                {hasPrimaryButton && (
+                  <a 
+                    href={data.ctaButtons!.primaryButton!.href}
+                    className="text-white px-8 py-3 rounded-md font-medium font-sans inline-flex items-center justify-center group transition-colors hover:opacity-90" 
+                    style={{backgroundColor: '#E67E50', fontSize: '14px'}}
+                  >
+                    {data.ctaButtons!.primaryButton!.text}
+                    <svg className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-7-7l7 7-7 7" />
+                    </svg>
+                  </a>
+                )}
+                {hasSecondaryButton && (
+                  <a 
+                    href={data.ctaButtons!.secondaryButton!.href}
+                    className="border border-slate-300 hover:bg-slate-50 px-8 py-3 rounded-md font-medium font-sans transition-colors"
+                    style={{fontSize: '14px', color: '#475569'}}
+                  >
+                    {data.ctaButtons!.secondaryButton!.text}
+                  </a>
+                )}
+              </div>
+            )}
 
-            {/* Statistics */}
-            <div className="flex items-center gap-8 pt-4">
+            {/* Statistics - adjust top margin based on whether buttons are present */}
+            <div className={`flex items-center gap-8 ${hasAnyButtons ? 'pt-4' : 'pt-2'}`}>
               <div className="text-center">
                 <div className="text-3xl font-serif font-bold" style={{color: '#243b53'}}>{data.statistics.studentsHelped.stats}</div>
                 <div className="text-sm font-sans" style={{color: '#64748b'}}>{data.statistics.studentsHelped.text}</div>

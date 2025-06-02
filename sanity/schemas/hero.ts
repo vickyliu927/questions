@@ -48,50 +48,45 @@ export default defineType({
       name: 'ctaButtons',
       title: 'CTA Buttons',
       type: 'object',
-      description: 'Call-to-action buttons in the hero section',
+      description: 'Call-to-action buttons in the hero section (optional)',
       fields: [
         {
           name: 'primaryButton',
           title: 'Primary Button',
           type: 'object',
+          description: 'Primary call-to-action button (optional)',
           fields: [
             {
               name: 'text',
               title: 'Button Text',
-              type: 'string',
-              validation: Rule => Rule.required()
+              type: 'string'
             },
             {
               name: 'href',
               title: 'Button URL',
-              type: 'string',
-              validation: Rule => Rule.required()
+              type: 'string'
             }
-          ],
-          validation: Rule => Rule.required()
+          ]
         },
         {
           name: 'secondaryButton',
           title: 'Secondary Button',
           type: 'object',
+          description: 'Secondary call-to-action button (optional)',
           fields: [
             {
               name: 'text',
               title: 'Button Text',
-              type: 'string',
-              validation: Rule => Rule.required()
+              type: 'string'
             },
             {
               name: 'href',
               title: 'Button URL',
-              type: 'string',
-              validation: Rule => Rule.required()
+              type: 'string'
             }
-          ],
-          validation: Rule => Rule.required()
+          ]
         }
-      ],
-      validation: Rule => Rule.required()
+      ]
     }),
     defineField({
       name: 'statistics',
