@@ -54,6 +54,15 @@ export const structure = (S: StructureBuilder) =>
                             .filter('_type == "faq"')
                         ),
                       
+                      // Contact Form Submissions
+                      S.listItem()
+                        .title('Contact Form Submissions')
+                        .child(
+                          S.documentTypeList('contactForm')
+                            .title('Contact Form Submissions')
+                            .filter('_type == "contactForm"')
+                        ),
+                      
                       // SEO Settings
                       S.listItem()
                         .title('SEO Settings')
