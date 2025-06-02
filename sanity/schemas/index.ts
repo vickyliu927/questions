@@ -2,6 +2,7 @@ import header from './header'
 import hero from './hero'
 import subjectGrid from './subjectGrid'
 import subjectPage from './subjectPage'
+import subjectRequest from './subjectRequest'
 import whyChooseUs from './whyChooseUs'
 import faq from './faq'
 import footer from './footer'
@@ -16,6 +17,7 @@ export const schemaTypes = [
   hero, 
   subjectGrid, 
   subjectPage, 
+  subjectRequest,
   whyChooseUs, 
   faq, 
   footer,
