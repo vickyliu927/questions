@@ -45,13 +45,13 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: SubjectPageProps): Promise<Metadata> {
   try {
-    const { subject } = await params
-    const subjectPageData = await getSubjectPageData(subject)
-    
-    if (!subjectPageData) {
+  const { subject } = await params
+  const subjectPageData = await getSubjectPageData(subject)
+  
+  if (!subjectPageData) {
       return generateSEOMetadata({
-        title: 'Subject Not Found - CIE IGCSE Notes',
-        description: 'The requested subject page could not be found.'
+      title: 'Subject Not Found - CIE IGCSE Notes',
+      description: 'The requested subject page could not be found.'
       })
     }
 

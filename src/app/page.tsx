@@ -15,6 +15,7 @@ import {
   subjectGridQuery, 
   whyChooseUsQuery, 
   faqQuery, 
+  contactFormSectionQuery,
   footerQuery,
   allSubjectPagesQuery,
   getHomepageData,
@@ -26,6 +27,7 @@ import {
   SubjectGridData, 
   WhyChooseUsData, 
   FAQData, 
+  ContactFormSectionData,
   FooterData,
   SubjectPageData
 } from '../../types/sanity'
@@ -133,6 +135,19 @@ async function getFAQData(): Promise<FAQData | undefined> {
   }
 }
 
+async function getContactFormSectionData(): Promise<ContactFormSectionData | undefined> {
+  try {
+    console.log('Fetching contact form section data from Sanity...');
+    
+    const contactFormSectionData = await client.fetch(contactFormSectionQuery);
+    console.log('Fetched contact form section data:', contactFormSectionData);
+    return contactFormSectionData;
+  } catch (error) {
+    console.error('Error fetching contact form section data:', error);
+    return undefined;
+  }
+}
+
 async function getFooterData(): Promise<FooterData | undefined> {
   try {
     console.log('Fetching footer data from Sanity...');
@@ -153,6 +168,7 @@ export default async function Home() {
   const publishedSubjects = await getPublishedSubjects();
   const whyChooseUsData = await getWhyChooseUsData();
   const faqData = await getFAQData();
+  const contactFormSectionData = await getContactFormSectionData();
   const footerData = await getFooterData();
 
   return (
@@ -163,7 +179,9 @@ export default async function Home() {
         <SubjectGrid subjectGridData={subjectGridData} publishedSubjects={publishedSubjects} />
         <WhyChooseUs whyChooseUsData={whyChooseUsData} />
         <FAQ faqData={faqData} />
-        <ContactForm />
+        {contactFormSectionData?.isActive && (
+          <ContactForm contactFormData={contactFormSectionData} />
+        )}
       </main>
       <Footer footerData={footerData} />
     </div>

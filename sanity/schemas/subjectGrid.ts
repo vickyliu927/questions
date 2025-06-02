@@ -157,30 +157,6 @@ export default defineType({
       validation: Rule => Rule.required().min(1).max(12)
     }),
     defineField({
-      name: 'viewAllButton',
-      title: 'View All Subjects Button',
-      type: 'object',
-      description: 'Button at the bottom of the section',
-      fields: [
-        {
-          name: 'text',
-          title: 'Button Text',
-          type: 'string',
-          description: 'Text displayed on the button (e.g., "View All Subjects")',
-          validation: Rule => Rule.required(),
-          initialValue: 'View All Subjects'
-        },
-        {
-          name: 'url',
-          title: 'Button URL',
-          type: 'url',
-          description: 'URL to navigate to when button is clicked',
-          validation: Rule => Rule.required()
-        }
-      ],
-      validation: Rule => Rule.required()
-    }),
-    defineField({
       name: 'isActive',
       title: 'Is Active',
       type: 'boolean',

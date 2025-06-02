@@ -1,8 +1,7 @@
 "use client";
 
-import { SubjectGridData, SubjectGridSubject } from '../../types/sanity';
+import { SubjectGridData, SubjectGridSubject, SubjectPageData, SanityImage } from '../../types/sanity';
 import { urlFor } from '../../lib/sanity';
-import { SubjectPageData } from '../../types/sanity';
 import Image from "next/image";
 
 interface SubjectGridProps {
@@ -18,27 +17,23 @@ function createSlug(name: string): string {
 export default function SubjectGrid({ subjectGridData, publishedSubjects }: SubjectGridProps) {
   // Fallback data if no Sanity data is provided
   const fallbackData: SubjectGridData = {
-    _id: 'fallback',
-    title: 'Default Subject Grid',
+    _id: 'fallback-subject-grid',
+    title: 'Subject Grid',
     sectionTitle: 'Popular Subjects',
-    sectionDescription: 'Explore our comprehensive study materials across all major CIE IGCSE subjects. Each subject includes detailed notes, practice questions, and exam tips.',
+    sectionDescription: 'Explore our comprehensive collection of study materials for various subjects. Each subject contains detailed notes, practice questions, and revision guides.',
     subjects: [
-      { 
-        name: "Mathematics", 
-        color: "bg-primary", 
-        image: {
-          _type: 'image',
-          asset: {
-            _ref: '',
-            _type: 'reference',
-            url: '/placeholder-math.jpg'
-          },
-          alt: 'Mathematics illustration'
+      {
+        name: 'Mathematics',
+        image: { 
+          _type: 'image' as const,
+          asset: { _ref: '', _type: 'reference' as const, url: '' }, 
+          alt: 'Mathematics' 
         },
-        description: "Algebra, Geometry, Statistics, and Calculus",
-        dateUpdated: "2024-01-15",
+        description: 'Comprehensive maths notes covering algebra, calculus, geometry, and statistics.',
+        color: 'bg-blue-500',
+        dateUpdated: '2024-01-15',
         viewNotesButton: {
-          text: "View Notes",
+          text: 'View Notes',
           href: "/maths"
         }
       },
@@ -46,10 +41,10 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
         name: "Physics", 
         color: "bg-secondary", 
         image: {
-          _type: 'image',
+          _type: 'image' as const,
           asset: {
             _ref: '',
-            _type: 'reference',
+            _type: 'reference' as const,
             url: '/placeholder-physics.jpg'
           },
           alt: 'Physics illustration'
@@ -65,10 +60,10 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
         name: "Chemistry", 
         color: "bg-accent", 
         image: {
-          _type: 'image',
+          _type: 'image' as const,
           asset: {
             _ref: '',
-            _type: 'reference',
+            _type: 'reference' as const,
             url: '/placeholder-chemistry.jpg'
           },
           alt: 'Chemistry illustration'
@@ -84,10 +79,10 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
         name: "Biology", 
         color: "bg-success", 
         image: {
-          _type: 'image',
+          _type: 'image' as const,
           asset: {
             _ref: '',
-            _type: 'reference',
+            _type: 'reference' as const,
             url: '/placeholder-biology.jpg'
           },
           alt: 'Biology illustration'
@@ -103,10 +98,10 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
         name: "English", 
         color: "bg-warning", 
         image: {
-          _type: 'image',
+          _type: 'image' as const,
           asset: {
             _ref: '',
-            _type: 'reference',
+            _type: 'reference' as const,
             url: '/placeholder-english.jpg'
           },
           alt: 'English illustration'
@@ -122,10 +117,10 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
         name: "History", 
         color: "bg-error", 
         image: {
-          _type: 'image',
+          _type: 'image' as const,
           asset: {
             _ref: '',
-            _type: 'reference',
+            _type: 'reference' as const,
             url: '/placeholder-history.jpg'
           },
           alt: 'History illustration'
@@ -139,8 +134,8 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
       },
     ],
     viewAllButton: {
-      text: "View All Subjects",
-      href: "/"
+      text: 'View All Subjects',
+      url: '/subjects'
     }
   };
 
@@ -222,7 +217,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
           <h3 className="leading-none mb-6 font-serif" style={{fontSize: '42px', color: '#e67e50', letterSpacing: '-0.01em', fontWeight: '600'}}>
             {data.sectionTitle}
           </h3>
-          <p className="font-sans leading-relaxed max-w-3xl mx-auto" style={{fontSize: '20px', color: '#486581', fontWeight: '500'}}>
+          <p className="font-sans leading-relaxed max-w-3xl mx-auto" style={{fontSize: '20px', color: '#486581', fontWeight: '400'}}>
             {data.sectionDescription}
           </p>
         </div>
@@ -237,7 +232,14 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                 key={subject.name} 
                 className="group relative bg-white rounded-2xl overflow-hidden border border-gray-100/60 hover:border-gray-200/80 transition-all duration-500 hover:shadow-lg hover:shadow-gray-900/5 hover:-translate-y-1"
                 style={{
-                  boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 1px 2px 0 rgba(0, 0, 0, 0.03)'
+                  boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.02), 0 1px 2px 0 rgba(0, 0, 0, 0.03)',
+                  '--hover-border-color': '#e67e50'
+                } as React.CSSProperties & { '--hover-border-color': string }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.borderColor = '#e67e50';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.borderColor = '';
                 }}
               >
                 {/* Image Section */}
@@ -266,22 +268,22 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                 </div>
                 
                 {/* Content Section */}
-                <div className="p-8 space-y-6">
+                <div className="p-8">
                   {/* Subject Name */}
-                  <h4 className="text-xl font-semibold leading-tight font-serif" style={{color: '#243b53'}}>
+                  <h4 className="text-xl font-semibold leading-tight font-sans" style={{color: '#243b53'}}>
                     {subject.name}
                   </h4>
                   
                   {/* Description */}
                   {subject.description && (
-                    <p className="text-sm leading-relaxed font-sans" style={{color: '#64748b', lineHeight: '1.6'}}>
+                    <p className="text-sm leading-relaxed font-sans mt-2" style={{color: '#64748b', lineHeight: '1.6'}}>
                       {subject.description}
                     </p>
                   )}
                   
                   {/* Updated Date - Minimalist Design */}
                   {subject.dateUpdated && (
-                    <div className="flex items-center justify-between pt-2 border-t border-gray-100/80">
+                    <div className="flex items-center justify-between pt-6 mt-6 border-t border-gray-100/80">
                       <div className="flex items-center space-x-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
                         <span className="text-xs font-medium font-sans tracking-wide" style={{color: '#64748b', letterSpacing: '0.025em'}}>
@@ -292,7 +294,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                   )}
                   
                   {/* CTA Button - Premium Design */}
-                  <div className="pt-4">
+                  <div className="mt-6 pt-4">
                     <a 
                       href={subjectUrl}
                       className="group/btn relative w-full inline-flex items-center justify-center px-6 py-3.5 text-sm font-medium font-sans tracking-wide rounded-xl border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 overflow-hidden"
@@ -313,22 +315,6 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
               </div>
             );
           })}
-        </div>
-        
-        {/* View All Button - Premium Design */}
-        <div className="text-center mt-20">
-          <a 
-            href={data.viewAllButton.href}
-            className="group relative inline-flex items-center justify-center px-12 py-4 text-sm font-medium font-sans tracking-wide rounded-2xl bg-white border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all duration-300 shadow-sm hover:shadow-md"
-            style={{letterSpacing: '0.05em', color: '#e67e50'}}
-          >
-            <span className="flex items-center">
-              {data.viewAllButton.text}
-              <svg className="ml-3 w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-              </svg>
-            </span>
-          </a>
         </div>
       </div>
     </section>

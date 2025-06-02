@@ -72,10 +72,26 @@ export default function FAQ({ faqData }: FAQProps) {
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
-          <h3 className="text-3xl font-bold text-gray-900 mb-4">
+          <h3 
+            className="mb-4 font-serif"
+            style={{
+              fontSize: '42px',
+              color: '#e67e50',
+              letterSpacing: '-0.01em',
+              fontWeight: 600
+            }}
+          >
             {data.sectionTitle}
           </h3>
-          <p className="text-lg text-gray-600">
+          <p 
+            className=""
+            style={{
+              fontFamily: 'sans-serif',
+              color: '#486581',
+              fontWeight: 500,
+              fontSize: '20px'
+            }}
+          >
             {data.sectionDescription}
           </p>
         </div>

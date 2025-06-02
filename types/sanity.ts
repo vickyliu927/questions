@@ -335,4 +335,24 @@ export interface ContactFormData {
   tutoringDetails: string
   hourlyBudget: string
   submissionDate?: string
+}
+
+export interface ContactFormSectionData {
+  _id: string
+  title: string
+  isActive: boolean
+  sectionTitle: string
+  sectionDescription: string
+  tutorChaseLink?: string
+  backgroundStyle?: {
+    gradientFrom: string
+    gradientTo: string
+  }
+  formSettings?: {
+    successMessage?: {
+      title: string
+      description: string
+    }
+    submitButtonText?: string
+  }
 } 

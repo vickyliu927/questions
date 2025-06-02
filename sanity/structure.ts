@@ -36,6 +36,15 @@ export const structure = (S: StructureBuilder) =>
                             .filter('_type == "subjectGrid"')
                         ),
                       
+                      // Subject Request Section
+                      S.listItem()
+                        .title('Subject Request Section')
+                        .child(
+                          S.documentTypeList('subjectRequest')
+                            .title('Subject Request Section')
+                            .filter('_type == "subjectRequest"')
+                        ),
+                      
                       // Why Choose Us Section
                       S.listItem()
                         .title('Why Choose Us Section')
@@ -52,6 +61,15 @@ export const structure = (S: StructureBuilder) =>
                           S.documentTypeList('faq')
                             .title('FAQ Section')
                             .filter('_type == "faq"')
+                        ),
+                      
+                      // Contact Form Section
+                      S.listItem()
+                        .title('Contact Form Section')
+                        .child(
+                          S.documentTypeList('contactFormSection')
+                            .title('Contact Form Section')
+                            .filter('_type == "contactFormSection"')
                         ),
                       
                       // Contact Form Submissions

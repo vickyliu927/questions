@@ -1,11 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { ContactFormData } from '../../types/sanity'
+import { ContactFormData, ContactFormSectionData } from '../../types/sanity'
 
 type FormData = Omit<ContactFormData, '_id' | '_type' | 'submissionDate'>
 
-export default function ContactForm() {
+interface ContactFormProps {
+  contactFormData?: ContactFormSectionData
+}
+
+export default function ContactForm({ contactFormData }: ContactFormProps) {
   const [formData, setFormData] = useState<FormData>({
     fullName: '',
     country: '',
@@ -18,6 +22,16 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  // Default values if no Sanity data is provided
+  const sectionTitle = contactFormData?.sectionTitle || 'Hire a tutor'
+  const sectionDescription = contactFormData?.sectionDescription || 'Please fill out the form and an academic consultant from TutorChase will find a tutor for you'
+  const tutorChaseLink = contactFormData?.tutorChaseLink || 'https://tutorchase.com'
+  const gradientFrom = contactFormData?.backgroundStyle?.gradientFrom || 'blue-600'
+  const gradientTo = contactFormData?.backgroundStyle?.gradientTo || 'purple-700'
+  const successTitle = contactFormData?.formSettings?.successMessage?.title || 'Thank you!'
+  const successDescription = contactFormData?.formSettings?.successMessage?.description || 'Your request has been submitted successfully. An academic consultant from TutorChase will contact you soon.'
+  const submitButtonText = contactFormData?.formSettings?.submitButtonText || 'SUBMIT'
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -63,16 +77,16 @@ export default function ContactForm() {
 
   if (isSubmitted) {
     return (
-      <section className="py-16 bg-gradient-to-br from-blue-600 to-purple-700">
+      <section className={`py-16 bg-gradient-to-br from-${gradientFrom} to-${gradientTo}`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-3xl shadow-2xl p-8 text-center">
             <div className="mb-6">
               <svg className="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
-              <h2 className="text-3xl font-bold text-gray-900 mb-2">Thank you!</h2>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2">{successTitle}</h2>
               <p className="text-gray-600">
-                Your request has been submitted successfully. An academic consultant from TutorChase will contact you soon.
+                {successDescription}
               </p>
             </div>
             <button
@@ -88,21 +102,27 @@ export default function ContactForm() {
   }
 
   return (
-    <section className="py-16 bg-gradient-to-br from-blue-600 to-purple-700">
+    <section className={`py-16 bg-gradient-to-br from-${gradientFrom} to-${gradientTo}`}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold text-white mb-4">Hire a tutor</h2>
+          <h2 className="text-4xl font-bold text-white mb-4">{sectionTitle}</h2>
           <p className="text-xl text-blue-100">
-            Please fill out the form and an academic consultant from{' '}
-            <a 
-              href="https://tutorchase.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-white underline hover:text-blue-200 transition-colors"
-            >
-              TutorChase
-            </a>
-            {' '}will find a tutor for you
+            {sectionDescription.includes('TutorChase') ? (
+              <>
+                {sectionDescription.split('TutorChase')[0]}
+                <a 
+                  href={tutorChaseLink} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-white underline hover:text-blue-200 transition-colors"
+                >
+                  TutorChase
+                </a>
+                {sectionDescription.split('TutorChase')[1]}
+              </>
+            ) : (
+              sectionDescription
+            )}
           </p>
         </div>
 
@@ -228,7 +248,7 @@ export default function ContactForm() {
                   Submitting...
                 </div>
               ) : (
-                'SUBMIT'
+                submitButtonText
               )}
             </button>
           </form>

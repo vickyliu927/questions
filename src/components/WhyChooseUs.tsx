@@ -68,10 +68,10 @@ export default function WhyChooseUs({ whyChooseUsData }: WhyChooseUsProps) {
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-foreground mb-4">
+          <h2 className="leading-none mb-6 font-serif" style={{fontSize: '42px', color: '#e67e50', letterSpacing: '-0.01em', fontWeight: '600'}}>
             {data.sectionTitle}
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="font-sans leading-relaxed max-w-3xl mx-auto" style={{fontSize: '20px', color: '#486581', fontWeight: '400'}}>
             {data.sectionDescription}
           </p>
         </div>

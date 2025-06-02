@@ -162,6 +162,27 @@ export const faqQuery = `*[_type == "faq" && isActive == true][0]{
   }
 }`
 
+// GROQ query to fetch contact form section data
+export const contactFormSectionQuery = `*[_type == "contactFormSection" && isActive == true][0]{
+  _id,
+  title,
+  isActive,
+  sectionTitle,
+  sectionDescription,
+  tutorChaseLink,
+  backgroundStyle{
+    gradientFrom,
+    gradientTo
+  },
+  formSettings{
+    successMessage{
+      title,
+      description
+    },
+    submitButtonText
+  }
+}`
+
 // GROQ query to fetch footer data
 export const footerQuery = `*[_type == "footer" && isActive == true][0]{
   _id,
