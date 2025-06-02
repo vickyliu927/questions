@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { client } from '../../../../lib/sanity'
 import { Resend } from 'resend'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 interface ContactFormData {
   fullName: string
   country: string
@@ -58,6 +56,7 @@ export async function POST(request: NextRequest) {
     // Send email notification if Resend is configured
     if (process.env.RESEND_API_KEY && process.env.NOTIFICATION_EMAIL) {
       try {
+        const resend = new Resend(process.env.RESEND_API_KEY)
         await resend.emails.send({
           from: process.env.FROM_EMAIL || 'notifications@yourdomain.com',
           to: process.env.NOTIFICATION_EMAIL,
