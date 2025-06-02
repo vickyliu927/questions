@@ -355,4 +355,12 @@ export interface ContactFormSectionData {
     }
     submitButtonText?: string
   }
+}
+
+export interface SubjectRequestData {
+  _id: string
+  title: string
+  sectionTitle: string
+  sectionDescription: string
+  requestButton: CTAButton
 } 
