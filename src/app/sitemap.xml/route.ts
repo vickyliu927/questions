@@ -27,7 +27,7 @@ ${subjectSlugs.map(slug => `  <url>
     return new Response(sitemap, {
       headers: {
         'Content-Type': 'application/xml',
-        'Cache-Control': 's-maxage=86400, stale-while-revalidate=43200', // Cache for 24 hours, stale for 12 hours
+        'Cache-Control': 's-maxage=60, stale-while-revalidate=60', // Cache for 60 seconds, consistent with page revalidation
       },
     })
   } catch (error) {

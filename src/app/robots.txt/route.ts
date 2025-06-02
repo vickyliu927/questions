@@ -6,7 +6,7 @@ export async function GET() {
   return new Response(robotsTxt, {
     headers: {
       'Content-Type': 'text/plain',
-      'Cache-Control': 's-maxage=86400', // Cache for 24 hours
+      'Cache-Control': 's-maxage=60', // Cache for 60 seconds, consistent with page revalidation
     },
   })
 } 

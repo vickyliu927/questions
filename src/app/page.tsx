@@ -33,8 +33,8 @@ import {
 } from '../../types/sanity'
 import { generateSEOMetadata } from '../../components/SEOHead'
 
-// Revalidate on every request for immediate content updates
-export const revalidate = 0;
+// Revalidate every 60 seconds for fresh content with good performance
+export const revalidate = 60;
 
 // Generate metadata for SEO
 export async function generateMetadata(): Promise<Metadata> {

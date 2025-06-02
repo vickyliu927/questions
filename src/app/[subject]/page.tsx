@@ -5,6 +5,9 @@ import { client, headerQuery, footerQuery, getSubjectPageData, getGlobalSEOSetti
 import { HeaderData, FooterData } from '../../../types/sanity'
 import { generateSEOMetadata } from '../../../components/SEOHead'
 
+// Revalidate every 60 seconds for fresh content with good performance
+export const revalidate = 60;
+
 interface SubjectPageProps {
   params: Promise<{
     subject: string
