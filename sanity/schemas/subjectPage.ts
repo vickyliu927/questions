@@ -56,17 +56,17 @@ export default defineType({
       description: 'Background color for the hero section',
       options: {
         list: [
-          { title: 'Blue Gradient', value: 'bg-gradient-to-br from-blue-50 to-indigo-100' },
-          { title: 'Green Gradient', value: 'bg-gradient-to-br from-green-50 to-emerald-100' },
-          { title: 'Purple Gradient', value: 'bg-gradient-to-br from-purple-50 to-violet-100' },
-          { title: 'Pink Gradient', value: 'bg-gradient-to-br from-pink-50 to-rose-100' },
-          { title: 'Orange Gradient', value: 'bg-gradient-to-br from-orange-50 to-amber-100' },
-          { title: 'Teal Gradient', value: 'bg-gradient-to-br from-teal-50 to-cyan-100' },
-          { title: 'Gray Gradient', value: 'bg-gradient-to-br from-gray-50 to-slate-100' }
+          { title: 'Warm Blue', value: 'bg-gradient-to-br from-slate-50 to-blue-100/80' },
+          { title: 'Sage Green', value: 'bg-gradient-to-br from-stone-50 to-green-100/80' },
+          { title: 'Lavender', value: 'bg-gradient-to-br from-gray-50 to-purple-100/80' },
+          { title: 'Dusty Rose', value: 'bg-gradient-to-br from-stone-50 to-pink-100/80' },
+          { title: 'Warm Orange', value: 'linear-gradient(135deg, #faf9f7 0%, #f4f0ed 50%, #e67e50 100%)' },
+          { title: 'Seafoam', value: 'bg-gradient-to-br from-gray-50 to-teal-100/80' },
+          { title: 'Warm Gray', value: 'bg-gradient-to-br from-stone-50 to-gray-100/80' }
         ]
       },
       validation: Rule => Rule.required(),
-      initialValue: 'bg-gradient-to-br from-blue-50 to-indigo-100'
+      initialValue: 'bg-gradient-to-br from-slate-50 to-blue-100/80'
     }),
     defineField({
       name: 'topics',
