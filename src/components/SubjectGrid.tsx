@@ -207,13 +207,13 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
   };
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50/30 relative overflow-hidden">
+    <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50/30 relative overflow-hidden">
       {/* Floating decorative bubbles - mirroring hero section design */}
       <div className="absolute top-32 left-8 w-6 h-6 rounded-full" style={{backgroundColor: '#E67E50', opacity: '0.06'}}></div>
       <div className="absolute top-28 right-12 w-8 h-8 rounded-full" style={{backgroundColor: '#E67E50', opacity: '0.04'}}></div>
       
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-20">
+        <div className="text-center mb-12">
           <h3 className="leading-none mb-6 font-serif" style={{fontSize: '42px', color: '#e67e50', letterSpacing: '-0.01em', fontWeight: '600'}}>
             {data.sectionTitle}
           </h3>
@@ -243,14 +243,14 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                 }}
               >
                 {/* Image Section */}
-                <div className="relative w-full h-56 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
+                <div className="relative w-full h-48 overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100">
                   {imageUrl ? (
                     <>
                       <Image 
                         src={imageUrl}
                         alt={subject.image.alt || subject.name}
                         width={400}
-                        height={224}
+                        height={192}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                       />
                       {/* Subtle overlay for better text contrast */}
@@ -268,7 +268,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                 </div>
                 
                 {/* Content Section */}
-                <div className="p-8">
+                <div className="p-6">
                   {/* Subject Name */}
                   <h4 className="text-xl font-semibold leading-tight font-sans" style={{color: '#243b53'}}>
                     {subject.name}
@@ -283,7 +283,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                   
                   {/* Updated Date - Minimalist Design */}
                   {subject.dateUpdated && (
-                    <div className="flex items-center justify-between pt-6 mt-6 border-t border-gray-100/80">
+                    <div className="flex items-center justify-between pt-4 mt-4 border-t border-gray-100/80">
                       <div className="flex items-center space-x-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
                         <span className="text-xs font-medium font-sans tracking-wide" style={{color: '#64748b', letterSpacing: '0.025em'}}>
@@ -294,10 +294,12 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                   )}
                   
                   {/* CTA Button - Premium Design */}
-                  <div className="mt-6 pt-4">
+                  <div className="mt-4 pt-3">
                     <a 
                       href={subjectUrl}
-                      className="group/btn relative w-full inline-flex items-center justify-center px-6 py-3.5 text-sm font-medium font-sans tracking-wide rounded-xl border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 overflow-hidden"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/btn relative w-full inline-flex items-center justify-center px-6 py-3 text-sm font-medium font-sans tracking-wide rounded-xl border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all duration-300 overflow-hidden"
                       style={{letterSpacing: '0.025em'}}
                     >
                       {/* Button background effect */}

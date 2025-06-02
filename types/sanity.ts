@@ -145,6 +145,7 @@ export interface FAQData {
 export interface FooterLink {
   label: string
   href: string
+  hasWhatsAppIcon?: boolean
 }
 
 export interface FooterSection {

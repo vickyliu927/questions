@@ -65,6 +65,8 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
                 ) : (
                   <Link
                     href={subSubtopic.subSubtopicUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="block p-2 pl-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
                   >
                     {subSubtopic.subSubtopicName}
@@ -83,6 +85,8 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
     return (
       <Link
         href={subtopic.subtopicUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         className="block p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
       >
         {subtopic.subtopicName}

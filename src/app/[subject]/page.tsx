@@ -108,15 +108,6 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
         {/* Topics Grid Section */}
         <section className="py-16 bg-gray-50">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                {subjectPageData.subjectName} Topics
-              </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Explore our comprehensive collection of {subjectPageData.subjectName.toLowerCase()} topics. Click on any topic to view its subtopics and access detailed notes.
-              </p>
-            </div>
-            
             <SubjectTopicGrid topics={subjectPageData.topics} />
           </div>
         </section>

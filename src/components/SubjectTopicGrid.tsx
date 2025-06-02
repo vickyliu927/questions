@@ -28,7 +28,7 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
   if (subtopic.isComingSoon) {
     return (
       <div className="p-3 text-gray-400 cursor-not-allowed flex items-center justify-between">
-        <span>{subtopic.subtopicName}</span>
+        <span className="font-semibold">{subtopic.subtopicName}</span>
         <span className="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full">
           Coming Soon
         </span>
@@ -42,8 +42,9 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
         <button
           onClick={toggleSubDropdown}
           className="w-full p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 flex items-center justify-between"
+          style={{ backgroundColor: 'rgba(230, 126, 80, 0.1)' }}
         >
-          <span>{subtopic.subtopicName}</span>
+          <span className="font-semibold">{subtopic.subtopicName}</span>
           {isSubDropdownOpen ? (
             <ChevronUpIcon className="h-4 w-4 text-gray-500" />
           ) : (
@@ -52,12 +53,12 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
         </button>
         
         {isSubDropdownOpen && (
-          <div className="ml-4 border-l-2 border-gray-100">
+          <div className="ml-4" style={{ backgroundColor: 'rgba(230, 126, 80, 0.1)' }}>
             {subtopic.subSubtopics?.map((subSubtopic, index) => (
-              <div key={index} className="border-b border-gray-50 last:border-b-0">
+              <div key={index} className="border-b border-gray-200 last:border-b-0">
                 {subSubtopic.isComingSoon ? (
-                  <div className="p-2 pl-4 text-gray-400 cursor-not-allowed flex items-center justify-between text-sm">
-                    <span>{subSubtopic.subSubtopicName}</span>
+                  <div className="p-2 pl-4 text-gray-400 cursor-not-allowed flex items-center justify-between text-sm bg-white">
+                    <span className="font-semibold">{subSubtopic.subSubtopicName}</span>
                     <span className="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full">
                       Coming Soon
                     </span>
@@ -65,9 +66,11 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
                 ) : (
                   <Link
                     href={subSubtopic.subSubtopicUrl}
-                    className="block p-2 pl-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block p-2 pl-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 bg-white"
                   >
-                    {subSubtopic.subSubtopicName}
+                    <span className="font-semibold">{subSubtopic.subSubtopicName}</span>
                   </Link>
                 )}
               </div>
@@ -83,9 +86,12 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
     return (
       <Link
         href={subtopic.subtopicUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         className="block p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
+        style={{ backgroundColor: 'rgba(230, 126, 80, 0.1)' }}
       >
-        {subtopic.subtopicName}
+        <span className="font-semibold">{subtopic.subtopicName}</span>
       </Link>
     )
   }
@@ -93,7 +99,7 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
   // Subtopic without URL and no sub-subtopics (shouldn't happen with validation)
   return (
     <div className="p-3 text-gray-400 cursor-not-allowed">
-      {subtopic.subtopicName}
+      <span className="font-semibold">{subtopic.subtopicName}</span>
     </div>
   )
 }
@@ -105,46 +111,56 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic }) => {
     setIsDropdownOpen(!isDropdownOpen)
   }
 
-  const getTotalSubtopicCount = () => {
-    let count = topic.subtopics.length
-    topic.subtopics.forEach(subtopic => {
-      if (subtopic.subSubtopics) {
-        count += subtopic.subSubtopics.length
-      }
-    })
-    return count
+  // Map Tailwind color classes to actual hex values
+  const getBackgroundColor = (colorClass: string) => {
+    const colorMap: { [key: string]: string } = {
+      'bg-blue-500': '#3b82f6',
+      'bg-green-500': '#10b981',
+      'bg-purple-500': '#e67e50',
+      'bg-pink-500': '#ec4899',
+      'bg-indigo-500': '#6366f1',
+      'bg-teal-500': '#14b8a6',
+      'bg-orange-500': '#f97316',
+      'bg-red-500': '#ef4444',
+      'bg-yellow-500': '#eab308',
+      'bg-cyan-500': '#06b6d4'
+    }
+    return colorMap[colorClass] || '#e67e50' // Default to orange
   }
 
   return (
-    <div className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100">
+    <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       {/* Clickable Topic Header */}
       <button
         onClick={toggleDropdown}
-        className={`w-full ${topic.color} bg-gradient-to-br from-opacity-90 to-opacity-100 p-6 text-left hover:opacity-90 transition-opacity duration-200`}
+        className="w-full p-6 text-left hover:opacity-90 transition-opacity duration-200"
+        style={{ 
+          backgroundColor: getBackgroundColor(topic.color),
+          color: 'white'
+        }}
       >
-        <div className="text-white flex items-center justify-between">
+        <div className="flex items-center justify-between">
           <div>
-            <h3 className="text-xl font-bold mb-2">{topic.topicName}</h3>
+            <h3 className="text-xl font-bold mb-2">{topic.topicName || 'Topic Name Missing'}</h3>
             {topic.topicDescription && (
-              <p className="text-white/90 text-sm">{topic.topicDescription}</p>
+              <p className="opacity-90 text-sm">{topic.topicDescription}</p>
             )}
           </div>
           <div className="flex flex-col items-center ml-4">
             {isDropdownOpen ? (
-              <ChevronUpIcon className="h-6 w-6 text-white" />
+              <ChevronUpIcon className="h-6 w-6" />
             ) : (
-              <ChevronDownIcon className="h-6 w-6 text-white" />
+              <ChevronDownIcon className="h-6 w-6" />
             )}
-            <span className="text-xs text-white/80 mt-1">({getTotalSubtopicCount()})</span>
           </div>
         </div>
       </button>
 
       {/* Dropdown Menu */}
       {isDropdownOpen && (
-        <div className="bg-white border-t border-gray-200">
+        <div className="bg-white border-t-2 border-gray-300">
           {topic.subtopics.map((subtopic, index) => (
-            <div key={index} className="border-b border-gray-100 last:border-b-0">
+            <div key={index} className="border-b border-gray-200 last:border-b-0">
               <SubtopicItem subtopic={subtopic} />
             </div>
           ))}

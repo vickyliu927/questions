@@ -81,7 +81,7 @@ export default function Header({ headerData }: HeaderProps) {
           {/* Logo - Only display if uploaded via Sanity */}
           {hasLogo && (
             <div className="flex items-center">
-              <Link href="/" className="flex items-center">
+              <Link href="/" target="_blank" rel="noopener noreferrer" className="flex items-center">
                 <Image 
                   src={logoSrc}
                   alt={logoAlt}
@@ -105,6 +105,8 @@ export default function Header({ headerData }: HeaderProps) {
               <a 
                 key={index}
                 href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="transition-colors font-semibold py-2"
                 style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
               >
@@ -117,6 +119,8 @@ export default function Header({ headerData }: HeaderProps) {
           <div className="hidden md:flex items-center space-x-4">
             <a 
               href={ctaButton.href} 
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn btn-primary font-semibold px-4 py-2"
               style={{ backgroundColor: '#e67e50', borderColor: '#e67e50', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
             >
@@ -153,6 +157,8 @@ export default function Header({ headerData }: HeaderProps) {
                 <a 
                   key={index}
                   href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="transition-colors font-semibold py-2"
                   style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
                 >
@@ -164,6 +170,8 @@ export default function Header({ headerData }: HeaderProps) {
               <div className="flex flex-col space-y-3 pt-4 border-t border-border">
                 <a 
                   href={ctaButton.href} 
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="btn btn-primary w-full font-semibold px-4 py-2"
                   style={{ backgroundColor: '#e67e50', borderColor: '#e67e50', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
                 >

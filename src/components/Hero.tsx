@@ -95,7 +95,7 @@ export default function Hero({ heroData }: HeroProps) {
   const hasAnyButtons = hasPrimaryButton || hasSecondaryButton;
 
   return (
-    <section className="relative py-20 overflow-hidden notebook-paper">
+    <section className="relative py-8 sm:py-20 overflow-hidden notebook-paper">
       {/* Background with reduced orange tones and gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50/25 via-white/20 to-orange-50/20"></div>
       <div className="absolute inset-0 bg-gradient-to-r from-gray-100/15 via-transparent to-orange-100/15"></div>
@@ -137,29 +137,33 @@ export default function Hero({ heroData }: HeroProps) {
 
             {/* CTA Buttons - only show if buttons exist, adjust spacing if no buttons */}
             {hasAnyButtons && (
-              <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4">
                 {hasPrimaryButton && (
                   <a 
                     href={data.ctaButtons!.primaryButton!.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-white px-8 py-3 rounded-md font-medium font-sans inline-flex items-center justify-center group transition-colors hover:opacity-90" 
                     style={{backgroundColor: '#E67E50', fontSize: '14px'}}
                   >
                     {data.ctaButtons!.primaryButton!.text}
-                    <svg className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-7-7l7 7-7 7" />
-                    </svg>
+                <svg className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-7-7l7 7-7 7" />
+                </svg>
                   </a>
                 )}
                 {hasSecondaryButton && (
                   <a 
                     href={data.ctaButtons!.secondaryButton!.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="border border-slate-300 hover:bg-slate-50 px-8 py-3 rounded-md font-medium font-sans transition-colors"
                     style={{fontSize: '14px', color: '#475569'}}
                   >
                     {data.ctaButtons!.secondaryButton!.text}
                   </a>
                 )}
-              </div>
+            </div>
             )}
 
             {/* Statistics - adjust top margin based on whether buttons are present */}
@@ -180,7 +184,7 @@ export default function Hero({ heroData }: HeroProps) {
           </div>
 
           {/* Right side - Floating cards with gradient effects */}
-          <div className="relative lg:h-96">
+          <div className="relative lg:h-96 hidden lg:block">
             {/* First card (Physics/top-right) with muted gradient overlay */}
             {data.floatingCards[0] && (
               <div className="absolute top-0 right-8 bg-white rounded-2xl p-6 shadow-lg border border-slate-200 rotate-3 transform hover:rotate-0 transition-transform duration-300 overflow-hidden">
@@ -189,15 +193,15 @@ export default function Hero({ heroData }: HeroProps) {
                 <div className="relative z-10">
                   <div className="w-full h-32 bg-gradient-to-br from-white via-slate-100 to-slate-300 rounded-lg flex items-center justify-center mb-4">
                     <svg className="h-8 w-8 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <circle cx="12" cy="12" r="10"/>
-                      <circle cx="12" cy="12" r="6"/>
-                      <circle cx="12" cy="12" r="2"/>
-                    </svg>
-                  </div>
+                  <circle cx="12" cy="12" r="10"/>
+                  <circle cx="12" cy="12" r="6"/>
+                  <circle cx="12" cy="12" r="2"/>
+                </svg>
+              </div>
                   <h3 className="font-serif font-bold mb-2" style={{color: '#243b53'}}>{data.floatingCards[0].title}</h3>
                   <p className="text-sm font-sans whitespace-pre-line" style={{color: '#64748b'}}>{wrapText(data.floatingCards[0].description, data.floatingCards[0].maxCharactersPerLine)}</p>
                 </div>
-              </div>
+            </div>
             )}
 
             {/* Second card (Mathematics/left) with muted gradient overlay */}
@@ -207,19 +211,19 @@ export default function Hero({ heroData }: HeroProps) {
                 <div className="absolute inset-0 bg-gradient-to-br from-yellow-50/40 via-transparent to-yellow-100/30 pointer-events-none"></div>
                 <div className="relative z-10">
                   <div className="w-full h-24 bg-gradient-to-br from-white via-yellow-100 to-yellow-200 rounded-lg flex items-center justify-center mb-4">
-                    <svg className="h-6 w-6 text-yellow-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
-                      <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
-                      <path d="M4 22h16"/>
-                      <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
-                      <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
-                      <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
-                    </svg>
-                  </div>
+                <svg className="h-6 w-6 text-yellow-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/>
+                  <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/>
+                  <path d="M4 22h16"/>
+                  <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/>
+                  <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/>
+                  <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>
+                </svg>
+              </div>
                   <h3 className="font-serif font-bold mb-2" style={{color: '#243b53'}}>{data.floatingCards[1].title}</h3>
                   <p className="text-sm font-sans whitespace-pre-line" style={{color: '#64748b'}}>{wrapText(data.floatingCards[1].description, data.floatingCards[1].maxCharactersPerLine)}</p>
                 </div>
-              </div>
+            </div>
             )}
 
             {/* Third card (Chemistry/bottom-right) with muted gradient overlay */}
@@ -229,9 +233,9 @@ export default function Hero({ heroData }: HeroProps) {
                 <div className="absolute inset-0 bg-gradient-to-br from-red-50/30 via-transparent to-red-100/25 pointer-events-none"></div>
                 <div className="relative z-10">
                   <div className="w-full h-20 bg-gradient-to-br from-white via-red-100 to-red-200 rounded-lg flex items-center justify-center mb-3">
-                    <svg className="h-5 w-5 text-red-700 fill-current" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="h-5 w-5 text-red-700 fill-current" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.770-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a .53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>
-                    </svg>
+                </svg>
                   </div>
                   <h3 className="font-serif font-bold text-sm mb-1" style={{color: '#243b53'}}>{data.floatingCards[2].title}</h3>
                   <p className="text-xs font-sans whitespace-pre-line" style={{color: '#64748b'}}>{wrapText(data.floatingCards[2].description, data.floatingCards[2].maxCharactersPerLine)}</p>

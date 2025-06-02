@@ -57,7 +57,7 @@ export default function StudioPage() {
         <pre style={{ background: '#f5f5f5', padding: '10px', borderRadius: '4px' }}>
           {error instanceof Error ? error.message : 'Unknown error'}
         </pre>
-        <p>Try visiting <Link href="/studio/structure" style={{ color: 'blue', textDecoration: 'underline' }}>/studio/structure</Link> directly.</p>
+        <p>Try visiting <Link href="/studio/structure" target="_blank" rel="noopener noreferrer" style={{ color: 'blue', textDecoration: 'underline' }}>/studio/structure</Link> directly.</p>
       </div>
     )
   }

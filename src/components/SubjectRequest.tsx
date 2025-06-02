@@ -31,6 +31,8 @@ export default function SubjectRequest({ subjectRequestData }: SubjectRequestPro
         </p>
         <a
           href={data.requestButton.href}
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center px-8 py-4 text-sm font-medium font-sans tracking-wide rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
           style={{letterSpacing: '0.025em'}}
         >

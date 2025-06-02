@@ -430,7 +430,7 @@ export async function getGlobalSEOSettings() {
 // Subject page data query (updated to include SEO)
 export async function getSubjectPageData(slug: string) {
   const query = `
-    *[_type == "subjectPage" && subjectSlug.current == $slug][0] {
+    *[_type == "subjectPage" && subjectSlug.current == $slug && isPublished == true][0] {
       _id,
       title,
       subjectSlug,
@@ -447,6 +447,7 @@ export async function getSubjectPageData(slug: string) {
         topicName,
         topicDescription,
         color,
+        displayOrder,
         subtopics[] {
           subtopicName,
           subtopicUrl,
