@@ -5,6 +5,7 @@ import {
   SubjectGrid, 
   WhyChooseUs, 
   FAQ, 
+  ContactForm,
   Footer 
 } from '@/components'
 import { 
@@ -162,6 +163,7 @@ export default async function Home() {
         <SubjectGrid subjectGridData={subjectGridData} publishedSubjects={publishedSubjects} />
         <WhyChooseUs whyChooseUsData={whyChooseUsData} />
         <FAQ faqData={faqData} />
+        <ContactForm />
       </main>
       <Footer footerData={footerData} />
     </div>

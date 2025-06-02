@@ -323,4 +323,16 @@ export interface HomepageData {
     showFAQ?: boolean
     showFooter?: boolean
   }
+}
+
+export interface ContactFormData {
+  _id?: string
+  _type?: 'contactForm'
+  fullName: string
+  country: string
+  phone: string
+  email: string
+  tutoringDetails: string
+  hourlyBudget: string
+  submissionDate?: string
 } 
