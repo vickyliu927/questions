@@ -89,8 +89,7 @@ export default defineType({
               name: 'topicDescription',
               title: 'Topic Description',
               type: 'text',
-              description: 'Brief description of the topic',
-              validation: Rule => Rule.required()
+              description: 'Brief description of the topic'
             },
             {
               name: 'color',

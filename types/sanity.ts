@@ -194,7 +194,7 @@ export interface MathsSubtopic {
 
 export interface MathsTopic {
   topicName: string
-  topicDescription: string
+  topicDescription?: string
   color: string
   subtopics: MathsSubtopic[]
   displayOrder: number
@@ -219,7 +219,7 @@ export interface MathsPageData {
 // Generic Subject Page Types (new dynamic system)
 export interface SubjectTopic {
   topicName: string
-  topicDescription: string
+  topicDescription?: string
   color: string
   subtopics: SubjectSubtopic[]
   displayOrder: number
@@ -262,7 +262,7 @@ export interface SubjectPageData {
 // Legacy Maths Page Types (for backward compatibility)
 export interface MathsTopic {
   topicName: string
-  topicDescription: string
+  topicDescription?: string
   color: string
   subtopics: MathsSubtopic[]
   displayOrder: number

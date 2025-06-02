@@ -125,7 +125,9 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic }) => {
         <div className="text-white flex items-center justify-between">
           <div>
             <h3 className="text-xl font-bold mb-2">{topic.topicName}</h3>
-            <p className="text-white/90 text-sm">{topic.topicDescription}</p>
+            {topic.topicDescription && (
+              <p className="text-white/90 text-sm">{topic.topicDescription}</p>
+            )}
           </div>
           <div className="flex flex-col items-center ml-4">
             {isDropdownOpen ? (
