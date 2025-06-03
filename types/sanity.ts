@@ -279,7 +279,7 @@ export interface MathsPageData {
 export interface SEOData {
   metaTitle?: string
   metaDescription?: string
-  noFollow?: boolean
+  noFollowExternal?: boolean
 }
 
 export interface SEOSettings {
@@ -287,7 +287,7 @@ export interface SEOSettings {
   title: string
   metaTitle?: string
   metaDescription?: string
-  noFollow?: boolean
+  noFollowExternal?: boolean
 }
 
 export interface HomepageData {

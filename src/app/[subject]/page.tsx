@@ -4,6 +4,7 @@ import { Header, Footer, SubjectTopicGrid } from '@/components'
 import { client, headerQuery, footerQuery, getSubjectPageData, getGlobalSEOSettings, allSubjectSlugsQuery } from '../../../lib/sanity'
 import { HeaderData, FooterData } from '../../../types/sanity'
 import { generateSEOMetadata } from '../../../components/SEOHead'
+import { SEOProvider } from '../../../contexts/SEOContext'
 
 // Revalidate every 60 seconds for fresh content with good performance
 export const revalidate = 60;
@@ -91,31 +92,33 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header headerData={headerData} />
-      <main>
-        {/* Hero Section */}
-        <section className={`${subjectPageData.heroBackgroundColor} py-16`}>
-          <div className="container mx-auto px-4">
-            <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                {subjectPageData.pageTitle}
-              </h1>
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-                {subjectPageData.pageDescription}
-              </p>
+    <SEOProvider seoData={subjectPageData.seo}>
+      <div className="min-h-screen bg-white">
+        <Header headerData={headerData} />
+        <main>
+          {/* Hero Section */}
+          <section className={`${subjectPageData.heroBackgroundColor} py-16`}>
+            <div className="container mx-auto px-4">
+              <div className="text-center max-w-4xl mx-auto">
+                <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                  {subjectPageData.pageTitle}
+                </h1>
+                <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
+                  {subjectPageData.pageDescription}
+                </p>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        {/* Topics Grid Section */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <SubjectTopicGrid topics={subjectPageData.topics} />
-          </div>
-        </section>
-      </main>
-      <Footer footerData={footerData} />
-    </div>
+          {/* Topics Grid Section */}
+          <section className="py-16 bg-gray-50">
+            <div className="container mx-auto px-4">
+              <SubjectTopicGrid topics={subjectPageData.topics} />
+            </div>
+          </section>
+        </main>
+        <Footer footerData={footerData} />
+      </div>
+    </SEOProvider>
   )
 } 

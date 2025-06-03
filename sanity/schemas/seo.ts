@@ -22,10 +22,10 @@ export const seoFields = [
         validation: Rule => Rule.max(160).warning('Descriptions longer than 160 characters may be truncated in search results')
       },
       {
-        name: 'noFollow',
-        title: 'No Follow Links',
+        name: 'noFollowExternal',
+        title: 'No Follow External Links',
         type: 'boolean',
-        description: 'Prevent search engines from following links on this page',
+        description: 'Prevent search engines from following external links on this page (internal links will still pass link juice)',
         initialValue: false
       }
     ],

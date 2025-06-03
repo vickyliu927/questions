@@ -21,7 +21,7 @@ export function generateSEOMetadata({
     description: metaDescription,
     robots: {
       index: true,
-      follow: !seoData?.noFollow,
+      follow: true, // Always allow following since we handle nofollow at link level
     },
   }
 

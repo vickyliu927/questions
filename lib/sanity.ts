@@ -393,7 +393,7 @@ export async function getSEOSettings() {
       title,
       metaTitle,
       metaDescription,
-      noFollow
+      noFollowExternal
     }
   `
   
@@ -413,7 +413,7 @@ export async function getGlobalSEOSettings() {
       "seo": seo {
         metaTitle,
         metaDescription,
-        noFollow
+        noFollowExternal
       }
     }
   `
@@ -441,7 +441,7 @@ export async function getSubjectPageData(slug: string) {
       "seo": seo {
         metaTitle,
         metaDescription,
-        noFollow
+        noFollowExternal
       },
       topics[] {
         topicName,

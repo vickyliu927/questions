@@ -45,7 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const seoData = {
     metaTitle: seoSettings?.metaTitle,
     metaDescription: seoSettings?.metaDescription,
-    noFollow: seoSettings?.noFollow
+    noFollowExternal: seoSettings?.noFollowExternal
   }
   
   return generateSEOMetadata({

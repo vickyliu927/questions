@@ -1,9 +1,9 @@
 'use client'
 
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { ChevronDownIcon, ChevronUpIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import { SubjectTopic, SubjectSubtopic } from '../../types/sanity'
+import { SmartLink } from '../../components/SmartLink'
 
 interface SubjectTopicGridProps {
   topics: SubjectTopic[]
@@ -68,14 +68,12 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
                     </span>
                   </div>
                 ) : (
-                  <Link
+                  <SmartLink
                     href={subSubtopic.subSubtopicUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="block p-2 pl-4 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 bg-white"
                   >
                     <span className="font-semibold">{subSubtopic.subSubtopicName}</span>
-                  </Link>
+                  </SmartLink>
                 )}
               </div>
             ))}
@@ -88,14 +86,12 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
   // Regular subtopic with direct URL
   if (subtopic.subtopicUrl) {
     return (
-      <Link
+      <SmartLink
         href={subtopic.subtopicUrl}
-        target="_blank"
-        rel="noopener noreferrer"
         className="block p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
       >
         <span className="font-semibold">{subtopic.subtopicName}</span>
-      </Link>
+      </SmartLink>
     )
   }
 
