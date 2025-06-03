@@ -5,13 +5,15 @@ import Link from 'next/link'
 import { useSEO } from '../contexts/SEOContext'
 import { generateLinkRel, shouldOpenInNewTab } from '../lib/seo-utils'
 
-interface SmartLinkProps {
+// Define allowed HTML attributes for links
+type HTMLLinkAttributes = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, 'href' | 'target' | 'rel' | 'className'>
+
+interface SmartLinkProps extends HTMLLinkAttributes {
   href: string
   children: React.ReactNode
   className?: string
   target?: '_blank' | '_self' | '_parent' | '_top'
   rel?: string
-  [key: string]: any // Allow other props to pass through
 }
 
 export function SmartLink({ 
@@ -47,13 +49,12 @@ export function SmartLink({
 }
 
 // For cases where you need a regular anchor tag instead of Next.js Link
-interface SmartAnchorProps {
+interface SmartAnchorProps extends HTMLLinkAttributes {
   href: string
   children: React.ReactNode
   className?: string
   target?: '_blank' | '_self' | '_parent' | '_top'
   rel?: string
-  [key: string]: any
 }
 
 export function SmartAnchor({ 

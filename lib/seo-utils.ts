@@ -42,7 +42,7 @@ export function isInternalLink(url: string, currentDomain?: string): boolean {
     const cleanUrlDomain = urlObj.hostname.replace(/^www\./, '');
     
     return cleanUrlDomain === cleanCurrentDomain;
-  } catch (error) {
+  } catch {
     // If URL parsing fails, assume external for safety
     return false;
   }
