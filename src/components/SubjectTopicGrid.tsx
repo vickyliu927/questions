@@ -112,6 +112,9 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, backgroundColorClass }) =>
     setIsDropdownOpen(!isDropdownOpen)
   }
 
+  // Debug log to check the background color
+  console.log('TopicCard background color:', backgroundColorClass)
+
   // Check if topic has any valid subtopics
   const hasValidSubtopics = topic.subtopics && topic.subtopics.length > 0 && topic.subtopics.some(subtopic => subtopic.subtopicName)
 
@@ -122,6 +125,7 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, backgroundColorClass }) =>
         <button
           onClick={toggleDropdown}
           className={`w-full p-6 text-left hover:opacity-90 transition-opacity duration-200 ${backgroundColorClass}`}
+          style={{ backgroundColor: backgroundColorClass ? undefined : '#3b82f6' }}
         >
           <div className="flex items-center justify-between">
             <div>
@@ -142,6 +146,7 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, backgroundColorClass }) =>
       ) : (
         <div
           className={`w-full p-6 ${backgroundColorClass}`}
+          style={{ backgroundColor: backgroundColorClass ? undefined : '#3b82f6' }}
         >
           <div>
             <h3 className="text-xl font-bold mb-2 text-white">{topic.topicName || 'Topic Name Missing'}</h3>

@@ -91,13 +91,23 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
     notFound()
   }
 
+  // Debug log to check the data
+  console.log('Subject page data:', {
+    subject,
+    topicBlockBackgroundColor: subjectPageData.topicBlockBackgroundColor,
+    topics: subjectPageData.topics?.length
+  })
+
+  // Ensure topicBlockBackgroundColor has a default value if not set
+  const backgroundColorClass = subjectPageData.topicBlockBackgroundColor || 'bg-blue-500'
+
   return (
     <SEOProvider seoData={subjectPageData.seo}>
       <div className="min-h-screen bg-white">
         <Header headerData={headerData} />
         <main>
           {/* Hero Section */}
-          <section className="bg-gradient-to-br from-slate-50 to-blue-100/80 py-16">
+          <section className="bg-white py-16">
             <div className="container mx-auto px-4">
               <div className="text-center max-w-4xl mx-auto">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -115,7 +125,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
             <div className="container mx-auto px-4">
               <SubjectTopicGrid 
                 topics={subjectPageData.topics} 
-                topicBlockBackgroundColor={subjectPageData.topicBlockBackgroundColor} 
+                topicBlockBackgroundColor={backgroundColorClass}
               />
             </div>
           </section>

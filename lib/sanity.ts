@@ -438,11 +438,6 @@ export async function getSubjectPageData(slug: string) {
       pageTitle,
       pageDescription,
       topicBlockBackgroundColor,
-      "seo": seo {
-        metaTitle,
-        metaDescription,
-        noFollowExternal
-      },
       topics[] {
         topicName,
         topicDescription,
@@ -463,7 +458,13 @@ export async function getSubjectPageData(slug: string) {
   `
   
   try {
+    console.log('Fetching subject page data for slug:', slug)
     const data = await client.fetch(query, { slug })
+    console.log('Fetched data:', {
+      slug,
+      topicBlockBackgroundColor: data?.topicBlockBackgroundColor,
+      hasTopics: !!data?.topics?.length
+    })
     return data
   } catch (error) {
     console.error('Error fetching subject page data:', error)
