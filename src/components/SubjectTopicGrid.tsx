@@ -42,7 +42,6 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
         <button
           onClick={toggleSubDropdown}
           className="w-full p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200 flex items-center justify-between"
-          style={{ backgroundColor: 'rgba(230, 126, 80, 0.1)' }}
         >
           <span className="font-semibold">{subtopic.subtopicName}</span>
           {isSubDropdownOpen ? (
@@ -53,7 +52,7 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
         </button>
         
         {isSubDropdownOpen && (
-          <div className="ml-4" style={{ backgroundColor: 'rgba(230, 126, 80, 0.1)' }}>
+          <div className="ml-4">
             {subtopic.subSubtopics?.map((subSubtopic, index) => (
               <div key={index} className="border-b border-gray-200 last:border-b-0">
                 {subSubtopic.isComingSoon ? (
@@ -89,7 +88,6 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
         target="_blank"
         rel="noopener noreferrer"
         className="block p-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors duration-200"
-        style={{ backgroundColor: 'rgba(230, 126, 80, 0.1)' }}
       >
         <span className="font-semibold">{subtopic.subtopicName}</span>
       </Link>

@@ -29,7 +29,7 @@ export default function Header({ headerData }: HeaderProps) {
       { label: "Past Papers", href: "#" },
       { label: "Resources", href: "#" },
       { label: "About", href: "#" },
-      { label: "Contact", href: "#" }
+      { label: "Contact", href: "/contact" }
     ],
     ctaButton: {
       text: "View all CIE IGCSE Study Notes on TutorChase",
@@ -101,18 +101,34 @@ export default function Header({ headerData }: HeaderProps) {
 
           {/* Desktop Navigation */}
           <nav className={`hidden md:flex space-x-12 ${!hasLogo ? 'ml-0' : ''}`}>
-            {navigation.map((link, index) => (
-              <a 
-                key={index}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="transition-colors font-semibold py-2"
-                style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
-              >
-                {link.label}
-              </a>
-            ))}
+            {navigation.map((link, index) => {
+              // Use internal routing for contact page
+              if (link.href === '/contact') {
+                return (
+                  <Link 
+                    key={index}
+                    href={link.href}
+                    className="transition-colors font-semibold py-2"
+                    style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              }
+              // External links for other navigation items
+              return (
+                <a 
+                  key={index}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-colors font-semibold py-2"
+                  style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </nav>
 
           {/* Desktop CTA Buttons */}
@@ -153,18 +169,34 @@ export default function Header({ headerData }: HeaderProps) {
         {isMobileMenuOpen && (
           <div className="md:hidden pb-6 animate-slide-down">
             <nav className="flex flex-col space-y-4">
-              {navigation.map((link, index) => (
-                <a 
-                  key={index}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-colors font-semibold py-2"
-                  style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
-                >
-                  {link.label}
-                </a>
-              ))}
+              {navigation.map((link, index) => {
+                // Use internal routing for contact page
+                if (link.href === '/contact') {
+                  return (
+                    <Link 
+                      key={index}
+                      href={link.href}
+                      className="transition-colors font-semibold py-2"
+                      style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
+                    >
+                      {link.label}
+                    </Link>
+                  );
+                }
+                // External links for other navigation items
+                return (
+                  <a 
+                    key={index}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="transition-colors font-semibold py-2"
+                    style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
+                  >
+                    {link.label}
+                  </a>
+                );
+              })}
               
               {/* Mobile CTA Buttons */}
               <div className="flex flex-col space-y-3 pt-4 border-t border-border">

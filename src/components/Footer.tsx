@@ -1,4 +1,7 @@
+"use client";
+
 import { FooterData } from '../../types/sanity'
+import Link from "next/link";
 
 // Fallback data for when Sanity data is not available
 const fallbackFooterData: FooterData = {
@@ -32,7 +35,7 @@ const fallbackFooterData: FooterData = {
     sectionTitle: 'Support',
     links: [
       { label: 'FAQs', href: '#faqs' },
-      { label: 'Contact Us', href: '#' },
+      { label: 'Contact Us', href: '/contact' },
       { label: 'Help Center', href: '#' },
       { label: 'Privacy Policy', href: '#' },
       { label: 'Terms of Service', href: '#' },
@@ -243,15 +246,25 @@ export default function Footer({ footerData }: FooterProps) {
               <ul className="space-y-3">
                 {(data.support!.links || []).map((link, index) => (
                   <li key={index}>
-                    <a 
-                      href={link.href} 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white/80 hover:text-coral-400 transition-colors flex items-center"
-                    >
-                      {link.hasWhatsAppIcon && <Icons.WhatsApp />}
-                      {link.label}
-                    </a>
+                    {link.href === '/contact' ? (
+                      <Link 
+                        href={link.href}
+                        className="text-white/80 hover:text-coral-400 transition-colors flex items-center"
+                      >
+                        {link.hasWhatsAppIcon && <Icons.WhatsApp />}
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <a 
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white/80 hover:text-coral-400 transition-colors flex items-center"
+                      >
+                        {link.hasWhatsAppIcon && <Icons.WhatsApp />}
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
