@@ -125,16 +125,16 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, backgroundColorClass }) =>
         >
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-xl font-bold mb-2 text-gray-900">{topic.topicName || 'Topic Name Missing'}</h3>
+              <h3 className="text-xl font-bold mb-2 text-white">{topic.topicName || 'Topic Name Missing'}</h3>
               {topic.topicDescription && (
-                <p className="text-sm text-gray-700">{topic.topicDescription}</p>
+                <p className="text-sm text-white/90">{topic.topicDescription}</p>
               )}
             </div>
             <div className="flex flex-col items-center ml-4">
               {isDropdownOpen ? (
-                <ChevronUpIcon className="h-6 w-6 text-gray-700" />
+                <ChevronUpIcon className="h-6 w-6 text-white" />
               ) : (
-                <ChevronDownIcon className="h-6 w-6 text-gray-700" />
+                <ChevronDownIcon className="h-6 w-6 text-white" />
               )}
             </div>
           </div>
@@ -144,9 +144,9 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic, backgroundColorClass }) =>
           className={`w-full p-6 ${backgroundColorClass}`}
         >
           <div>
-            <h3 className="text-xl font-bold mb-2 text-gray-900">{topic.topicName || 'Topic Name Missing'}</h3>
+            <h3 className="text-xl font-bold mb-2 text-white">{topic.topicName || 'Topic Name Missing'}</h3>
             {topic.topicDescription && (
-              <p className="text-sm text-gray-700">{topic.topicDescription}</p>
+              <p className="text-sm text-white/90">{topic.topicDescription}</p>
             )}
           </div>
         </div>

@@ -22,9 +22,9 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
     sectionTitle: 'Popular Subjects',
     sectionDescription: 'Explore our comprehensive collection of study materials for various subjects. Each subject contains detailed notes, practice questions, and revision guides.',
     subjects: [
-      {
+      { 
         name: 'Mathematics',
-        image: { 
+        image: {
           _type: 'image' as const,
           asset: { _ref: '', _type: 'reference' as const, url: '' }, 
           alt: 'Mathematics' 
@@ -247,8 +247,8 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                   {imageUrl ? (
                     <>
                       <Image 
-                        src={imageUrl}
-                        alt={subject.image.alt || subject.name}
+                      src={imageUrl}
+                      alt={subject.image.alt || subject.name}
                         width={400}
                         height={192}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -287,7 +287,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                       <div className="flex items-center space-x-2">
                         <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
                         <span className="text-xs font-medium font-sans tracking-wide" style={{color: '#64748b', letterSpacing: '0.025em'}}>
-                          Updated {formatDate(subject.dateUpdated)}
+                      Updated {formatDate(subject.dateUpdated)}
                         </span>
                       </div>
                     </div>
@@ -295,7 +295,7 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                   
                   {/* CTA Button - Premium Design */}
                   <div className="mt-4 pt-3">
-                    <a 
+                  <a 
                       href={subjectUrl}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -306,12 +306,12 @@ export default function SubjectGrid({ subjectGridData, publishedSubjects }: Subj
                       <div className="absolute inset-0 bg-gradient-to-r from-gray-50 to-gray-100 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
                       
                       <span className="relative z-10 flex items-center">
-                        {subject.viewNotesButton.text}
+                    {subject.viewNotesButton.text}
                         <svg className="ml-2 w-4 h-4 transition-transform duration-200 group-hover/btn:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                         </svg>
                       </span>
-                    </a>
+                  </a>
                   </div>
                 </div>
               </div>
