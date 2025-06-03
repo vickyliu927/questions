@@ -274,6 +274,7 @@ export const allSubjectPagesQuery = `*[_type == "subjectPage" && isPublished == 
   subjectName,
   pageTitle,
   pageDescription,
+  topicBlockBackgroundColor,
   topics[]{
     topicName,
     topicDescription,
@@ -306,6 +307,7 @@ export const subjectPageBySlugQuery = (slug: string) => `*[_type == "subjectPage
   subjectName,
   pageTitle,
   pageDescription,
+  topicBlockBackgroundColor,
   topics[]{
     topicName,
     topicDescription,
@@ -435,6 +437,7 @@ export async function getSubjectPageData(slug: string) {
       subjectName,
       pageTitle,
       pageDescription,
+      topicBlockBackgroundColor,
       "seo": seo {
         metaTitle,
         metaDescription,

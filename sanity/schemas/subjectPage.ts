@@ -50,6 +50,25 @@ export default defineType({
       validation: Rule => Rule.required()
     }),
     defineField({
+      name: 'topicBlockBackgroundColor',
+      title: 'Topic Block Background Color',
+      type: 'string',
+      description: 'Background color/gradient for the topic blocks',
+      options: {
+        list: [
+          { title: 'Warm Blue', value: 'bg-gradient-to-br from-blue-50 via-blue-100/90 to-blue-200/80' },
+          { title: 'Sage Green', value: 'bg-gradient-to-br from-green-50 via-green-100/90 to-green-200/80' },
+          { title: 'Lavender', value: 'bg-gradient-to-br from-purple-50 via-purple-100/90 to-purple-200/80' },
+          { title: 'Dusty Rose', value: 'bg-gradient-to-br from-pink-50 via-pink-100/90 to-pink-200/80' },
+          { title: 'Warm Orange', value: 'linear-gradient(135deg, #faf9f7 0%, #f4f0ed 50%, #e67e50 100%)' },
+          { title: 'Seafoam', value: 'bg-gradient-to-br from-teal-50 via-teal-100/90 to-teal-200/80' },
+          { title: 'Warm Gray', value: 'bg-gradient-to-br from-gray-50 via-gray-100/90 to-gray-200/80' }
+        ]
+      },
+      validation: Rule => Rule.required(),
+      initialValue: 'bg-gradient-to-br from-blue-50 via-blue-100/90 to-blue-200/80'
+    }),
+    defineField({
       name: 'topics',
       title: 'Subject Topics',
       type: 'array',

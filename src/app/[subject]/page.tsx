@@ -113,7 +113,10 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
           {/* Topics Grid Section */}
           <section className="py-16 bg-gray-50">
             <div className="container mx-auto px-4">
-              <SubjectTopicGrid topics={subjectPageData.topics} />
+              <SubjectTopicGrid 
+                topics={subjectPageData.topics} 
+                topicBlockBackgroundColor={subjectPageData.topicBlockBackgroundColor} 
+              />
             </div>
           </section>
         </main>

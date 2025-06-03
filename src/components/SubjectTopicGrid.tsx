@@ -7,10 +7,12 @@ import { SmartLink } from '../../components/SmartLink'
 
 interface SubjectTopicGridProps {
   topics: SubjectTopic[]
+  topicBlockBackgroundColor: string
 }
 
 interface TopicCardProps {
   topic: SubjectTopic
+  backgroundColorClass: string
 }
 
 interface SubtopicItemProps {
@@ -103,28 +105,11 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
   )
 }
 
-const TopicCard: React.FC<TopicCardProps> = ({ topic }) => {
+const TopicCard: React.FC<TopicCardProps> = ({ topic, backgroundColorClass }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen)
-  }
-
-  // Map Tailwind color classes to actual hex values
-  const getBackgroundColor = (colorClass: string) => {
-    const colorMap: { [key: string]: string } = {
-      'bg-blue-500': '#3b82f6',
-      'bg-green-500': '#10b981',
-      'bg-purple-500': '#e67e50',
-      'bg-pink-500': '#ec4899',
-      'bg-indigo-500': '#6366f1',
-      'bg-teal-500': '#14b8a6',
-      'bg-orange-500': '#f97316',
-      'bg-red-500': '#ef4444',
-      'bg-yellow-500': '#eab308',
-      'bg-cyan-500': '#06b6d4'
-    }
-    return colorMap[colorClass] || '#e67e50' // Default to orange
   }
 
   // Check if topic has any valid subtopics
@@ -136,40 +121,32 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic }) => {
       {hasValidSubtopics ? (
         <button
           onClick={toggleDropdown}
-          className="w-full p-6 text-left hover:opacity-90 transition-opacity duration-200"
-          style={{ 
-            backgroundColor: getBackgroundColor(topic.color),
-            color: 'white'
-          }}
+          className={`w-full p-6 text-left hover:opacity-90 transition-opacity duration-200 ${backgroundColorClass}`}
         >
           <div className="flex items-center justify-between">
             <div>
-              <h3 className="text-xl font-bold mb-2">{topic.topicName || 'Topic Name Missing'}</h3>
+              <h3 className="text-xl font-bold mb-2 text-gray-900">{topic.topicName || 'Topic Name Missing'}</h3>
               {topic.topicDescription && (
-                <p className="opacity-90 text-sm">{topic.topicDescription}</p>
+                <p className="text-sm text-gray-700">{topic.topicDescription}</p>
               )}
             </div>
             <div className="flex flex-col items-center ml-4">
               {isDropdownOpen ? (
-                <ChevronUpIcon className="h-6 w-6" />
+                <ChevronUpIcon className="h-6 w-6 text-gray-700" />
               ) : (
-                <ChevronDownIcon className="h-6 w-6" />
+                <ChevronDownIcon className="h-6 w-6 text-gray-700" />
               )}
             </div>
           </div>
         </button>
       ) : (
         <div
-          className="w-full p-6"
-          style={{ 
-            backgroundColor: getBackgroundColor(topic.color),
-            color: 'white'
-          }}
+          className={`w-full p-6 ${backgroundColorClass}`}
         >
           <div>
-            <h3 className="text-xl font-bold mb-2">{topic.topicName || 'Topic Name Missing'}</h3>
+            <h3 className="text-xl font-bold mb-2 text-gray-900">{topic.topicName || 'Topic Name Missing'}</h3>
             {topic.topicDescription && (
-              <p className="opacity-90 text-sm">{topic.topicDescription}</p>
+              <p className="text-sm text-gray-700">{topic.topicDescription}</p>
             )}
           </div>
         </div>
@@ -189,7 +166,7 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic }) => {
   )
 }
 
-const SubjectTopicGrid: React.FC<SubjectTopicGridProps> = ({ topics }) => {
+const SubjectTopicGrid: React.FC<SubjectTopicGridProps> = ({ topics, topicBlockBackgroundColor }) => {
   if (!topics || topics.length === 0) {
     return (
       <div className="text-center py-12">
@@ -204,7 +181,7 @@ const SubjectTopicGrid: React.FC<SubjectTopicGridProps> = ({ topics }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {sortedTopics.map((topic, index) => (
-        <TopicCard key={index} topic={topic} />
+        <TopicCard key={index} topic={topic} backgroundColorClass={topicBlockBackgroundColor} />
       ))}
     </div>
   )
