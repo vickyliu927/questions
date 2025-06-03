@@ -105,8 +105,8 @@ export default function ContactForm({ contactFormData }: ContactFormProps) {
     <section className={`py-16 bg-gradient-to-br from-${gradientFrom} to-${gradientTo}`}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold text-white mb-4">{sectionTitle}</h2>
-          <p className="text-xl text-blue-100">
+          <h2 className="font-semibold font-serif mb-4" style={{ color: '#243b53', fontSize: '42px' }}>{sectionTitle}</h2>
+          <p className="text-xl font-sans" style={{ color: '#486581' }}>
             {sectionDescription.includes('TutorChase') ? (
               <>
                 {sectionDescription.split('TutorChase')[0]}
@@ -114,7 +114,8 @@ export default function ContactForm({ contactFormData }: ContactFormProps) {
                   href={tutorChaseLink} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="text-white underline hover:text-blue-200 transition-colors"
+                  className="underline hover:opacity-80 transition-opacity"
+                  style={{ color: '#486581' }}
                 >
                   TutorChase
                 </a>
