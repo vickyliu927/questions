@@ -25,6 +25,11 @@ const SubtopicItem: React.FC<SubtopicItemProps> = ({ subtopic }) => {
     setIsSubDropdownOpen(!isSubDropdownOpen)
   }
 
+  // If subtopic has no name, skip rendering
+  if (!subtopic.subtopicName) {
+    return null
+  }
+
   if (subtopic.isComingSoon) {
     return (
       <div className="p-3 text-gray-400 cursor-not-allowed flex items-center justify-between">
@@ -157,7 +162,7 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic }) => {
       {/* Dropdown Menu */}
       {isDropdownOpen && (
         <div className="bg-white border-t-2 border-gray-300">
-          {topic.subtopics.map((subtopic, index) => (
+          {topic.subtopics.filter(subtopic => subtopic.subtopicName).map((subtopic, index) => (
             <div key={index} className="border-b border-gray-200 last:border-b-0">
               <SubtopicItem subtopic={subtopic} />
             </div>

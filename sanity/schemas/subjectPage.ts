@@ -127,8 +127,7 @@ export default defineType({
                       name: 'subtopicName',
                       title: 'Subtopic Name',
                       type: 'string',
-                      description: 'Name of the subtopic',
-                      validation: Rule => Rule.required()
+                      description: 'Name of the subtopic'
                     },
                     {
                       name: 'subtopicUrl',

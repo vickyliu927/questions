@@ -187,7 +187,7 @@ export interface MathsSubSubtopic {
 }
 
 export interface MathsSubtopic {
-  subtopicName: string
+  subtopicName?: string
   subtopicUrl?: string
   isComingSoon: boolean
   subSubtopics?: MathsSubSubtopic[]
@@ -227,7 +227,7 @@ export interface SubjectTopic {
 }
 
 export interface SubjectSubtopic {
-  subtopicName: string
+  subtopicName?: string
   subtopicUrl?: string
   isComingSoon: boolean
   subSubtopics?: SubjectSubSubtopic[]
@@ -267,19 +267,6 @@ export interface MathsTopic {
   color: string
   subtopics: MathsSubtopic[]
   displayOrder: number
-}
-
-export interface MathsSubtopic {
-  subtopicName: string
-  subtopicUrl?: string
-  isComingSoon: boolean
-  subSubtopics?: MathsSubSubtopic[]
-}
-
-export interface MathsSubSubtopic {
-  subSubtopicName: string
-  subSubtopicUrl: string
-  isComingSoon: boolean
 }
 
 export interface MathsPageSEO {
