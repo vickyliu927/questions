@@ -28,10 +28,10 @@ export default defineType({
       validation: Rule => Rule.max(160).warning('Meta descriptions longer than 160 characters may be truncated in search results')
     }),
     defineField({
-      name: 'noFollow',
-      title: 'No Follow',
+      name: 'noFollowExternal',
+      title: 'No Follow External Links',
       type: 'boolean',
-      description: 'When enabled, tells search engines not to follow links on this page',
+      description: 'When enabled, tells search engines not to follow external links on this page (internal links will still pass link juice)',
       initialValue: false
     }),
     defineField({

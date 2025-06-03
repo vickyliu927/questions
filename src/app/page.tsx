@@ -32,6 +32,7 @@ import {
   SubjectPageData
 } from '../../types/sanity'
 import { generateSEOMetadata } from '../../components/SEOHead'
+import { SEOProvider } from '../../contexts/SEOContext'
 
 // Revalidate every 60 seconds for fresh content with good performance
 export const revalidate = 60;
@@ -170,20 +171,30 @@ export default async function Home() {
   const faqData = await getFAQData();
   const contactFormSectionData = await getContactFormSectionData();
   const footerData = await getFooterData();
+  const seoSettings = await getSEOSettings();
+
+  // Create SEO data object
+  const seoData = {
+    metaTitle: seoSettings?.metaTitle,
+    metaDescription: seoSettings?.metaDescription,
+    noFollowExternal: seoSettings?.noFollowExternal
+  }
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header headerData={headerData} />
-      <main>
-        <Hero heroData={heroData} />
-        <SubjectGrid subjectGridData={subjectGridData} publishedSubjects={publishedSubjects} />
-        <WhyChooseUs whyChooseUsData={whyChooseUsData} />
-        <FAQ faqData={faqData} />
-        {contactFormSectionData?.isActive && (
-          <ContactForm contactFormData={contactFormSectionData} />
-        )}
-      </main>
-      <Footer footerData={footerData} />
-    </div>
+    <SEOProvider seoData={seoData}>
+      <div className="min-h-screen bg-white">
+        <Header headerData={headerData} />
+        <main>
+          <Hero heroData={heroData} />
+          <SubjectGrid subjectGridData={subjectGridData} publishedSubjects={publishedSubjects} />
+          <WhyChooseUs whyChooseUsData={whyChooseUsData} />
+          <FAQ faqData={faqData} />
+          {contactFormSectionData?.isActive && (
+            <ContactForm contactFormData={contactFormSectionData} />
+          )}
+        </main>
+        <Footer footerData={footerData} />
+      </div>
+    </SEOProvider>
   );
 }
