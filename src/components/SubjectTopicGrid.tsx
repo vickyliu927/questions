@@ -131,38 +131,58 @@ const TopicCard: React.FC<TopicCardProps> = ({ topic }) => {
     return colorMap[colorClass] || '#e67e50' // Default to orange
   }
 
+  // Check if topic has any valid subtopics
+  const hasValidSubtopics = topic.subtopics && topic.subtopics.length > 0 && topic.subtopics.some(subtopic => subtopic.subtopicName)
+
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-      {/* Clickable Topic Header */}
-      <button
-        onClick={toggleDropdown}
-        className="w-full p-6 text-left hover:opacity-90 transition-opacity duration-200"
-        style={{ 
-          backgroundColor: getBackgroundColor(topic.color),
-          color: 'white'
-        }}
-      >
-        <div className="flex items-center justify-between">
+      {/* Clickable Topic Header - only make clickable if has subtopics */}
+      {hasValidSubtopics ? (
+        <button
+          onClick={toggleDropdown}
+          className="w-full p-6 text-left hover:opacity-90 transition-opacity duration-200"
+          style={{ 
+            backgroundColor: getBackgroundColor(topic.color),
+            color: 'white'
+          }}
+        >
+          <div className="flex items-center justify-between">
+            <div>
+              <h3 className="text-xl font-bold mb-2">{topic.topicName || 'Topic Name Missing'}</h3>
+              {topic.topicDescription && (
+                <p className="opacity-90 text-sm">{topic.topicDescription}</p>
+              )}
+            </div>
+            <div className="flex flex-col items-center ml-4">
+              {isDropdownOpen ? (
+                <ChevronUpIcon className="h-6 w-6" />
+              ) : (
+                <ChevronDownIcon className="h-6 w-6" />
+              )}
+            </div>
+          </div>
+        </button>
+      ) : (
+        <div
+          className="w-full p-6"
+          style={{ 
+            backgroundColor: getBackgroundColor(topic.color),
+            color: 'white'
+          }}
+        >
           <div>
             <h3 className="text-xl font-bold mb-2">{topic.topicName || 'Topic Name Missing'}</h3>
             {topic.topicDescription && (
               <p className="opacity-90 text-sm">{topic.topicDescription}</p>
             )}
           </div>
-          <div className="flex flex-col items-center ml-4">
-            {isDropdownOpen ? (
-              <ChevronUpIcon className="h-6 w-6" />
-            ) : (
-              <ChevronDownIcon className="h-6 w-6" />
-            )}
-          </div>
         </div>
-      </button>
+      )}
 
-      {/* Dropdown Menu */}
-      {isDropdownOpen && (
+      {/* Dropdown Menu - only show if has subtopics and is open */}
+      {hasValidSubtopics && isDropdownOpen && (
         <div className="bg-white border-t-2 border-gray-300">
-          {topic.subtopics.filter(subtopic => subtopic.subtopicName).map((subtopic, index) => (
+          {(topic.subtopics || []).filter(subtopic => subtopic.subtopicName).map((subtopic, index) => (
             <div key={index} className="border-b border-gray-200 last:border-b-0">
               <SubtopicItem subtopic={subtopic} />
             </div>

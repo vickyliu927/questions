@@ -117,7 +117,7 @@ export default defineType({
               name: 'subtopics',
               title: 'Subtopics',
               type: 'array',
-              description: 'List of subtopics within this topic',
+              description: 'List of subtopics within this topic (optional)',
               of: [
                 {
                   type: 'object',
@@ -214,8 +214,7 @@ export default defineType({
                     }
                   }
                 }
-              ],
-              validation: Rule => Rule.required().min(1)
+              ]
             },
             {
               name: 'displayOrder',

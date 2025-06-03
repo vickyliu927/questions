@@ -197,7 +197,7 @@ export interface MathsTopic {
   topicName: string
   topicDescription?: string
   color: string
-  subtopics: MathsSubtopic[]
+  subtopics?: MathsSubtopic[]
   displayOrder: number
 }
 
@@ -222,7 +222,7 @@ export interface SubjectTopic {
   topicName: string
   topicDescription?: string
   color: string
-  subtopics: SubjectSubtopic[]
+  subtopics?: SubjectSubtopic[]
   displayOrder: number
 }
 
@@ -261,14 +261,6 @@ export interface SubjectPageData {
 }
 
 // Legacy Maths Page Types (for backward compatibility)
-export interface MathsTopic {
-  topicName: string
-  topicDescription?: string
-  color: string
-  subtopics: MathsSubtopic[]
-  displayOrder: number
-}
-
 export interface MathsPageSEO {
   metaTitle?: string
   metaDescription?: string
