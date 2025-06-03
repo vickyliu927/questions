@@ -2,6 +2,7 @@
 
 import { FooterData } from '../../types/sanity'
 import Link from "next/link";
+import { useContactNavigation } from "../hooks/useContactNavigation";
 
 // Fallback data for when Sanity data is not available
 const fallbackFooterData: FooterData = {
@@ -116,10 +117,15 @@ const Icons = {
 
 interface FooterProps {
   footerData?: FooterData
+  isContactFormActive?: boolean
 }
 
-export default function Footer({ footerData }: FooterProps) {
+export default function Footer({ footerData, isContactFormActive }: FooterProps) {
   const currentYear = new Date().getFullYear()
+  const { handleContactNavigation } = useContactNavigation({ 
+    isContactFormActive,
+    externalContactUrl: 'https://tutorchase.com/contact'
+  });
 
   // Use provided data or fallback data
   const data = footerData || fallbackFooterData
@@ -247,13 +253,13 @@ export default function Footer({ footerData }: FooterProps) {
                 {(data.support!.links || []).map((link, index) => (
                   <li key={index}>
                     {link.href === '/contact' ? (
-                      <Link 
-                        href={link.href}
+                      <button 
+                        onClick={handleContactNavigation}
                         className="text-white/80 hover:text-coral-400 transition-colors flex items-center"
                       >
                         {link.hasWhatsAppIcon && <Icons.WhatsApp />}
                         {link.label}
-                      </Link>
+                      </button>
                     ) : (
                       <a 
                         href={link.href}

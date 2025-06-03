@@ -5,13 +5,19 @@ import Link from "next/link";
 import Image from "next/image";
 import { HeaderData } from "../../types/sanity";
 import { urlFor } from "../../lib/sanity";
+import { useContactNavigation } from "../hooks/useContactNavigation";
 
 interface HeaderProps {
   headerData?: HeaderData;
+  isContactFormActive?: boolean;
 }
 
-export default function Header({ headerData }: HeaderProps) {
+export default function Header({ headerData, isContactFormActive }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { handleContactNavigation } = useContactNavigation({ 
+    isContactFormActive,
+    externalContactUrl: 'https://tutorchase.com/contact'
+  });
 
   // Debug logging
   console.log('Header received data:', headerData);
@@ -102,17 +108,17 @@ export default function Header({ headerData }: HeaderProps) {
           {/* Desktop Navigation */}
           <nav className={`hidden md:flex space-x-12 ${!hasLogo ? 'ml-0' : ''}`}>
             {navigation.map((link, index) => {
-              // Use internal routing for contact page
+              // Use contact navigation for contact links
               if (link.href === '/contact') {
                 return (
-                  <Link 
+                  <button 
                     key={index}
-                    href={link.href}
+                    onClick={handleContactNavigation}
                     className="transition-colors font-semibold py-2"
                     style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
                   >
                     {link.label}
-                  </Link>
+                  </button>
                 );
               }
               // External links for other navigation items
@@ -170,17 +176,17 @@ export default function Header({ headerData }: HeaderProps) {
           <div className="md:hidden pb-6 animate-slide-down">
             <nav className="flex flex-col space-y-4">
               {navigation.map((link, index) => {
-                // Use internal routing for contact page
+                // Use contact navigation for contact links
                 if (link.href === '/contact') {
                   return (
-                    <Link 
+                    <button 
                       key={index}
-                      href={link.href}
+                      onClick={handleContactNavigation}
                       className="transition-colors font-semibold py-2"
                       style={{ color: '#334e68', fontSize: '16px', fontFamily: 'Inter, sans-serif' }}
                     >
                       {link.label}
-                    </Link>
+                    </button>
                   );
                 }
                 // External links for other navigation items

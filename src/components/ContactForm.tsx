@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ContactFormData, ContactFormSectionData } from '../../types/sanity'
 
 type FormData = Omit<ContactFormData, '_id' | '_type' | 'submissionDate'>
@@ -22,6 +22,21 @@ export default function ContactForm({ contactFormData }: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  // Add useEffect to handle URL parameter
+  useEffect(() => {
+    // Check if we should scroll to the form
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('contact') === 'true') {
+      // Remove the parameter from URL without refreshing
+      window.history.replaceState({}, '', window.location.pathname);
+      // Scroll to form
+      const contactFormElement = document.getElementById('contact-form-section');
+      if (contactFormElement) {
+        contactFormElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, []);
 
   // Default values if no Sanity data is provided
   const sectionTitle = contactFormData?.sectionTitle || 'Hire a tutor'
@@ -77,7 +92,7 @@ export default function ContactForm({ contactFormData }: ContactFormProps) {
 
   if (isSubmitted) {
     return (
-      <section className={`py-16 bg-gradient-to-br from-${gradientFrom} to-${gradientTo}`}>
+      <section id="contact-form-section" className={`py-16 bg-gradient-to-br from-${gradientFrom} to-${gradientTo}`}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white rounded-3xl shadow-2xl p-8 text-center">
             <div className="mb-6">
@@ -102,7 +117,7 @@ export default function ContactForm({ contactFormData }: ContactFormProps) {
   }
 
   return (
-    <section className={`py-16 bg-gradient-to-br from-${gradientFrom} to-${gradientTo}`}>
+    <section id="contact-form-section" className={`py-16 bg-gradient-to-br from-${gradientFrom} to-${gradientTo}`}>
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <h2 className="font-semibold font-serif mb-4" style={{ color: '#243b53', fontSize: '42px' }}>{sectionTitle}</h2>

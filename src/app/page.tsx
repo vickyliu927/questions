@@ -6,7 +6,8 @@ import {
   WhyChooseUs, 
   FAQ, 
   ContactForm,
-  Footer 
+  Footer,
+  SubjectRequestBanner
 } from '@/components'
 import { 
   client, 
@@ -136,19 +137,6 @@ async function getFAQData(): Promise<FAQData | undefined> {
   }
 }
 
-async function getContactFormSectionData(): Promise<ContactFormSectionData | undefined> {
-  try {
-    console.log('Fetching contact form section data from Sanity...');
-    
-    const contactFormSectionData = await client.fetch(contactFormSectionQuery);
-    console.log('Fetched contact form section data:', contactFormSectionData);
-    return contactFormSectionData;
-  } catch (error) {
-    console.error('Error fetching contact form section data:', error);
-    return undefined;
-  }
-}
-
 async function getFooterData(): Promise<FooterData | undefined> {
   try {
     console.log('Fetching footer data from Sanity...');
@@ -162,6 +150,19 @@ async function getFooterData(): Promise<FooterData | undefined> {
   }
 }
 
+async function getContactFormSectionData(): Promise<ContactFormSectionData | undefined> {
+  try {
+    console.log('Fetching contact form section data from Sanity...');
+    
+    const contactFormSectionData = await client.fetch(contactFormSectionQuery);
+    console.log('Fetched contact form section data:', contactFormSectionData);
+    return contactFormSectionData;
+  } catch (error) {
+    console.error('Error fetching contact form section data:', error);
+    return undefined;
+  }
+}
+
 export default async function Home() {
   const headerData = await getHeaderData();
   const heroData = await getHeroData();
@@ -169,9 +170,9 @@ export default async function Home() {
   const publishedSubjects = await getPublishedSubjects();
   const whyChooseUsData = await getWhyChooseUsData();
   const faqData = await getFAQData();
-  const contactFormSectionData = await getContactFormSectionData();
   const footerData = await getFooterData();
   const seoSettings = await getSEOSettings();
+  const contactFormSectionData = await getContactFormSectionData();
 
   // Create SEO data object
   const seoData = {
@@ -180,20 +181,24 @@ export default async function Home() {
     noFollowExternal: seoSettings?.noFollowExternal
   }
 
+  // Check if contact form is active
+  const isContactFormActive = contactFormSectionData?.isActive ?? false;
+
   return (
     <SEOProvider seoData={seoData}>
       <div className="min-h-screen bg-white">
-        <Header headerData={headerData} />
+        <Header headerData={headerData} isContactFormActive={isContactFormActive} />
         <main>
           <Hero heroData={heroData} />
           <SubjectGrid subjectGridData={subjectGridData} publishedSubjects={publishedSubjects} />
+          <SubjectRequestBanner />
           <WhyChooseUs whyChooseUsData={whyChooseUsData} />
           <FAQ faqData={faqData} />
-          {contactFormSectionData?.isActive && (
+          {isContactFormActive && (
             <ContactForm contactFormData={contactFormSectionData} />
           )}
         </main>
-        <Footer footerData={footerData} />
+        <Footer footerData={footerData} isContactFormActive={isContactFormActive} />
       </div>
     </SEOProvider>
   );
