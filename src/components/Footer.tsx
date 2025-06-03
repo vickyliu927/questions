@@ -1,7 +1,6 @@
 "use client";
 
 import { FooterData } from '../../types/sanity'
-import Link from "next/link";
 import { useContactNavigation } from "../hooks/useContactNavigation";
 
 // Fallback data for when Sanity data is not available
