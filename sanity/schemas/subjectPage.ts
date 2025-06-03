@@ -50,25 +50,6 @@ export default defineType({
       validation: Rule => Rule.required()
     }),
     defineField({
-      name: 'heroBackgroundColor',
-      title: 'Hero Background Color',
-      type: 'string',
-      description: 'Background color for the hero section',
-      options: {
-        list: [
-          { title: 'Warm Blue', value: 'bg-gradient-to-br from-slate-50 to-blue-100/80' },
-          { title: 'Sage Green', value: 'bg-gradient-to-br from-stone-50 to-green-100/80' },
-          { title: 'Lavender', value: 'bg-gradient-to-br from-gray-50 to-purple-100/80' },
-          { title: 'Dusty Rose', value: 'bg-gradient-to-br from-stone-50 to-pink-100/80' },
-          { title: 'Warm Orange', value: 'linear-gradient(135deg, #faf9f7 0%, #f4f0ed 50%, #e67e50 100%)' },
-          { title: 'Seafoam', value: 'bg-gradient-to-br from-gray-50 to-teal-100/80' },
-          { title: 'Warm Gray', value: 'bg-gradient-to-br from-stone-50 to-gray-100/80' }
-        ]
-      },
-      validation: Rule => Rule.required(),
-      initialValue: 'bg-gradient-to-br from-slate-50 to-blue-100/80'
-    }),
-    defineField({
       name: 'topics',
       title: 'Subject Topics',
       type: 'array',

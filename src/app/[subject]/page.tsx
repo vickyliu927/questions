@@ -97,7 +97,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
         <Header headerData={headerData} />
         <main>
           {/* Hero Section */}
-          <section className={`${subjectPageData.heroBackgroundColor} py-16`}>
+          <section className="bg-gradient-to-br from-slate-50 to-blue-100/80 py-16">
             <div className="container mx-auto px-4">
               <div className="text-center max-w-4xl mx-auto">
                 <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">

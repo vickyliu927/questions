@@ -254,7 +254,6 @@ export interface SubjectPageData {
   subjectName: string
   pageTitle: string
   pageDescription: string
-  heroBackgroundColor: string
   topics: SubjectTopic[]
   isPublished: boolean
   seo?: SubjectPageSEO

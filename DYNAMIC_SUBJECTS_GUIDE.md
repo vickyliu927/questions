@@ -54,9 +54,6 @@ The system uses a new `subjectPage` schema in Sanity that includes:
 - **Page Title**: Main heading on the page
 - **Page Description**: Subtitle/description text
 
-#### Visual Settings
-- **Hero Background Color**: Choose from predefined gradient options
-
 #### Content Structure
 - **Topics**: Add topics with subtopics and sub-subtopics
   - Each topic has a name, description, color, and display order
