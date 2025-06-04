@@ -3,7 +3,7 @@ import imageUrlBuilder from '@sanity/image-url'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || '8udeaunz'
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'production'
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || 'question-bank'
 const apiVersion = '2023-12-01'
 const token = process.env.SANITY_API_TOKEN
 
