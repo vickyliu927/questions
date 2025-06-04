@@ -167,6 +167,22 @@ export interface FooterLayoutSettings {
   copyrightText?: string
 }
 
+export interface FooterContactInfo {
+  sectionTitle: string
+  email: {
+    address: string
+    subtitle?: string
+  }
+  phone: {
+    number: string
+    subtitle?: string
+  }
+  location: {
+    address: string
+    subtitle?: string
+  }
+}
+
 export interface FooterData {
   _id: string
   title: string
@@ -177,6 +193,7 @@ export interface FooterData {
   popularSubjects?: FooterSection | null
   support?: FooterSection | null
   socialMedia?: FooterSocialMedia
+  contactInfo: FooterContactInfo
   layoutSettings: FooterLayoutSettings
 }
 

@@ -52,6 +52,21 @@ Configure social media links that appear as icons:
 
 **Note**: Only social platforms with URLs will display. Empty fields are automatically hidden.
 
+### Contact Information
+Configure the "Get in Touch" section with editable contact details:
+- **Section Title**: Title for the contact section (e.g., "Get in Touch", "Contact Us")
+- **Email Information**:
+  - **Email Address**: Main contact email (validated)
+  - **Email Subtitle**: Additional info (e.g., "24/7 support")
+- **Phone Information**:
+  - **Phone Number**: Main contact phone number
+  - **Phone Subtitle**: Availability info (e.g., "Mon-Fri 9AM-6PM GMT")
+- **Location Information**:
+  - **Location**: Primary location or city
+  - **Location Subtitle**: Additional service info (e.g., "Online tutoring worldwide")
+
+**Note**: All contact information fields are required. This ensures the "Get in Touch" section always displays with complete information.
+
 ### Layout Settings
 - **Adaptive Spacing** (boolean): Enable automatic layout adjustment when optional sections are hidden
 - **Show Copyright** (boolean): Toggle copyright notice display
@@ -173,7 +188,24 @@ interface FooterData {
   popularSubjects?: FooterSection | null
   support?: FooterSection | null
   socialMedia?: FooterSocialMedia
+  contactInfo: FooterContactInfo
   layoutSettings: FooterLayoutSettings
+}
+
+interface FooterContactInfo {
+  sectionTitle: string
+  email: {
+    address: string
+    subtitle?: string
+  }
+  phone: {
+    number: string
+    subtitle?: string
+  }
+  location: {
+    address: string
+    subtitle?: string
+  }
 }
 ```
 

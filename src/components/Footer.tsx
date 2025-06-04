@@ -43,6 +43,21 @@ const fallbackFooterData: FooterData = {
       { label: 'WhatsApp', href: 'https://wa.me/1234567890', hasWhatsAppIcon: true }
     ]
   },
+  contactInfo: {
+    sectionTitle: 'Get in Touch',
+    email: {
+      address: 'hello@igcsestudynotes.com',
+      subtitle: '24/7 support'
+    },
+    phone: {
+      number: '+44 20 1234 5678',
+      subtitle: 'Mon-Fri 9AM-6PM GMT'
+    },
+    location: {
+      address: 'London, United Kingdom',
+      subtitle: 'Online tutoring worldwide'
+    }
+  },
   layoutSettings: {
     adaptiveSpacing: true,
     showCopyright: true,
@@ -343,27 +358,29 @@ export default function Footer({ footerData, isContactFormActive }: FooterProps)
             shouldShowQuickLinks || shouldShowPopularSubjects || shouldShowSupport ? 'animate-fade-in-delay-2' : 
             'animate-fade-in-delay-1'
           }`}>
-            <h4 className="text-lg font-serif font-semibold mb-6 text-white">Get in Touch</h4>
+            <h4 className="text-lg font-serif font-semibold mb-6 text-white">
+              {data.contactInfo?.sectionTitle || 'Get in Touch'}
+            </h4>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
                 <Icons.Mail />
                 <div>
-                  <p className="text-white/80">hello@igcsestudynotes.com</p>
-                  <p className="text-white/60 text-sm">24/7 support</p>
+                  <p className="text-white/80">{data.contactInfo?.email?.address || 'hello@igcsestudynotes.com'}</p>
+                  <p className="text-white/60 text-sm">{data.contactInfo?.email?.subtitle || '24/7 support'}</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <Icons.Phone />
                 <div>
-                  <p className="text-white/80">+44 20 1234 5678</p>
-                  <p className="text-white/60 text-sm">Mon-Fri 9AM-6PM GMT</p>
+                  <p className="text-white/80">{data.contactInfo?.phone?.number || '+44 20 1234 5678'}</p>
+                  <p className="text-white/60 text-sm">{data.contactInfo?.phone?.subtitle || 'Mon-Fri 9AM-6PM GMT'}</p>
                 </div>
               </div>
               <div className="flex items-start space-x-3">
                 <Icons.MapPin />
                 <div>
-                  <p className="text-white/80">London, United Kingdom</p>
-                  <p className="text-white/60 text-sm">Online tutoring worldwide</p>
+                  <p className="text-white/80">{data.contactInfo?.location?.address || 'London, United Kingdom'}</p>
+                  <p className="text-white/60 text-sm">{data.contactInfo?.location?.subtitle || 'Online tutoring worldwide'}</p>
                 </div>
               </div>
             </div>

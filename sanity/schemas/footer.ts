@@ -322,6 +322,86 @@ export default defineType({
           placeholder: '© 2024 Your Website Name. All rights reserved.'
         }
       ]
+    }),
+    defineField({
+      name: 'contactInfo',
+      title: 'Contact Information Section',
+      type: 'object',
+      description: 'Contact information displayed in the "Get in Touch" section',
+      fields: [
+        {
+          name: 'sectionTitle',
+          title: 'Section Title',
+          type: 'string',
+          description: 'Title for the contact section (e.g., "Get in Touch", "Contact Us")',
+          initialValue: 'Get in Touch',
+          validation: Rule => Rule.required().max(50)
+        },
+        {
+          name: 'email',
+          title: 'Email Information',
+          type: 'object',
+          fields: [
+            {
+              name: 'address',
+              title: 'Email Address',
+              type: 'string',
+              description: 'Main contact email address',
+              validation: Rule => Rule.required().email()
+            },
+            {
+              name: 'subtitle',
+              title: 'Email Subtitle',
+              type: 'string',
+              description: 'Additional info about email (e.g., "24/7 support")',
+              initialValue: '24/7 support'
+            }
+          ]
+        },
+        {
+          name: 'phone',
+          title: 'Phone Information',
+          type: 'object',
+          fields: [
+            {
+              name: 'number',
+              title: 'Phone Number',
+              type: 'string',
+              description: 'Main contact phone number',
+              validation: Rule => Rule.required()
+            },
+            {
+              name: 'subtitle',
+              title: 'Phone Subtitle',
+              type: 'string',
+              description: 'Additional info about phone availability (e.g., "Mon-Fri 9AM-6PM GMT")',
+              initialValue: 'Mon-Fri 9AM-6PM GMT'
+            }
+          ]
+        },
+        {
+          name: 'location',
+          title: 'Location Information',
+          type: 'object',
+          fields: [
+            {
+              name: 'address',
+              title: 'Location',
+              type: 'string',
+              description: 'Primary location or city',
+              validation: Rule => Rule.required()
+            },
+            {
+              name: 'subtitle',
+              title: 'Location Subtitle',
+              type: 'string',
+              description: 'Additional info about location/services (e.g., "Online tutoring worldwide")',
+              initialValue: 'Online tutoring worldwide'
+            }
+          ]
+        }
+      ],
+      validation: Rule => Rule.required()
     })
   ],
   preview: {
