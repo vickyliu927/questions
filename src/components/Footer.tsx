@@ -123,11 +123,25 @@ export default function Footer({ footerData, isContactFormActive }: FooterProps)
   const currentYear = new Date().getFullYear()
   const { handleContactNavigation } = useContactNavigation({ 
     isContactFormActive,
-    externalContactUrl: 'https://tutorchase.com/contact'
+    externalContactUrl: 'https://www.tutorchase.com/#hireFormBlock'
   });
 
   // Use provided data or fallback data
   const data = footerData || fallbackFooterData
+
+  // Check if quick links section should be displayed with proper null checks
+  const shouldShowQuickLinks = data.quickLinks && 
+                              data.quickLinks.links && 
+                              Array.isArray(data.quickLinks.links) &&
+                              data.quickLinks.links.length > 0 && 
+                              data.quickLinks.sectionTitle
+
+  // Check if popular subjects section should be displayed with proper null checks
+  const shouldShowPopularSubjects = data.popularSubjects && 
+                                   data.popularSubjects.links && 
+                                   Array.isArray(data.popularSubjects.links) &&
+                                   data.popularSubjects.links.length > 0 && 
+                                   data.popularSubjects.sectionTitle
 
   // Check if support section should be displayed with proper null checks
   const shouldShowSupport = data.support && 
@@ -136,10 +150,27 @@ export default function Footer({ footerData, isContactFormActive }: FooterProps)
                            data.support.links.length > 0 && 
                            data.support.sectionTitle
 
+  // Calculate grid columns based on which sections are present
+  // Base sections: Logo (1) + Get in Touch (1) = 2
+  // Optional sections: Quick Links (1) + Popular Subjects (1) + Support (1) = up to 3 more
+  const totalColumns = 2 + (shouldShowQuickLinks ? 1 : 0) + (shouldShowPopularSubjects ? 1 : 0) + (shouldShowSupport ? 1 : 0)
+  
+  // Determine grid class based on total columns
+  let gridClass = 'grid gap-8 mb-12'
+  if (totalColumns === 2) {
+    gridClass += ' md:grid-cols-2 lg:grid-cols-2'
+  } else if (totalColumns === 3) {
+    gridClass += ' md:grid-cols-2 lg:grid-cols-3'
+  } else if (totalColumns === 4) {
+    gridClass += ' md:grid-cols-2 lg:grid-cols-4'
+  } else {
+    gridClass += ' md:grid-cols-2 lg:grid-cols-5'
+  }
+
   return (
     <div className="py-16 bg-[#253B53]">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div className={gridClass}>
           {/* Logo and Company Info */}
           <div className="space-y-6 animate-fade-in-left">
             <div className="flex items-center space-x-3">
@@ -158,43 +189,43 @@ export default function Footer({ footerData, isContactFormActive }: FooterProps)
             {/* Social Media Links */}
             <div className="flex space-x-4">
               {data.socialMedia?.facebook && (
-                <a 
+              <a 
                   href={data.socialMedia.facebook}
                   className="text-white/70 hover:text-coral-400 transition-colors"
-                  aria-label="Facebook"
+                aria-label="Facebook"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
+              >
                   <Icons.Facebook />
-                </a>
+              </a>
               )}
               {data.socialMedia?.twitter && (
-                <a 
+              <a 
                   href={data.socialMedia.twitter}
                   className="text-white/70 hover:text-coral-400 transition-colors"
-                  aria-label="Twitter"
+                aria-label="Twitter"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
+              >
                   <Icons.Twitter />
-                </a>
+              </a>
               )}
               {data.socialMedia?.instagram && (
-                <a 
+              <a 
                   href={data.socialMedia.instagram}
                   className="text-white/70 hover:text-coral-400 transition-colors"
-                  aria-label="Instagram"
+                aria-label="Instagram"
                   target="_blank"
                   rel="noopener noreferrer"
-                >
+              >
                   <Icons.Instagram />
-                </a>
+              </a>
               )}
               {data.socialMedia?.youtube && (
-                <a 
+              <a 
                   href={data.socialMedia.youtube}
                   className="text-white/70 hover:text-coral-400 transition-colors"
-                  aria-label="YouTube"
+                aria-label="YouTube"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -222,29 +253,58 @@ export default function Footer({ footerData, isContactFormActive }: FooterProps)
           </div>
 
           {/* Quick Links */}
-          <div className="animate-fade-in-delay-1">
-            <h4 className="text-lg font-serif font-semibold mb-6 text-white">
-              {data.quickLinks?.sectionTitle || 'Quick Links'}
-            </h4>
-            <ul className="space-y-3">
-              {(data.quickLinks?.links || []).map((link, index) => (
-                <li key={index}>
-                  <a 
-                    href={link.href} 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white/80 hover:text-coral-400 transition-colors"
-                  >
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {shouldShowQuickLinks && (
+            <div className="animate-fade-in-delay-1">
+              <h4 className="text-lg font-serif font-semibold mb-6 text-white">
+                {data.quickLinks!.sectionTitle || 'Quick Links'}
+              </h4>
+              <ul className="space-y-3">
+                {(data.quickLinks!.links || []).map((link, index) => (
+                  <li key={index}>
+                    <a 
+                      href={link.href} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/80 hover:text-coral-400 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
 
-          {/* Support or Popular Subjects */}
-          {shouldShowSupport ? (
-            <div className="animate-fade-in-delay-2">
+          {/* Popular Subjects - Only show if has content */}
+          {shouldShowPopularSubjects && (
+            <div className={`${shouldShowQuickLinks ? 'animate-fade-in-delay-2' : 'animate-fade-in-delay-1'}`}>
+              <h4 className="text-lg font-serif font-semibold mb-6 text-white">
+                {data.popularSubjects!.sectionTitle || 'Popular Subjects'}
+              </h4>
+              <ul className="space-y-3">
+                {(data.popularSubjects!.links || []).map((link, index) => (
+                  <li key={index}>
+                    <a 
+                      href={link.href} 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-white/80 hover:text-coral-400 transition-colors"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* Support Section - Only show if has content */}
+          {shouldShowSupport && (
+            <div className={`${
+              shouldShowQuickLinks && shouldShowPopularSubjects ? 'animate-fade-in-delay-3' : 
+              shouldShowQuickLinks || shouldShowPopularSubjects ? 'animate-fade-in-delay-2' : 
+              'animate-fade-in-delay-1'
+            }`}>
               <h4 className="text-lg font-serif font-semibold mb-6 text-white">
                 {data.support!.sectionTitle}
               </h4>
@@ -274,30 +334,15 @@ export default function Footer({ footerData, isContactFormActive }: FooterProps)
                 ))}
               </ul>
             </div>
-          ) : (
-            <div className="animate-fade-in-delay-2">
-              <h4 className="text-lg font-serif font-semibold mb-6 text-white">
-                {data.popularSubjects?.sectionTitle || 'Popular Subjects'}
-              </h4>
-              <ul className="space-y-3">
-                {(data.popularSubjects?.links || []).map((link, index) => (
-                  <li key={index}>
-                    <a 
-                      href={link.href} 
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white/80 hover:text-coral-400 transition-colors"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
           )}
 
-          {/* Get in Touch */}
-          <div className="animate-fade-in-delay-3">
+          {/* Get in Touch - Always show as last column */}
+          <div className={`${
+            shouldShowQuickLinks && shouldShowPopularSubjects && shouldShowSupport ? 'animate-fade-in-delay-4' : 
+            (shouldShowQuickLinks && shouldShowPopularSubjects) || (shouldShowQuickLinks && shouldShowSupport) || (shouldShowPopularSubjects && shouldShowSupport) ? 'animate-fade-in-delay-3' :
+            shouldShowQuickLinks || shouldShowPopularSubjects || shouldShowSupport ? 'animate-fade-in-delay-2' : 
+            'animate-fade-in-delay-1'
+          }`}>
             <h4 className="text-lg font-serif font-semibold mb-6 text-white">Get in Touch</h4>
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
@@ -323,7 +368,7 @@ export default function Footer({ footerData, isContactFormActive }: FooterProps)
               </div>
             </div>
           </div>
-        </div>
+          </div>
 
         {/* Bottom Footer */}
         {data.layoutSettings?.showCopyright && (
@@ -347,7 +392,7 @@ export default function Footer({ footerData, isContactFormActive }: FooterProps)
                 <a href="#" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-coral-400 transition-colors">
                   Accessibility
                 </a>
-              </div>
+            </div>
             </div>
           </div>
         )}

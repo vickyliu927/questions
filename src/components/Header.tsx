@@ -16,7 +16,7 @@ export default function Header({ headerData, isContactFormActive }: HeaderProps)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { handleContactNavigation } = useContactNavigation({ 
     isContactFormActive,
-    externalContactUrl: 'https://tutorchase.com/contact'
+    externalContactUrl: 'https://www.tutorchase.com/#hireFormBlock'
   });
 
   // Debug logging

@@ -1,125 +1,162 @@
 # Footer Schema Documentation
 
+This document describes the Footer schema configuration in Sanity CMS for the CIE IGCSE Notes website.
+
 ## Overview
 
-The Footer schema provides a comprehensive and flexible structure for managing website footer content through Sanity CMS. It includes editable text fields, navigation links, social media icons, and adaptive layout settings.
+The Footer schema allows you to configure the website footer with customizable sections, links, and layout options. It includes adaptive spacing that automatically adjusts based on which optional sections are enabled.
 
-## Schema Structure
+## Schema Fields
 
-### Core Fields
+### Document Management
+- **Title** (required): Internal title for organizing footer configurations
+- **Is Active** (boolean): Toggle to activate this footer configuration (only one should be active)
 
-#### Document Management
-- **Document Title**: Internal title for organizing multiple footer configurations
-- **Is Active**: Toggle to activate/deactivate footer configurations (only one should be active)
-
-#### Website Information
-- **Website Title**: Main title displayed in the footer (max 100 characters)
-- **Website Description**: Brief description of the website (max 300 characters)
+### Website Information
+- **Website Title** (required): Main title displayed in footer (max 100 characters)
+- **Website Description** (required): Brief description shown in footer (max 300 characters)
 
 ### Navigation Sections
 
-#### Quick Links Section (Required)
-- **Section Title**: Customizable title (default: "Quick Links", max 50 characters)
+#### Quick Links Section (Optional)
+- **Section Title**: Title for the Quick Links section (e.g., "Quick Links")
 - **Links**: Array of navigation links (max 10 links)
   - **Link Text**: Display text for the link
-  - **Link URL**: URL or path for the link
+  - **Link URL**: URL or path (e.g., /subjects, #contact, https://example.com)
 
-#### Popular Subjects Section (Required)
-- **Section Title**: Customizable title (default: "Popular Subjects", max 50 characters)
+**Note**: This section is completely optional. Leave the links array empty to hide the entire Quick Links section. The footer layout will automatically adjust to distribute the remaining sections evenly.
+
+#### Popular Subjects Section (Optional)
+- **Section Title**: Title for the Popular Subjects section (e.g., "Popular Subjects")
 - **Subject Links**: Array of subject links (max 15 links)
-  - **Subject Name**: Name of the subject (e.g., "Mathematics", "Physics")
+  - **Subject Name**: Name of the subject
   - **Subject URL**: URL or path to the subject page
 
+**Note**: This section is completely optional. Leave the links array empty to hide the entire Popular Subjects section. The footer layout will automatically adjust to distribute the remaining sections evenly.
+
 #### Support Section (Optional)
-- **Section Title**: Customizable title (default: "Support")
-- **Support Links**: Array of support links (max 10 links)
+- **Section Title**: Title for the Support section (e.g., "Support", "Help")
+- **Support Links**: Array of support and help links (max 10 links)
   - **Link Text**: Display text for the support link
   - **Link URL**: URL or path for the support link
 
-### Optional Features
+**Note**: This section is completely optional. Leave empty to hide the entire support section. When hidden, Quick Links and Popular Subjects will expand to fill the available space.
 
-#### Social Media Icons (Optional)
-- **Facebook URL**: Facebook page URL
-- **Twitter/X URL**: Twitter/X profile URL
-- **Instagram URL**: Instagram profile URL
-- **LinkedIn URL**: LinkedIn profile URL
-- **YouTube URL**: YouTube channel URL
+### Social Media (Optional)
+Configure social media links that appear as icons:
+- **Facebook**: Facebook page URL
+- **Twitter**: Twitter profile URL
+- **Instagram**: Instagram profile URL
+- **LinkedIn**: LinkedIn page URL
+- **YouTube**: YouTube channel URL
 
-All social media URLs are validated to ensure proper URL format.
+**Note**: Only social platforms with URLs will display. Empty fields are automatically hidden.
 
-#### Layout Settings
-- **Adaptive Spacing**: When enabled, Quick Links and Popular Subjects distribute space evenly when Support section is empty
-- **Show Copyright**: Toggle to display copyright notice
-- **Copyright Text**: Custom copyright text (leave empty for auto-generated)
+### Layout Settings
+- **Adaptive Spacing** (boolean): Enable automatic layout adjustment when optional sections are hidden
+- **Show Copyright** (boolean): Toggle copyright notice display
+- **Copyright Text** (optional): Custom copyright text (falls back to automatic generation)
 
 ## Layout Behavior
 
-### Fixed Positioning
-When all three sections (Quick Links, Popular Subjects, Support) have content:
-- All sections maintain fixed positions
-- Equal spacing between sections
-- Consistent layout structure
+The footer uses a responsive grid system that automatically adapts based on which sections are present:
 
-### Adaptive Positioning
-When the Support section is empty and Adaptive Spacing is enabled:
-- Quick Links and Popular Subjects sections distribute available space evenly
-- Balanced visual appearance
-- Responsive spacing adjustment
+### Desktop Layout (lg screens and above):
+- **All sections present (5 columns)**: Logo | Quick Links | Popular Subjects | Support | Get in Touch
+- **4 sections present**: Evenly distributed across 4 columns
+- **3 sections present**: Evenly distributed across 3 columns  
+- **2 sections present (minimum)**: Logo | Get in Touch
 
-## Usage Examples
+### Mobile/Tablet Layout:
+- **Medium screens**: 2 columns with sections wrapping
+- **Small screens**: Single column stack
 
-### Basic Footer Configuration
-```typescript
-{
-  title: "Main Footer",
-  isActive: true,
-  websiteTitle: "CIE IGCSE Notes",
-  websiteDescription: "Comprehensive study notes and resources for CIE IGCSE examinations",
-  quickLinks: {
-    sectionTitle: "Quick Links",
-    links: [
-      { label: "Home", href: "/" },
-      { label: "About", href: "/about" },
-      { label: "Contact", href: "/contact" }
-    ]
-  },
-  popularSubjects: {
-    sectionTitle: "Popular Subjects",
-    links: [
-      { label: "Mathematics", href: "/subjects/mathematics" },
-      { label: "Physics", href: "/subjects/physics" },
-      { label: "Chemistry", href: "/subjects/chemistry" }
-    ]
-  }
-}
-```
+## Conditional Logic
 
-### Footer with Support Section
-```typescript
-{
-  // ... basic configuration
-  support: {
-    sectionTitle: "Support",
-    links: [
-      { label: "Help Center", href: "/help" },
-      { label: "FAQ", href: "/faq" },
-      { label: "Contact Support", href: "/support" }
-    ]
-  }
-}
-```
+### Quick Links Section Display
+The Quick Links section displays when:
+- The `quickLinks` object exists
+- The `links` array is not empty
+- The `sectionTitle` is provided
 
-### Footer with Social Media
-```typescript
-{
-  // ... basic configuration
-  socialMedia: {
-    facebook: "https://facebook.com/yourpage",
-    twitter: "https://twitter.com/yourhandle",
-    instagram: "https://instagram.com/yourprofile"
-  }
-}
-```
+### Popular Subjects Section Display
+The Popular Subjects section displays when:
+- The `popularSubjects` object exists
+- The `links` array is not empty
+- The `sectionTitle` is provided
+
+### Support Section Display
+The Support section displays when:
+- The `support` object exists
+- The `links` array is not empty
+- The `sectionTitle` is provided
+
+### Adaptive Spacing
+When `adaptiveSpacing` is enabled (default), the footer automatically:
+- Adjusts column count based on visible sections
+- Redistributes spacing evenly
+- Maintains visual balance
+
+## Best Practices
+
+1. **Content Management**:
+   - Keep only one footer configuration active at a time
+   - Use descriptive internal titles for easy management
+   - Keep descriptions concise but informative
+
+2. **Navigation Structure**:
+   - Group related links logically in appropriate sections
+   - Use clear, descriptive link labels
+   - Ensure all URLs are valid and functional
+
+3. **Optional Sections**:
+   - Quick Links: Use for important site navigation
+   - Support: Use for help, contact, and legal links
+   - Leave empty if not needed - layout will adapt automatically
+
+4. **Social Media**:
+   - Only add platforms you actively maintain
+   - Use complete URLs (including https://)
+   - Test links to ensure they work correctly
+
+5. **Mobile Optimization**:
+   - Keep section titles short for mobile display
+   - Limit number of links per section for readability
+   - Test on various screen sizes
+
+## Example Configuration
+
+### Minimal Footer (Logo + Contact Only)
+- Quick Links: Empty
+- Popular Subjects: Empty
+- Support: Empty
+- Result: Clean 2-column layout
+
+### Subject-focused Footer (Logo + Popular Subjects + Contact)
+- Quick Links: Empty  
+- Popular Subjects: 5-8 subject links
+- Support: Empty
+- Result: Clean 3-column layout
+
+### Navigation-focused Footer (Logo + Quick Links + Contact)
+- Quick Links: 6 navigation links
+- Popular Subjects: Empty
+- Support: Empty  
+- Result: Clean 3-column layout
+
+### Balanced Footer (Logo + Quick Links + Popular Subjects + Contact)
+- Quick Links: 4 main navigation links
+- Popular Subjects: 6 subject links
+- Support: Empty
+- Result: Balanced 4-column layout
+
+### Full Footer (All Sections)
+- Quick Links: 6 navigation links
+- Popular Subjects: 8 subject links  
+- Support: 6 help/legal links
+- Result: Comprehensive 5-column layout
+
+The schema automatically handles validation, ensures data consistency, and provides helpful descriptions for content editors.
 
 ## TypeScript Types
 
@@ -132,34 +169,13 @@ interface FooterData {
   isActive: boolean
   websiteTitle: string
   websiteDescription: string
-  quickLinks: FooterSection
-  popularSubjects: FooterSection
-  support?: FooterSection
+  quickLinks?: FooterSection | null
+  popularSubjects?: FooterSection | null
+  support?: FooterSection | null
   socialMedia?: FooterSocialMedia
   layoutSettings: FooterLayoutSettings
 }
 ```
-
-## Best Practices
-
-### Content Guidelines
-1. Keep website title concise and memorable
-2. Write clear, informative descriptions
-3. Use descriptive link labels
-4. Organize links logically within sections
-5. Limit the number of links to avoid clutter
-
-### Layout Considerations
-1. Enable adaptive spacing for better visual balance when support section is empty
-2. Use consistent naming for section titles
-3. Test footer appearance with and without optional sections
-4. Consider mobile responsiveness when designing link layouts
-
-### SEO and Accessibility
-1. Use descriptive link text for better accessibility
-2. Ensure all URLs are valid and functional
-3. Include relevant internal links for better site navigation
-4. Consider adding structured data for organization information
 
 ## Implementation Notes
 
@@ -189,13 +205,13 @@ const Footer = ({ footerData }: { footerData: FooterData }) => {
       <div className={`footer-sections ${adaptiveSpacing ? 'adaptive-spacing' : 'fixed-spacing'}`}>
         {/* Quick Links Section */}
         <div className="footer-section">
-          <h3>{footerData.quickLinks.sectionTitle}</h3>
+          <h3>{footerData.quickLinks?.sectionTitle}</h3>
           {/* render links */}
         </div>
         
         {/* Popular Subjects Section */}
         <div className="footer-section">
-          <h3>{footerData.popularSubjects.sectionTitle}</h3>
+          <h3>{footerData.popularSubjects?.sectionTitle}</h3>
           {/* render links */}
         </div>
         

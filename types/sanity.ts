@@ -173,8 +173,8 @@ export interface FooterData {
   isActive: boolean
   websiteTitle: string
   websiteDescription: string
-  quickLinks: FooterSection
-  popularSubjects: FooterSection
+  quickLinks?: FooterSection | null
+  popularSubjects?: FooterSection | null
   support?: FooterSection | null
   socialMedia?: FooterSocialMedia
   layoutSettings: FooterLayoutSettings

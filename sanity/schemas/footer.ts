@@ -35,23 +35,29 @@ export default defineType({
     }),
     defineField({
       name: 'quickLinks',
-      title: 'Quick Links Section',
+      title: 'Quick Links Section (Optional)',
       type: 'object',
-      description: 'Quick Links section with title and links',
+      description: 'Quick Links section with title and links - this section is optional. Leave empty to hide the entire section.',
       fields: [
         {
           name: 'sectionTitle',
           title: 'Section Title',
           type: 'string',
-          description: 'Title for the Quick Links section (e.g., "Quick Links")',
+          description: 'Title for the Quick Links section (e.g., "Quick Links"). Required if you add quick links.',
           initialValue: 'Quick Links',
-          validation: Rule => Rule.required().max(50)
+          validation: (Rule: any) => Rule.custom((title: string, context: any) => {
+            const links = context.parent?.links
+            if (links && links.length > 0 && !title) {
+              return 'Section title is required when quick links are provided'
+            }
+            return true
+          })
         },
         {
           name: 'links',
           title: 'Links',
           type: 'array',
-          description: 'List of quick navigation links',
+          description: 'List of quick navigation links. Leave empty to hide the entire quick links section.',
           of: [
             {
               type: 'object',
@@ -83,27 +89,45 @@ export default defineType({
           validation: Rule => Rule.max(10).error('Maximum 10 quick links allowed')
         }
       ],
-      validation: Rule => Rule.required()
+      validation: (Rule: any) => Rule.custom((quickLinks: any) => {
+        // If quickLinks object exists but has no links or empty links array, it's valid (hidden section)
+        if (!quickLinks || !quickLinks.links || quickLinks.links.length === 0) {
+          return true
+        }
+        
+        // If there are links, validate that sectionTitle exists
+        if (quickLinks.links.length > 0 && !quickLinks.sectionTitle) {
+          return 'Section title is required when quick links are provided'
+        }
+        
+        return true
+      })
     }),
     defineField({
       name: 'popularSubjects',
-      title: 'Popular Subjects Section',
+      title: 'Popular Subjects Section (Optional)',
       type: 'object',
-      description: 'Popular Subjects section with title and links',
+      description: 'Popular Subjects section with title and links - this section is optional. Leave empty to hide the entire section.',
       fields: [
         {
           name: 'sectionTitle',
           title: 'Section Title',
           type: 'string',
-          description: 'Title for the Popular Subjects section (e.g., "Popular Subjects")',
+          description: 'Title for the Popular Subjects section (e.g., "Popular Subjects"). Required if you add subject links.',
           initialValue: 'Popular Subjects',
-          validation: Rule => Rule.required().max(50)
+          validation: (Rule: any) => Rule.custom((title: string, context: any) => {
+            const links = context.parent?.links
+            if (links && links.length > 0 && !title) {
+              return 'Section title is required when subject links are provided'
+            }
+            return true
+          })
         },
         {
           name: 'links',
           title: 'Subject Links',
           type: 'array',
-          description: 'List of popular subject links',
+          description: 'List of popular subject links. Leave empty to hide the entire popular subjects section.',
           of: [
             {
               type: 'object',
@@ -135,7 +159,19 @@ export default defineType({
           validation: Rule => Rule.max(15).error('Maximum 15 subject links allowed')
         }
       ],
-      validation: Rule => Rule.required()
+      validation: (Rule: any) => Rule.custom((popularSubjects: any) => {
+        // If popularSubjects object exists but has no links or empty links array, it's valid (hidden section)
+        if (!popularSubjects || !popularSubjects.links || popularSubjects.links.length === 0) {
+          return true
+        }
+        
+        // If there are links, validate that sectionTitle exists
+        if (popularSubjects.links.length > 0 && !popularSubjects.sectionTitle) {
+          return 'Section title is required when subject links are provided'
+        }
+        
+        return true
+      })
     }),
     defineField({
       name: 'support',

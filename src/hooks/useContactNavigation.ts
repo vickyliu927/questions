@@ -8,7 +8,7 @@ interface UseContactNavigationProps {
 
 export function useContactNavigation({
   isContactFormActive = false,
-  externalContactUrl = 'https://tutorchase.com/contact'
+  externalContactUrl = 'https://www.tutorchase.com/#hireFormBlock'
 }: UseContactNavigationProps) {
   const router = useRouter();
   const pathname = usePathname();
