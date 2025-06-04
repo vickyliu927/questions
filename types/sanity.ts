@@ -274,6 +274,7 @@ export interface SubjectPageData {
   topicBlockBackgroundColor: string
   topics: SubjectTopic[]
   isPublished: boolean
+  showContactForm?: boolean
   seo?: SubjectPageSEO
 }
 

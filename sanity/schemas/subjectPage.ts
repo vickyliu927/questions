@@ -250,6 +250,13 @@ export default defineType({
       description: 'Whether this subject page is published and should appear on the website',
       initialValue: false
     }),
+    defineField({
+      name: 'showContactForm',
+      title: 'Show Contact Form',
+      type: 'boolean',
+      description: 'Whether to display the contact form on this subject page (also requires global contact form to be active)',
+      initialValue: true
+    }),
     ...seoFields,
   ],
   preview: {

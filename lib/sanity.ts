@@ -187,6 +187,7 @@ export const contactFormSectionQuery = `*[_type == "contactFormSection" && isAct
 export const footerQuery = `*[_type == "footer" && isActive == true][0]{
   _id,
   title,
+  isActive,
   websiteTitle,
   websiteDescription,
   quickLinks{
@@ -216,6 +217,21 @@ export const footerQuery = `*[_type == "footer" && isActive == true][0]{
     instagram,
     linkedin,
     youtube
+  },
+  contactInfo{
+    sectionTitle,
+    email{
+      address,
+      subtitle
+    },
+    phone{
+      number,
+      subtitle
+    },
+    location{
+      address,
+      subtitle
+    }
   },
   layoutSettings{
     adaptiveSpacing,
@@ -292,6 +308,7 @@ export const allSubjectPagesQuery = `*[_type == "subjectPage" && isPublished == 
     displayOrder
   },
   isPublished,
+  showContactForm,
   seo{
     metaTitle,
     metaDescription,
@@ -325,6 +342,7 @@ export const subjectPageBySlugQuery = (slug: string) => `*[_type == "subjectPage
     displayOrder
   },
   isPublished,
+  showContactForm,
   seo{
     metaTitle,
     metaDescription,
@@ -438,6 +456,13 @@ export async function getSubjectPageData(slug: string) {
       pageTitle,
       pageDescription,
       topicBlockBackgroundColor,
+      isPublished,
+      showContactForm,
+      seo{
+        metaTitle,
+        metaDescription,
+        keywords
+      },
       topics[] {
         topicName,
         topicDescription,

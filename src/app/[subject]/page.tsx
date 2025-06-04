@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
-import { Header, Footer, SubjectTopicGrid } from '@/components'
-import { client, headerQuery, footerQuery, getSubjectPageData, getGlobalSEOSettings, allSubjectSlugsQuery } from '../../../lib/sanity'
-import { HeaderData, FooterData } from '../../../types/sanity'
+import { Header, Footer, SubjectTopicGrid, ContactForm } from '@/components'
+import { client, headerQuery, footerQuery, getSubjectPageData, getGlobalSEOSettings, allSubjectSlugsQuery, contactFormSectionQuery } from '../../../lib/sanity'
+import { HeaderData, FooterData, ContactFormSectionData } from '../../../types/sanity'
 import { generateSEOMetadata } from '../../../components/SEOHead'
 import { SEOProvider } from '../../../contexts/SEOContext'
 
@@ -32,6 +32,19 @@ async function getFooterData(): Promise<FooterData | undefined> {
   } catch (error) {
     console.error('Error fetching footer data:', error)
     return undefined
+  }
+}
+
+async function getContactFormSectionData(): Promise<ContactFormSectionData | undefined> {
+  try {
+    console.log('Fetching contact form section data from Sanity...');
+    
+    const contactFormSectionData = await client.fetch(contactFormSectionQuery);
+    console.log('Fetched contact form section data:', contactFormSectionData);
+    return contactFormSectionData;
+  } catch (error) {
+    console.error('Error fetching contact form section data:', error);
+    return undefined;
   }
 }
 
@@ -86,6 +99,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
   const headerData = await getHeaderData()
   const footerData = await getFooterData()
   const subjectPageData = await getSubjectPageData(subject)
+  const contactFormSectionData = await getContactFormSectionData()
 
   if (!subjectPageData) {
     notFound()
@@ -101,10 +115,15 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
   // Ensure topicBlockBackgroundColor has a default value if not set
   const backgroundColorClass = subjectPageData.topicBlockBackgroundColor || 'bg-blue-500'
 
+  // Check if contact form is active
+  const isContactFormActive = contactFormSectionData?.isActive ?? false;
+  const showContactFormOnThisPage = subjectPageData.showContactForm ?? true; // Default to true for backward compatibility
+  const shouldShowContactForm = isContactFormActive && showContactFormOnThisPage;
+
   return (
     <SEOProvider seoData={subjectPageData.seo}>
       <div className="min-h-screen bg-white">
-        <Header headerData={headerData} />
+        <Header headerData={headerData} isContactFormActive={shouldShowContactForm} />
         <main>
           {/* Hero Section */}
           <section className="bg-white py-16">
@@ -130,7 +149,13 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
             </div>
           </section>
         </main>
-        <Footer footerData={footerData} />
+        
+        {/* Contact Form Section - only show if active */}
+        {shouldShowContactForm && (
+          <ContactForm contactFormData={contactFormSectionData} />
+        )}
+        
+        <Footer footerData={footerData} isContactFormActive={shouldShowContactForm} />
       </div>
     </SEOProvider>
   )
